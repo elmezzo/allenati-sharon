@@ -205,16 +205,8 @@ html[data-skin="vetro"]{--bg:#0b0a1f;--card:rgba(255,255,255,.06);--card-2:rgba(
   --cardbg:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
   --bgimg:radial-gradient(520px 380px at 0% -5%,rgba(var(--acc-rgb,255,79,154),.38),transparent 62%),radial-gradient(520px 520px at 105% 28%,rgba(92,110,255,.40),transparent 62%),radial-gradient(560px 420px at 25% 108%,rgba(255,138,80,.26),transparent 62%),#0b0a1f;
   --title:linear-gradient(100deg,#fff 10%,#ffc2d9 55%,#ffb38a);--navbg:rgba(14,12,36,.62)}
-html[data-skin="carbonio"]{--bg:#0c0e11;--card:#181c22;--card-2:#222831;--field:#0a0c0f;--line:#2c333d;--fg:#eef1f4;--muted:#97a1ad;--dim:#66707c;
-  --hot:var(--acc,#ffb000);--hot-ink:#1d1300;--grad:linear-gradient(180deg,#ffd257,var(--acc,#ffb000) 55%,#e08a00);--glow:rgba(var(--acc-rgb,255,176,0),.30);--hl:rgba(255,255,255,.10);
-  --cardbg:linear-gradient(180deg,#20252c,#151920);
-  --bgimg:radial-gradient(700px 400px at 50% -10%,rgba(var(--acc-rgb,255,176,0),.10),transparent 60%),repeating-linear-gradient(45deg,#0f1215 0 3px,#0b0d10 3px 6px),repeating-linear-gradient(-45deg,rgba(255,255,255,.018) 0 3px,transparent 3px 6px),#0c0e11;
-  --title:linear-gradient(180deg,#ffffff 0%,#d7dde4 45%,#8d97a3 55%,#e9edf1 100%);--navbg:rgba(10,12,15,.85)}
-html[data-skin="campo"]{--bg:#061430;--card:#0b2250;--card-2:#12306a;--field:#05122b;--line:#1d3f7d;--fg:#f2f7ff;--muted:#9fb6da;--dim:#6c86b0;
-  --hot:var(--acc,#e4ff3a);--hot-ink:#122000;--grad:linear-gradient(160deg,#f4ff8a,var(--acc,#e4ff3a) 45%,#b8de00);--glow:rgba(var(--acc-rgb,228,255,58),.35);--hl:rgba(160,200,255,.22);
-  --cardbg:linear-gradient(170deg,#11306b,#0a1f4a);
-  --bgimg:linear-gradient(90deg,transparent calc(50% - 1px),rgba(255,255,255,.07) calc(50% - 1px) calc(50% + 1px),transparent calc(50% + 1px)),linear-gradient(0deg,transparent 64%,rgba(255,255,255,.06) 64% calc(64% + 2px),transparent calc(64% + 2px)),radial-gradient(600px 420px at 50% 0%,rgba(60,140,255,.35),transparent 65%),#061430;
-  --title:linear-gradient(100deg,#ffffff 30%,var(--acc,#e4ff3a));--navbg:rgba(4,14,36,.8)}
+
+
 
 html[data-skin][data-skin] body{background:var(--bgimg);background-attachment:fixed}
 html[data-skin][data-skin] h1{background:var(--title);-webkit-background-clip:text;background-clip:text;color:transparent;padding-block:2px}
@@ -231,8 +223,8 @@ html[data-skin][data-skin] nav.bar{background:var(--navbg);-webkit-backdrop-filt
 html[data-skin][data-skin] nav.bar button[aria-current="page"] svg{filter:drop-shadow(0 0 6px var(--glow))}
 html[data-skin="vetro"] :is(.card,.ex,.status,details.h,.tabs button,.tile){-webkit-backdrop-filter:blur(18px) saturate(140%);backdrop-filter:blur(18px) saturate(140%)}
 html[data-skin="vetro"] .tabs button,html[data-skin="vetro"] .tile{background:rgba(255,255,255,.07)}
-html[data-skin="carbonio"] .tile,html[data-skin="carbonio"] .tabs button{background:linear-gradient(180deg,#252b33,#1a1f25)}
-html[data-skin="campo"] .tile,html[data-skin="campo"] .tabs button{background:var(--tilebg,#0e2a5e)}
+
+
 
 
 /* riflesso che passa sul pulsante principale */
@@ -273,36 +265,25 @@ html[data-skin="vetro"][data-skin] div.timer:not(.over){-webkit-backdrop-filter:
 html[data-skin="vetro"][data-skin] .seg button[aria-pressed="true"]{background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.06));box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 4px 12px rgba(0,0,0,.25)}
 
 /* ===== CARBONIO+ ===== */
-html[data-skin="carbonio"][data-skin] body{background:
-  radial-gradient(90% 55% at 50% -8%,rgba(var(--acc-rgb,255,176,0),.13),transparent 60%),
-  radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.65)),
-  linear-gradient(27deg,#121417 5px,transparent 5px) 0 5px,
-  linear-gradient(207deg,#121417 5px,transparent 5px) 10px 0,
-  linear-gradient(27deg,#1c1f23 5px,transparent 5px) 0 10px,
-  linear-gradient(207deg,#1c1f23 5px,transparent 5px) 10px 5px,
-  linear-gradient(90deg,#16191c 10px,transparent 10px),
-  linear-gradient(#181b1f 25%,#15181b 25%,#15181b 50%,transparent 50%,transparent 75%,#1e2226 75%,#1e2226),#111316;
-  background-size:100% 100%,100% 100%,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px;background-attachment:fixed}
-html[data-skin="carbonio"][data-skin] :is(.card,.ex,.status,details.h){border:1px solid #2f363f;
-  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 28%),repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px),linear-gradient(180deg,#232930,#14181d);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(0,0,0,.7),0 16px 34px rgba(0,0,0,.55)}
-html[data-skin="carbonio"][data-skin] .head{position:relative;padding-bottom:8px}
-html[data-skin="carbonio"][data-skin] .head::after{content:"";width:72px;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--acc,#ffb000),#ff6a00);box-shadow:0 0 12px rgba(255,150,0,.7)}
-html[data-skin="carbonio"][data-skin] h1{filter:drop-shadow(0 2px 0 rgba(0,0,0,.6))}
-html[data-skin="carbonio"][data-skin] .target{background:none;color:var(--acc,#ffb000);-webkit-text-fill-color:var(--acc,#ffb000);text-shadow:0 0 10px rgba(var(--acc-rgb,255,176,0),.55),0 0 2px rgba(255,200,80,.9)}
-html[data-skin="carbonio"][data-skin] .set .i{color:var(--acc,#ffb000);text-shadow:0 0 8px rgba(var(--acc-rgb,255,176,0),.45);opacity:.8}
-html[data-skin="carbonio"][data-skin] .field{background:linear-gradient(180deg,#07080a,#0d0f12);border-color:#2a3038;box-shadow:inset 0 2px 5px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.05)}
-html[data-skin="carbonio"][data-skin] .field input{color:#f4f6f8}
-html[data-skin="carbonio"][data-skin] .ex.ss{box-shadow:inset 3px 0 0 var(--acc,#ffb000),inset 0 1px 0 rgba(255,255,255,.16),0 16px 34px rgba(0,0,0,.55)}
-html[data-skin="carbonio"][data-skin] div.timer:not(.over){background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,0) 50%),linear-gradient(180deg,#14171b,#08090b);color:var(--acc,#ffb000);border:1px solid rgba(var(--acc-rgb,255,176,0),.55);box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 24px rgba(255,150,0,.25),0 10px 30px rgba(0,0,0,.6)}
-html[data-skin="carbonio"][data-skin] div.timer:not(.over) .t{text-shadow:0 0 12px rgba(var(--acc-rgb,255,176,0),.75),0 0 2px #ffd780}
-html[data-skin="carbonio"][data-skin] div.timer:not(.over) .l{color:#d9dee4}
-html[data-skin="carbonio"][data-skin] div.timer:not(.over) button{color:var(--acc,#ffb000);border-color:rgba(var(--acc-rgb,255,176,0),.6)}
-html[data-skin="carbonio"][data-skin] button.tick[aria-pressed="true"]{box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 0 rgba(0,0,0,.25),0 0 14px rgba(var(--acc-rgb,255,176,0),.45)}
-html[data-skin="carbonio"][data-skin] .seg{background:linear-gradient(180deg,#07080a,#0e1013);box-shadow:inset 0 2px 5px rgba(0,0,0,.8)}
-html[data-skin="carbonio"][data-skin] .seg button[aria-pressed="true"]{background:linear-gradient(180deg,#2f363f,#1d2228);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 2px 6px rgba(0,0,0,.6);color:var(--acc,#ffb000)}
-html[data-skin="carbonio"][data-skin] nav.bar{border-top:1px solid #2f363f;box-shadow:0 -1px 0 rgba(255,255,255,.04)}
-html[data-skin="carbonio"][data-skin] .tile b{color:#fff}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* tabs scorrevoli */
 .tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
@@ -352,9 +333,9 @@ html[data-skin="vetro"] .sheet{background:rgba(16,13,44,.92);-webkit-backdrop-fi
 /* ===== DESIGN v2: gerarchia, icone, meno maiuscolo ===== */
 :root{--grad:linear-gradient(135deg,var(--hot),var(--hot));--pad:#6fd3ff;--match:#ffc35c}
 html[data-skin="vetro"]{--dim:#8f8bb8}
-html[data-skin="carbonio"]{--dim:#7f8994}
 
-html[data-skin="campo"]{--pad:#7fe6ff;--match:#ffd36b}
+
+
 .kicker{font-size:max(14px,0.8235rem);font-weight:700;letter-spacing:.01em;text-transform:none}
 .chip{text-transform:none;letter-spacing:0;font-size:max(12px,0.7059rem);padding:4px 9px}
 .chip.hot{background:transparent!important;color:var(--hot)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--hot) 70%,transparent)!important}
@@ -405,8 +386,8 @@ html[data-skin="vetro"] :is(.ctx button,.xrow,.dayr){-webkit-backdrop-filter:blu
 /* Fascia dietro orologio e Dynamic Island: il contenuto non scorre sotto l'ora */
 .sbar{position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);z-index:25;pointer-events:none;background:color-mix(in srgb,var(--bg) 96%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
 html[data-skin="vetro"] .sbar{background:rgba(12,13,22,.95)}
-html[data-skin="lavagna"] .sbar{background:#1d2521;-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="manga"] .sbar{background:rgba(15,14,18,.92)}
+
+
 .swq{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:color-mix(in srgb,var(--fg) 5%,transparent)}
 .swq p{margin:0;font-size:max(14px,0.8235rem)}
 /* Scheda che si colora a ogni serie: il testo grigio si schiarisce per restare leggibile sul velo */
@@ -475,7 +456,7 @@ details.more > div{display:flex;flex-direction:column;gap:6px}
 .dayr .d{font:400 25px/1 var(--display);letter-spacing:.04em}
 /* colonna del giorno: almeno 50 px, e almeno il nome più largo ("Dom") nel font dello stile, anche col testo grande; sotto le 14em di riga "Cambia" va a capo sotto */
 .dayr .d{min-width:max(50px,var(--dw,0px))}
-html[data-skin="vetro"]{--dw:2.26em}html[data-skin="manga"]{--dw:2.78em}html[data-skin="eclisse"]{--dw:2.55em}html[data-skin="lavagna"]{--dw:2.2em}
+html[data-skin="vetro"]{--dw:2.26em}html[data-skin="eclisse"]{--dw:2.55em}
 .dayr{container-type:inline-size}
 @container (max-width:14em){.dayr>.d{grid-row:1 / span 2}.dayr>.w{grid-column:2 / -1}.dayr>.ed{grid-column:2 / -1;grid-row:2;justify-self:start}}
 .dayr .w{display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -522,9 +503,9 @@ body{overflow-x:clip}
 /* Alone dell'anello sul contenitore delle due metà, non sulle metà: ritagliate, ognuna tagliava il suo alone e al centro restava una riga */
 .rg{position:absolute;inset:0;pointer-events:none}
 html:not([data-skin="lavagna"]) :is(.tr,.rr) .rg .ra{filter:none!important}
-html[data-skin="lavagna"] .soon :is(.tr,.rr) .ra{filter:url(#chalk)!important}
+
 .soon .rg{filter:drop-shadow(0 0 6px color-mix(in srgb,var(--adapt) 70%,transparent))}
-html[data-skin="carbonio"] :is(.rest,.timer):not(.over) .rg{filter:drop-shadow(0 0 4px rgba(var(--acc-rgb,255,176,0),.8))}
+
 :is(.tr,.rr).rz .ra{opacity:0}
 .timer .tr .t{font-size:max(22px,1.2941rem);min-width:0;letter-spacing:.02em}
 .rest .rr .tv{font-size:max(22px,1.2941rem);flex:none}
@@ -534,7 +515,7 @@ html[data-skin="carbonio"] :is(.rest,.timer):not(.over) .rg{filter:drop-shadow(0
 :is(.timer,.rest) .tb{display:flex;gap:inherit;flex:none;margin-left:auto}
 :is(.timer,.rest) .tb button{white-space:nowrap}
 html[data-skin="vetro"] .rest:not(.over) .ra{stroke:url(#rgg);filter:drop-shadow(0 0 5px rgba(var(--acc-rgb,255,79,154),.6))}
-html[data-skin="carbonio"] :is(.rest,.timer):not(.over) .ra{stroke:var(--acc,#ffb000);filter:drop-shadow(0 0 4px rgba(var(--acc-rgb,255,176,0),.8))}
+
 /* 2 spunta a molla */
 .tick,.xrow .ck{position:relative}
 :is(.tick,.xrow .ck).pop{animation:spring .55s cubic-bezier(.3,1.6,.5,1)}
@@ -566,7 +547,7 @@ nav.bar .ndot::before{content:"";width:34px;height:3px;border-radius:0 0 3px 3px
 .set .field{position:relative}
 /* timbro pieno nel colore dello stile con il suo inchiostro (contrasto da 4,9:1 in su in tutti gli stili e varianti), bordo del colore della scheda per staccarlo dal velo; cresce col testo grande */
 .prs{position:absolute;font-style:normal;right:-7px;top:-11px;z-index:2;pointer-events:none;font:400 max(13px,.7647rem)/1 var(--display);letter-spacing:.08em;color:var(--pr-ink);background:var(--pr);border-radius:5px;padding:3px 5px 2px;box-shadow:0 0 0 2px var(--card),0 2px 6px rgba(0,0,0,.35);transform:rotate(-12deg)}
-html[data-skin="lavagna"] .prs{font:800 max(12px,.7059rem)/1 var(--ui);letter-spacing:.06em}
+
 .prs.in{animation:prIn .34s cubic-bezier(.3,1.5,.6,1) both}
 .prs.in::after{content:"";position:absolute;inset:-5px;border-radius:8px;border:1.5px solid var(--pr);opacity:0;animation:prRing .5s .22s ease-out}
 @keyframes prIn{0%{opacity:0;transform:rotate(-4deg) scale(1.7)}70%{opacity:1}100%{opacity:1;transform:rotate(-12deg) scale(1)}}
@@ -636,11 +617,11 @@ html[data-skin="vetro"] #aurw{display:block;position:fixed;inset:-25%;z-index:-1
 .lu{font:800 .34em/1 var(--ui);color:#d9dee4;letter-spacing:.02em;margin:0 .3em;white-space:pre}
 html.boot .seg7 .on{animation:flick .9s steps(1) both}
 @keyframes flick{0%{opacity:0}12%{opacity:1}18%{opacity:.1}30%{opacity:1}36%{opacity:.3}46%,100%{opacity:1}}
-html[data-skin="carbonio"] :is(.tgt b,.kpi b){display:inline-flex;align-items:center;line-height:1}
+
 /* 7 Campo: righe che si disegnano, pallina che rimbalza mentre carica */
-html[data-skin="campo"]{--bgimg:radial-gradient(600px 420px at 50% 0%,rgba(60,140,255,.35),transparent 65%),#061430}
+
 #court{display:none}
-html[data-skin="campo"] #court{display:block;position:fixed;left:50%;top:50%;height:94vh;width:auto;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;opacity:.22}
+
 #court .ln{fill:none;stroke:#f2f7ff;stroke-width:1.1;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
 #court .net{stroke:var(--acc,#e4ff3a);stroke-width:1.6}
 @media (prefers-reduced-motion:no-preference){
@@ -663,80 +644,76 @@ html[data-skin="campo"] #court{display:block;position:fixed;left:50%;top:50%;hei
 
 
 /* 9 Manga: carta col retino, linee di velocità, un solo rosso, timbro sulla serie fatta */
-html[data-skin="manga"]{color-scheme:dark;--bg:#0f0e12;--card:#1a191e;--card-2:#24222a;--field:#141317;--line:#ece6d6;--fg:#ece6d6;--muted:#a9a39a;--dim:#8d877e;
-  --hot:var(--acc,#ff2340);--hot-ink:#0f0e12;--go:#5fd38f;--adapt:#ffb35c;--stop:#ff4d62;--pad:#7fb8ff;--match:#ffb35c;
-  --grad:linear-gradient(var(--acc,#ff2340),var(--acc,#ff2340));--glow:transparent;--hl:transparent;--cardbg:#1a191e;
-  --bgimg:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1.4px) 0 0/7px 7px,#0f0e12;
-  --title:linear-gradient(#ece6d6,#ece6d6);--navbg:rgba(16,15,19,.96);--manga:"Dela Gothic One","Arial Black",sans-serif}
-html[data-skin="manga"][data-skin] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-conic-gradient(from 0deg at 50% 38%,transparent 0 3deg,rgba(255,255,255,.045) 3deg 4deg);-webkit-mask:radial-gradient(circle at 50% 38%,transparent 38%,#000 85%);mask:radial-gradient(circle at 50% 38%,transparent 38%,#000 85%)}
-html[data-skin="manga"][data-skin] :is(h1,h2,h3,.hero .big,.tgt b,.kpi b,.timer .t,.rest .tv,.dayr .d,.pitem b,details.h summary b,.set .i,.tile b,.edx .top b){font-family:var(--manga);letter-spacing:0;font-weight:400}
-html[data-skin="manga"][data-skin] h1{font-size:34px;line-height:1.05}
-html[data-skin="manga"][data-skin] .thead h1{font-size:26px}
-html[data-skin="manga"][data-skin] h2{font-size:max(22px,1.2941rem);line-height:1.1}
-html[data-skin="manga"][data-skin] h3{font-size:max(20px,1.1765rem);line-height:1.15}
-html[data-skin="manga"][data-skin] .ex.cur h3{font-size:max(22px,1.2941rem)}
-html[data-skin="manga"][data-skin] .hero .big{font-size:clamp(40px,12vw,58px);line-height:1.02;background:none;color:#ece6d6;-webkit-text-fill-color:#ece6d6;text-shadow:3px 3px 0 var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] .tgt b{font-size:32px}
-html[data-skin="manga"][data-skin] .kpi b{font-size:40px}
-html[data-skin="manga"][data-skin] :is(.timer .tr .t,.rest .rr .tv){font-size:max(17px,1rem)}
-html[data-skin="manga"][data-skin] .dayr .d{font-size:max(20px,1.1765rem)}
-html[data-skin="manga"][data-skin] :is(.pitem b,details.h summary b){font-size:max(17px,1rem)}
-html[data-skin="manga"][data-skin] .set .i{font-size:max(17px,1rem)}
-html[data-skin="manga"][data-skin] .tile b{font-size:min(max(20px,1.1765rem),calc(100cqi / (var(--n,3) * .9)))}
-html[data-skin="manga"][data-skin] :is(.card,.ex,.status,details.h){background:#1a191e;border:2.5px solid #ece6d6;border-radius:6px;box-shadow:5px 5px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"][data-skin] :is(.ctx button,.xrow,.dayr,.tile,.gear,.pitem,.opt,.edx,.arx){background:#1a191e;border:2px solid #ece6d6;border-radius:6px;box-shadow:3px 3px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"][data-skin] .xrow.done{background:#24222a;box-shadow:none}
-html[data-skin="manga"][data-skin] .ex.ss{box-shadow:inset 4px 0 0 var(--acc,#ff2340),5px 5px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"][data-skin] .ex.cur{outline:none}
-html[data-skin="manga"][data-skin] .tabs button{background:#1a191e;border:2px solid #ece6d6;border-radius:6px;box-shadow:2px 2px 0 rgba(236,230,214,.14);color:#ece6d6}
-html[data-skin="manga"][data-skin] .tabs button[aria-pressed="true"]{background:#ece6d6;color:#1a191e;box-shadow:3px 3px 0 var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] button.btn.hot{background:var(--acc,#ff2340);color:var(--hot-ink);border:2.5px solid #ece6d6;border-radius:6px;box-shadow:4px 4px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"][data-skin] .btn.hot::after{display:none}
-html[data-skin="manga"][data-skin] .btn:not(.hot){border:2px solid #ece6d6;color:#ece6d6;background:#1a191e;border-radius:6px}
-html[data-skin="manga"][data-skin] .btn.danger{color:var(--stop);border-color:var(--stop)}
-html[data-skin="manga"][data-skin] .sbtn{border:2px solid #ece6d6;color:#ece6d6;border-radius:6px}
-html[data-skin="manga"][data-skin] .sbtn.danger{color:var(--stop);border-color:var(--stop)}
-html[data-skin="manga"][data-skin] div.timer:not(.over){background:#1a191e;color:#ece6d6;border:2.5px solid #ece6d6;box-shadow:5px 5px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"][data-skin] :is(.timer,.rest):not(.over) .ra{stroke:var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] .rest{background:#1a191e;border:2px solid #ece6d6;color:#ece6d6}
-html[data-skin="manga"][data-skin] .rest.over{background:#5fd38f;color:#06140c;border-color:#5fd38f}
-html[data-skin="manga"][data-skin] :is(.timer,.rest) button{border-width:2px}
-html[data-skin="manga"][data-skin] :is(.field,select,.inl input,.edx input,.edx select,.ed input,.ed select){background:#1a191e;border:2px solid #ece6d6;box-shadow:none}
-html[data-skin="manga"][data-skin] .set.done .field{background:#24222a;border-color:#ece6d6}
-html[data-skin="manga"][data-skin] .tick{background:#1a191e;border:2px solid #ece6d6;color:#ece6d6;width:44px;height:44px;border-radius:50%;justify-self:center;box-shadow:none}
-html[data-skin="manga"][data-skin] button.tick[aria-pressed="true"]{background:#1a191e!important;color:transparent!important;box-shadow:none!important}
-html[data-skin="manga"][data-skin] button.tick[aria-pressed="true"]::before{content:"✓";position:absolute;inset:-5px;border:3.5px solid var(--go);border-radius:50%;color:var(--go);font:400 max(22px,1.2941rem)/1 var(--manga);display:grid;place-items:center;transform:rotate(-14deg);background:rgba(26,25,30,.88)}
-html[data-skin="manga"]:not(#z):not(#y) .tick.pop{animation:none}
-html[data-skin="manga"][data-skin] .tick.pop::after{display:none}
-html[data-skin="manga"][data-skin] .tick.pop::before{animation:slam .28s cubic-bezier(.2,1.6,.4,1)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @keyframes slam{from{opacity:0;transform:rotate(-14deg) scale(2.2)}to{opacity:1;transform:rotate(-14deg) scale(1)}}
-html[data-skin="manga"][data-skin] .chip{background:#1a191e;color:#ece6d6;box-shadow:inset 0 0 0 1.5px #ece6d6}
-html[data-skin="manga"][data-skin] .chip.hot{color:var(--acc,#ff2340)!important;box-shadow:inset 0 0 0 1.5px var(--acc,#ff2340)!important}
-html[data-skin="manga"][data-skin] .chip.adapt{color:#ffb35c;background:#2a2116}
-html[data-skin="manga"][data-skin] .chip.go{color:#5fd38f;background:#14261b}
-html[data-skin="manga"][data-skin] .chip.stop{color:var(--stop);background:color-mix(in srgb,var(--stop) 14%,#1a191e)}
-html[data-skin="manga"][data-skin] .qm{background:#1a191e;color:#ece6d6;border:1.5px solid #ece6d6}
-html[data-skin="manga"][data-skin] .xrow .ck{background:#ece6d6;color:#1a191e}
-html[data-skin="manga"][data-skin] .xrow .ck.o{background:#1a191e;border:2px solid #ece6d6;color:#ece6d6}
-html[data-skin="manga"][data-skin] .seg{background:#24222a;border:2px solid #ece6d6;box-shadow:none}
-html[data-skin="manga"][data-skin] .seg button[aria-pressed="true"]{background:#ece6d6;color:#1a191e;box-shadow:none}
-html[data-skin="manga"][data-skin] nav.bar{background:rgba(16,15,19,.96);border-top:2.5px solid #ece6d6;-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="manga"][data-skin] nav.bar button{color:#8d877e}
-html[data-skin="manga"][data-skin] nav.bar button[aria-current="page"]{color:var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] nav.bar button[aria-current="page"] svg{filter:none}
-html[data-skin="manga"][data-skin] .thead{border-bottom:2.5px solid #ece6d6;background:rgba(15,14,18,.92)}
-html[data-skin="manga"][data-skin] .pill{box-shadow:inset 0 0 0 1.5px currentColor}
-html[data-skin="manga"][data-skin] .wd2.t{background:#1a191e;box-shadow:inset 0 0 0 2px var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] .banner{background:#2a2116;border:2px solid #ece6d6}
-html[data-skin="manga"][data-skin] .sheet{background:#0f0e12;border-top:3px solid #ece6d6}
-html[data-skin="manga"][data-skin] :is(.hero .lbl,.kicker){color:var(--acc,#ff2340)}
-html[data-skin="manga"][data-skin] .trk{background:#24222a;box-shadow:inset 0 0 0 1.5px #ece6d6}
-html[data-skin="manga"][data-skin] .pbar{background:#24222a;box-shadow:inset 0 0 0 1.5px #ece6d6;height:8px}
-html[data-skin="manga"][data-skin] .empty{border:2px dashed #ece6d6;color:#bdb6aa}
-html[data-skin="manga"][data-skin] .gear{color:#ece6d6}
-html[data-skin="manga"][data-skin] .tip{background:#ece6d6;color:#1a191e}
-html[data-skin="manga"][data-skin] .ask{border:2px dashed var(--acc,#ff2340);background:#1a191e}
-html[data-skin="manga"][data-skin] .ex.cur{box-shadow:5px 5px 0 var(--acc,#ff2340)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .skins{grid-template-columns:repeat(2,1fr)}
 @media (prefers-reduced-motion:reduce){:is(.tick,.xrow .ck).pop,:is(.tick,.xrow .ck).pop::after,:is(.tick,.xrow .ck).pop::before,.pbar.shine i::after,.app.in-r,.app.in-l{animation:none}}
 /* ===== CONTENUTI v3 ===== */
@@ -855,12 +832,12 @@ body{overflow-anchor:none}
 @keyframes rkLand{0%{transform:scale(.85);opacity:0}100%{transform:none;opacity:1}}
 @keyframes rkBlade{0%{transform:translateX(0) skewX(-18deg)}55%,100%{transform:translateX(475%) skewX(-18deg)}}
 @media (prefers-reduced-motion:reduce){.rk-pr .rbd.n,.rk-pr::after{animation:none}}
-html[data-skin="manga"] .rbd .hx{stroke:#ece6d6;stroke-width:3}
-html[data-skin="manga"] .rk-fig .rk-gl{display:none}
-html[data-skin="manga"] .rk-fig .rk-mz>g{stroke:#ece6d6;stroke-width:1.1}
-html[data-skin="manga"] .rk-gen .rbd.big,html[data-skin="manga"] .rk-sh .rbd{filter:drop-shadow(4px 4px 0 var(--acc,#ff2340))}
-html[data-skin="carbonio"] .rk-fig .rk-mz>g{stroke:#0c0e11;stroke-width:1}
-html[data-skin="carbonio"] .rk-gen .rbd.big{filter:drop-shadow(0 0 14px rgba(var(--acc-rgb,255,176,0),.35))}
+
+
+
+
+
+
 
 
 
@@ -871,14 +848,12 @@ html[data-skin="vetro"][data-var="2"]{--bg:#05131a;--hot:#34f0b8;--hot-ink:#0314
   --bgimg:radial-gradient(520px 380px at 0% -5%,rgba(46,230,176,.30),transparent 62%),radial-gradient(520px 520px at 105% 28%,rgba(40,130,255,.32),transparent 62%),radial-gradient(560px 420px at 25% 108%,rgba(190,255,120,.16),transparent 62%),#05131a}
 html[data-skin="vetro"][data-var="1"] #aurw{background:radial-gradient(34% 30% at 22% 18%,rgba(62,199,255,.6),transparent 70%),radial-gradient(34% 34% at 82% 40%,rgba(92,110,255,.5),transparent 70%),radial-gradient(30% 28% at 40% 86%,rgba(80,255,210,.35),transparent 70%)}
 html[data-skin="vetro"][data-var="2"] #aurw{background:radial-gradient(34% 30% at 22% 18%,rgba(46,230,176,.55),transparent 70%),radial-gradient(34% 34% at 82% 40%,rgba(40,130,255,.45),transparent 70%),radial-gradient(30% 28% at 40% 86%,rgba(190,255,120,.35),transparent 70%)}
-html[data-skin="carbonio"][data-var="1"]{--hot:#ff3b30;--hot-ink:#1d0300;--acc:#ff3b30;--acc-rgb:255,59,48;--grad:linear-gradient(180deg,#ff9a90,#ff3b30 55%,#c4140a);--glow:rgba(255,59,48,.32)}
-html[data-skin="carbonio"][data-var="2"]{--hot:#19e3ff;--hot-ink:#00161a;--acc:#19e3ff;--acc-rgb:25,227,255;--grad:linear-gradient(180deg,#a6f6ff,#19e3ff 55%,#0aa6c4);--glow:rgba(25,227,255,.30)}
-html[data-skin="campo"][data-var="1"]{--bg:#2a0f08;--card:#4a1c10;--card-2:#5c2414;--field:#220b06;--line:#7a3420;--muted:#e2bba9;--dim:#b8836f;--hl:rgba(255,190,160,.2);--tilebg:#56210f;--pad:#7fe6ff;
-  --cardbg:linear-gradient(170deg,#5e2615,#40170c);--bgimg:radial-gradient(600px 420px at 50% 0%,rgba(255,120,60,.35),transparent 65%),#2a0f08;--navbg:rgba(32,11,5,.84)}
-html[data-skin="campo"][data-var="2"]{--bg:#05200f;--card:#0c3a1c;--card-2:#124a25;--field:#04180b;--line:#1f6a38;--muted:#a9d8b6;--dim:#76a887;--hl:rgba(170,255,190,.2);--tilebg:#0f4220;
-  --cardbg:linear-gradient(170deg,#134c27,#0a3018);--bgimg:radial-gradient(600px 420px at 50% 0%,rgba(90,200,110,.32),transparent 65%),#05200f;--navbg:rgba(4,24,11,.84)}
-html[data-skin="manga"][data-var="1"]{--hot:#2f7bff;--acc:#2f7bff;--acc-rgb:47,123,255;--grad:linear-gradient(135deg,#2f7bff,#2f7bff)}
-html[data-skin="manga"][data-var="2"]{--hot:#ffd400;--hot-ink:#111;--acc:#ffd400;--acc-rgb:255,212,0;--grad:linear-gradient(135deg,#ffd400,#ffd400)}
+
+
+
+
+
+
 .vars{display:flex;gap:10px;align-items:center;margin-top:12px}
 .vars span{font-size:max(14px,0.8235rem);color:var(--muted);font-weight:700;margin-right:auto}
 .vars button{width:38px;height:38px;border-radius:50%;border:2px solid var(--line);padding:0;background-clip:padding-box}
@@ -886,20 +861,20 @@ html[data-skin="manga"][data-var="2"]{--hot:#ffd400;--hot-ink:#111;--acc:#ffd400
 
 /* stemmi del rango per stile */
 .rbd .ht,.rbd .cl{display:none}
-html[data-skin="carbonio"] .rbd :is(.hx,.wg,.cr){fill:#0b0d10;stroke:currentColor;stroke-width:2.4}
-html[data-skin="carbonio"] .rbd .hx{filter:drop-shadow(0 0 2.5px currentColor)}
-html[data-skin="carbonio"] .rbd .in{fill:none;stroke:currentColor;stroke-opacity:.35;stroke-dasharray:3 2}
-html[data-skin="carbonio"] .rbd .gl,html[data-skin="carbonio"] .rbd circle{fill:currentColor}
-html[data-skin="carbonio"] .rbd .gl{filter:drop-shadow(0 0 3px currentColor)}
-html[data-skin="carbonio"] .rbd .gs{display:none}
-html[data-skin="manga"] .rbd :is(.hx,.wg,.cr){fill:var(--rb);stroke:#ece6d6;stroke-width:3}
-html[data-skin="manga"] .rbd .ht{display:inline}
-html[data-skin="manga"] .rbd .in{fill:#0f0e12;stroke:#ece6d6;stroke-width:1.6}
-html[data-skin="manga"] .rbd .gs{display:none}
-html[data-skin="campo"] .rbd .cl{display:inline}
-html[data-skin="campo"] .rbd .in{fill:rgba(0,0,0,.18);stroke:#fff;stroke-width:1.6}
-html[data-skin="campo"] .rbd .gl{fill:var(--acc,#e4ff3a)}
-html[data-skin="campo"] .rbd .gs{opacity:.5}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* + e −, regolazioni, scorrimento */
 .field.pmf{padding-inline:2px;gap:0}
@@ -976,13 +951,13 @@ html:not([data-skin="vetro"]):not(#z):not(#y):not(#x) .ex.cur.tint:not(.gold){--
 /* ===== REVISIONE DESIGN 2026-10-07 (Impeccable + Emil Kowalski): tocchi, animazioni, contrasto, colori, gerarchia. PIPPA e fine esercizio dorato non toccati. ===== */
 /* ":root:not(#z)" vince sugli stili delle skin senza !important */
 :root{--info:#9db7ff;--match:#c9a8ff;--ease-out:cubic-bezier(.23,1,.32,1)}
-html[data-skin="campo"]{--match:#d9c2ff}
+
 /* Testo tenue: almeno 4,5:1 sulle schede */
 html[data-skin="vetro"]{--dim:#a29ecb;--navbg:rgba(14,12,36,.94)}
-html[data-skin="carbonio"]{--dim:#7f8994;--navbg:rgba(10,12,15,.96)}
-html[data-skin="campo"]{--dim:#8aa3cc;--navbg:rgba(4,14,36,.95)}
-html[data-skin="campo"][data-var="1"]{--dim:#d09f8a;--navbg:rgba(32,11,5,.95)}
-html[data-skin="campo"][data-var="2"]{--dim:#8ec09d;--navbg:rgba(4,24,11,.95)}
+
+
+
+
 :root:not(#z) nav.bar{-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%)}
 /* Risposta al tocco: si abbassa appena, 160 ms */
 button,summary{transition:scale .16s var(--ease-out)}
@@ -1002,7 +977,7 @@ button:is(.xrow,.btn,.setup,.rk-m,.dayr,.lnk):active:not(:disabled),details>summ
 .today-d{font-size:max(14px,0.8235rem);font-weight:700;color:var(--muted)}
 /* Niente striscia colorata sul lato del superset: basta il chip "Superset" */
 :root:not(#z) .ex.ss{box-shadow:inset 0 1px 0 var(--hl,transparent),0 12px 30px rgba(0,0,0,.35)}
-html[data-skin="manga"]:not(#z) .ex.ss{box-shadow:5px 5px 0 rgba(236,230,214,.14)}
+
 /* Giallo solo per gli avvisi; adattamenti in azzurro, partite in lilla */
 :root:not(#z) .chip.adapt{background:color-mix(in srgb,var(--info) 16%,transparent);color:var(--info)}
 :root:not(#z) .pill.adapt{color:var(--info);background:color-mix(in srgb,var(--info) 14%,transparent)}
@@ -1273,7 +1248,7 @@ details.more > div > .lnk,details.more > div > .painb{align-self:flex-start}
   :root:not(#z) .set .field input{min-width:2.4ch}
   /* carichi a 5 caratteri (122,5) un po' più piccoli, così stanno nel campo tra − e + */
   :root:not(#z) .set .field input.lg{font-size:min(.84em,14.5px);letter-spacing:-.03em}
-  html[data-skin="manga"]:not(#z) .set .field input.lg{font-size:min(.8em,13.5px);letter-spacing:-.05em}
+  
   /* 4 caratteri che non ci stanno (22,5 in Bodoni o Manrope a 320 px): solo un passo più piccoli */
   :root:not(#z) .set .field input.md{font-size:min(.9em,15.5px);letter-spacing:-.02em}
   :root:not(#z) .rest button{padding:8px 7px}
@@ -1281,14 +1256,14 @@ details.more > div > .lnk,details.more > div > .painb{align-self:flex-start}
 }
 @media (max-width:340px){
   :root:not(#z) .set .field input.lg{font-size:min(.76em,13px)}
-  html[data-skin="manga"]:not(#z) .set .field input.lg{font-size:min(.72em,12px)}
+  
 }
 :root:not(#z) .rk-i::after{inset:-9px}
 .sheet:focus{outline:none}
 html{scroll-padding-bottom:120px}
-html[data-skin="carbonio"]:not(#z):not(#y) .set .i{opacity:1}
-html[data-skin="carbonio"]:not(#z):not(#y) .tabs button small{opacity:1}
-html[data-skin="carbonio"]:not(#z):not(#y) .exhead .swap{border:1px solid #4d5560;color:#c3cad3}
+
+
+
 /* ===== GIRO 1 VERSO IL 10 (2026-10-08) ===== */
 .sheet-wrap.enter{animation:shBg .2s ease-out}
 .sheet-wrap.enter .sheet{animation:shUp .32s cubic-bezier(.32,.72,0,1)}
@@ -1304,9 +1279,9 @@ html[data-skin="carbonio"]:not(#z):not(#y) .exhead .swap{border:1px solid #4d556
 @media (max-width:400px){:root:not(#z) .set .pm{width:34px}:root:not(#z) .set .field input{min-width:2.2ch}}
 /* rip a 3 cifre (120) che non stanno nel campo stretto: rpFit le rimpicciolisce di uno o due passi */
 @media (max-width:400px){:root:not(#z):not(#y) .set .field input[data-f="reps"].md{font-size:min(.86em,15px);letter-spacing:-.03em}:root:not(#z):not(#y) .set .field input[data-f="reps"].lg{font-size:min(.74em,13px);letter-spacing:-.05em}}
-@media (max-width:360px){html[data-skin="manga"]:not(#z):not(#y) .set .field input{min-width:2ch}}
+
 /* 361-430 px: −/+ da 28 px (alti 44), altrimenti il "+" delle ripetizioni esce dalla casella e tocca il ✓ */
-@media (min-width:361px) and (max-width:430px){:root:not(#z):not(#y) .set .pm{width:28px}html[data-skin="manga"]:not(#z):not(#y) .set .pm{width:26px}}
+@media (min-width:361px) and (max-width:430px){:root:not(#z):not(#y) .set .pm{width:28px}}
 /* Riga della serie: numeri grandi da leggere a un braccio, −/+ più larghi, spazio tra i campi e prima della spunta */
 :root:not(#z) .set{column-gap:10px}
 :root:not(#z) .set .field input{font-size:clamp(17px,5.2vw,20px);font-variant-numeric:tabular-nums}
@@ -1315,12 +1290,12 @@ html[data-skin="carbonio"]:not(#z):not(#y) .exhead .swap{border:1px solid #4d556
 :root:not(#z):not(#y):not(#x) .set .pm{font-size:20px}
 .spec span{white-space:nowrap}
 details.wu .wut{min-width:0}
-html[data-skin="manga"]:not(#z):not(#y) details.wu .wut h3{font-size:clamp(17px,4.8vw,20px)}
-html[data-skin="manga"][data-var="1"]:not(#z):not(#y) .hero .lbl{color:#5a96ff}
+
+
 :root:not(#z) .thead{background:color-mix(in srgb,var(--bg) 92%,transparent);-webkit-backdrop-filter:blur(24px) saturate(140%);backdrop-filter:blur(24px) saturate(140%)}
 :root:not(#z) .pgr{color:var(--muted)}
 :root:not(#z) .tabs button small{opacity:.9}
-html[data-skin="campo"]:not(#z) #court{opacity:.14}
+
 .edx .eds{flex:1;min-width:0;font-size:max(14px,0.8235rem);font-weight:700;color:var(--muted);line-height:1.3}
 .edd summary{cursor:pointer;font-size:max(14px,0.8235rem);font-weight:700;color:var(--info);min-height:44px;display:flex;align-items:center}
 .edd[open] summary{margin-bottom:6px}
@@ -1349,9 +1324,9 @@ html[data-skin="vetro"]:not(#z) .rest:not(.over) :is(.tv,.tl){color:var(--fg)}
 @media (max-width:340px){:root:not(#z) .wk{padding-inline:4px!important;gap:2px!important}}
 /* ===== STILI VERSO IL 10 (2026-10-08) ===== */
 /* Colore base esplicito dove la variante 0 non lo dichiarava (serve alle regole nuove) */
-html[data-skin="carbonio"]:not([data-var="1"]):not([data-var="2"]){--acc:#ffb000;--acc-rgb:255,176,0}
-html[data-skin="campo"]{--acc:#e4ff3a;--acc-rgb:228,255,58}
-html[data-skin="manga"]:not([data-var="1"]):not([data-var="2"]){--acc:#ff2340;--acc-rgb:255,35,64}
+
+
+
 
 /* --p (avanzamento della seduta) sta solo su #aurw e sull'intestazione dell'Allenamento, senza transizione (sulla radice ricalcolava tutta la pagina a ogni spunta).
    L'aurora sfuma da sola (transition sull'opacità), la luna di Eclisse anima una sua copia (--pm) solo sul suo elemento */
@@ -1380,34 +1355,34 @@ html[data-skin="eclisse"]:not(#z):not(#y) .timer:not(.over) .ra{stroke:var(--acc
 html[data-skin="eclisse"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.banner){background:linear-gradient(180deg,rgba(var(--cor-rgb),.055),rgba(var(--cor-rgb),.02) 60%),rgba(10,10,16,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 @media (prefers-reduced-motion:no-preference){html[data-skin="eclisse"]:not(#z):not(#y) .hero>.lbl::before{animation-duration:48s}}
 /* Carbonio: niente arancio fisso nelle varianti Rosso e Ciano, LED grandi */
-html[data-skin="carbonio"]:not(#z):not(#y) .head::after{background:var(--acc);box-shadow:0 0 12px rgba(var(--acc-rgb),.7)}
-html[data-skin="carbonio"]:not(#z):not(#y) div.timer:not(.over){box-shadow:0 0 0 1px rgba(0,0,0,.6),0 0 24px rgba(var(--acc-rgb),.25),0 10px 30px rgba(0,0,0,.6)}
-html[data-skin="carbonio"]:not(#z):not(#y) .seg7 .on{filter:drop-shadow(0 0 3px rgba(var(--acc-rgb),.9)) drop-shadow(0 0 8px rgba(var(--acc-rgb),.45))}
-html[data-skin="carbonio"]:not(#z):not(#y) .rest .rr .tv{font-size:32px}
-html[data-skin="carbonio"]:not(#z):not(#y) .timer .tr .t{font-size:28px}
-html[data-skin="carbonio"][data-var="1"]{--grad:linear-gradient(180deg,#ff9a90,#ff3b30 60%,#e5261c)}
+
+
+
+
+
+
 /* Campo: il campo si vede, schede squadrate con le righe, terra rossa più leggibile */
-html[data-skin="campo"]:not(#z):not(#y) #court{opacity:.32}
-html[data-skin="campo"]:not(#z):not(#y) #court .ln{stroke-width:1.6}
-html[data-skin="campo"]:not(#z):not(#y) #court .net{stroke-width:2}
-html[data-skin="campo"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.banner){border:1.5px solid rgba(242,247,255,.22);border-radius:10px}
-html[data-skin="campo"][data-var="1"]:not(#z):not(#y){--card:#5a2414;--line:#a04a2c;--field:#1a0804}
-html[data-skin="campo"][data-var="1"]:not(#z):not(#y) .field{border:1px solid rgba(255,200,170,.18)}
+
+
+
+
+
+
 /* Manga: cifre che stanno nell'anello, spunta disegnata, avviso da fumetto */
-html[data-skin="manga"]:not(#z):not(#y) :is(.timer .tr .t,.rest .rr .tv){font:800 max(22px,1.2941rem)/1 "Manrope",system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-html[data-skin="manga"]:not(#z):not(#y) .rest .rr .tv{font-size:26px}
-html[data-skin="manga"]:not(#z):not(#y) button.tick[aria-pressed="true"]::before{content:"";background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235fd38f' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/24px no-repeat,rgba(26,25,30,.88)}
-html[data-skin="manga"]:not(#z):not(#y) .banner{background:#1a191e;border:2px solid #ece6d6;border-radius:6px;box-shadow:4px 4px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"]:not(#z):not(#y) .hero .big{margin-bottom:14px}
-html[data-skin="manga"]:not(#z):not(#y) .rk-gen>b{font-family:var(--manga);font-weight:400;letter-spacing:0}
+
+
+
+
+
+
 @media (min-width:361px){:root:not(#z):not(#y) .wd2 small{white-space:nowrap;display:block;-webkit-line-clamp:unset;font-size:max(11px,0.6471rem);letter-spacing:-.02em;padding:0;overflow:visible}}
 /* Campo: un mini campo da padel nella scheda di Oggi, con la pallina che entra e rimbalza nel servizio */
-html[data-skin="campo"]:not(#z):not(#y) .hero{position:relative;overflow:hidden}
-html[data-skin="campo"]:not(#z):not(#y) .hero .big{max-width:calc(100% - 104px)}
-html[data-skin="campo"]:not(#z):not(#y) .hero::after{content:"";position:absolute;top:20px;right:18px;width:88px;height:48px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 48' fill='none' stroke='%23f2f7ff' stroke-linecap='round'%3E%3Crect x='2' y='2' width='84' height='44' rx='1.5' stroke-width='1.6' stroke-opacity='.6'/%3E%3Cpath d='M15 2v44M73 2v44M15 24h58' stroke-width='1.2' stroke-opacity='.45'/%3E%3Cpath d='M44 -1v50' stroke-width='2.4' stroke-opacity='.9'/%3E%3C/svg%3E") center/contain no-repeat}
-html[data-skin="campo"]:not(#z):not(#y) .hero::before{content:"";position:absolute;top:31px;right:34px;width:9px;height:9px;border-radius:50%;background:var(--acc,#e4ff3a);box-shadow:0 0 10px rgba(var(--acc-rgb,228,255,58),.7);pointer-events:none;z-index:1}
-@media (prefers-reduced-motion:no-preference){html[data-skin="campo"]:not(#z):not(#y) .hero::before{animation:cpBall .9s linear .25s backwards}}
-html[data-skin="campo"]:not(#z):not(#y) :is(.tile,.ctx>*,.tabs button,.wd2,.field,.btn){border-radius:8px}
+
+
+
+
+
+
 /* Giro 2 */
 html[data-skin="vetro"]:not(#z):not(#y) .rest:not(.over){background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)}
 html[data-skin="vetro"]:not(#z):not(#y) div.timer:not(.over){background:rgba(22,18,48,.9)}
@@ -1417,39 +1392,39 @@ html[data-skin="eclisse"]:not(#z):not(#y) .rest .rr .tv{font-size:25px;letter-sp
 html[data-skin="eclisse"]:not(#z):not(#y) .dayr .d{font-size:max(22px,1.2941rem);letter-spacing:0}
 html[data-skin="eclisse"]:not(#z):not(#y) .rest:not(.over){background:linear-gradient(180deg,rgba(var(--cor-rgb),.08),rgba(var(--cor-rgb),.03));border:1px solid rgba(var(--cor-rgb),.22);box-shadow:inset 0 1px 0 rgba(var(--cor-rgb),.3)}
 html[data-skin="eclisse"]:not(#z):not(#y) .timer:not(.over){box-shadow:0 0 0 1px rgba(var(--acc-rgb),.55),0 10px 30px rgba(0,0,0,.6)}
-html[data-skin="carbonio"]:not(#z):not(#y) :is(.timer .tr,.rest .rr) .seg7 svg{height:.95em}
-html[data-skin="carbonio"]:not(#z):not(#y) .seg7 .off{fill:rgba(var(--acc-rgb),.04)}
-html[data-skin="carbonio"]:not(#z):not(#y) .tgt .seg7+.lu{vertical-align:.1em}
-html[data-skin="campo"]:not(#z):not(#y) :is(details.mn>summary,p.grp,p.note,.head p){text-shadow:0 0 3px var(--bg),0 0 8px var(--bg),0 0 14px var(--bg)}
-html[data-skin="campo"]:not(#z):not(#y) div.timer:not(.over){background:color-mix(in srgb,var(--card) 90%,var(--acc));color:var(--fg);border:1.5px solid var(--acc)}
-html[data-skin="campo"]:not(#z):not(#y) div.timer:not(.over) .ra{stroke:var(--acc);filter:none}
-html[data-skin="campo"]:not(#z):not(#y) div.timer:not(.over) button{color:var(--acc);border-color:color-mix(in srgb,var(--acc) 60%,transparent);background:transparent}
-html[data-skin="campo"]:not(#z):not(#y) div.timer:not(.over) .l{color:var(--fg)}
-html[data-skin="campo"][data-var="2"]:not(#z):not(#y){--go:#b6ffcf}
+
+
+
+
+
+
+
+
+
 @keyframes cpBall{0%{translate:-62px -10px;scale:.7;opacity:0;animation-timing-function:cubic-bezier(.5,0,.9,.5)}45%{translate:-26px 10px;scale:1.16 .8;opacity:1;animation-timing-function:cubic-bezier(.2,.7,.3,1)}100%{translate:0 0;scale:1}}
-html[data-skin="manga"]:not(#z):not(#y) .tgt b{letter-spacing:-.05em;font-kerning:normal}
-html[data-skin="manga"]:not(#z):not(#y) select{border:2px solid var(--fg);border-radius:6px;box-shadow:3px 3px 0 rgba(236,230,214,.14)}
-html[data-skin="manga"]:not(#z):not(#y) .hero{box-shadow:5px 5px 0 var(--acc,#ff2340)}
-html[data-skin="manga"]:not(#z):not(#y) .tgt b{font:800 30px/1 "Manrope",system-ui,sans-serif;letter-spacing:-.02em;font-variant-numeric:proportional-nums;text-shadow:2px 2px 0 var(--acc)}
+
+
+
+
 /* Giro 3 */
-html[data-skin="carbonio"]:not(#z):not(#y) :is(.timer .tr,.rest .rr) .seg7 svg{height:.8em}
-html[data-skin="carbonio"]:not(#z):not(#y) .timer .tr .t{font-size:24px}
-html[data-skin="carbonio"]:not(#z):not(#y) .rest .rr .tv{font-size:28px}
-html[data-skin="carbonio"]:not(#z):not(#y) .tgt .seg7+.lu{vertical-align:0}
+
+
+
+
 html[data-skin="eclisse"]:not(#z):not(#y) .wu h3{font-size:max(20px,1.1765rem)}
 html[data-skin="eclisse"]:not(#z):not(#y) .rest:not(.over) .ra{stroke:var(--acc);filter:none}
 html[data-skin="eclisse"]:not(#z):not(#y) .timer .tr .t{font-size:max(20px,1.1765rem);letter-spacing:-.03em}
-html[data-skin="campo"]:not(#z):not(#y) .rest:not(.over) .ra{stroke:var(--acc);filter:none}
-html[data-skin="campo"]:not(#z):not(#y) .rest:not(.over){background:color-mix(in srgb,var(--card) 90%,var(--acc));border:1.5px solid color-mix(in srgb,var(--acc) 45%,transparent)}
-html[data-skin="campo"]:not(#z):not(#y) details.mn>summary{padding-top:6px}
-html[data-skin="manga"]:not(#z):not(#y) .timer .tr .t{font-size:max(20px,1.1765rem)}
-html[data-skin="manga"]:not(#z):not(#y) .rest .rr .tv{font-size:max(22px,1.2941rem);letter-spacing:-.03em}
-html[data-skin="manga"][data-var="2"]:not(#z):not(#y) .tgt b{text-shadow:2px 2px 0 rgba(var(--acc-rgb),.75)}
+
+
+
+
+
+
 html[data-skin="vetro"][data-var="1"]:not(#z):not(#y){--pad:#c3a6ff}
 /* Riscaldamento: "Fatto" è l'azione principale */
 :root:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:color-mix(in srgb,var(--acc,var(--hot)) 24%,var(--card));color:var(--fg);border:1px solid color-mix(in srgb,var(--acc,var(--hot)) 55%,transparent)}
 html[data-skin="eclisse"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:var(--corona);color:#08080b;border-color:transparent}
-html[data-skin="manga"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:#ece6d6;color:#1a191e}
+
 /* Lame di luce con transform invece di left */
 .pbar i::after{left:0;width:100%;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.75) 50%,transparent 70%);transform:translateX(-100%)}
 .pbar.shine i::after{animation-name:sweepT}
@@ -1458,7 +1433,7 @@ html[data-skin="manga"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:#ec
 @keyframes bladeT{to{transform:skewX(-18deg) translateX(311%)}}
 .gold-end i{left:0;transform:skewX(-18deg) translateX(-145%);animation-name:goldsweepT}
 @keyframes goldsweepT{to{transform:skewX(-18deg) translateX(255%)}}
-html[data-skin="carbonio"]:not(#z):not(#y) :is(.timer .tr,.rest .rr) .seg7 .on{stroke:var(--acc);stroke-width:1.4;paint-order:stroke}
+
 /* Giro 4 */
 .nw{white-space:nowrap}
 :root:not(#z):not(#y) .kpi{align-items:baseline}
@@ -1466,16 +1441,16 @@ html[data-skin="carbonio"]:not(#z):not(#y) :is(.timer .tr,.rest .rr) .seg7 .on{s
 html[data-skin="eclisse"]:not(#z):not(#y) .timer:not(.over){background:linear-gradient(180deg,rgba(var(--cor-rgb),.08),rgba(var(--cor-rgb),.03)),rgba(10,10,16,.94);color:var(--fg);border:1px solid rgba(var(--cor-rgb),.22);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:inset 0 1px 0 rgba(var(--cor-rgb),.3),0 0 0 1px rgba(var(--acc-rgb),.35),0 14px 34px rgba(0,0,0,.7)}
 html[data-skin="eclisse"]:not(#z):not(#y) .timer:not(.over) .l{color:var(--fg)}
 html[data-skin="eclisse"]:not(#z):not(#y) .timer:not(.over) button{color:var(--corona);border-color:rgba(var(--cor-rgb),.4);background:transparent}
-html[data-skin="carbonio"]:not(#z):not(#y) .headrow::after{position:absolute;left:0;bottom:0}
-html[data-skin="carbonio"]:not(#z):not(#y) .tgt b{align-items:flex-end}
-html[data-skin="carbonio"]:not(#z):not(#y) .tgt .lu{padding-bottom:.06em}
-html[data-skin="campo"]:not(#z):not(#y) #court{height:100dvh}
-html[data-skin="campo"]:not(#z):not(#y) :is(details.mn>summary,p.note,p.grp){background:color-mix(in srgb,var(--bg) 85%,transparent);border-radius:6px;padding:4px 8px;margin-inline:-8px;text-shadow:none}
+
+
+
+
+
 html[data-skin="vetro"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:color-mix(in srgb,var(--acc) 30%,transparent);color:#fff;border-color:var(--acc)}
 html[data-skin="vetro"][data-var="2"]:not(#z):not(#y){--go:#b5f27a}
-html[data-skin="manga"]:not(#z):not(#y) .rest:not(.over){box-shadow:4px 4px 0 var(--acc);border-color:var(--fg)}
-html[data-skin="manga"]:not(#z):not(#y) .rest:not(.over) button{border-color:var(--fg)}
-html[data-skin="manga"]:not(#z):not(#y) .rk-gen>b{margin-bottom:4px}
+
+
+
 /* Oro di fine esercizio: si anima solo l'opacità */
 .gold-end{animation:none;box-shadow:none}
 .gold-end::before{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 3px rgba(255,214,140,.85),inset 0 0 60px rgba(255,190,90,.3),inset 0 0 120px rgba(255,190,90,.28);opacity:0;animation:goldglow 1.4s ease-out forwards}
@@ -1483,43 +1458,43 @@ html[data-skin="manga"]:not(#z):not(#y) .rk-gen>b{margin-bottom:4px}
 /* Giro 5 */
 :root:not(#z):not(#y) .kpi .pill{align-self:center}
 html[data-skin="eclisse"]:not(#z):not(#y){--go:#9fe3b0}
-html[data-skin="carbonio"]:not(#z):not(#y) .kpi b{align-items:flex-end}
-html[data-skin="carbonio"]:not(#z):not(#y) .kpi :is(.lu,small){padding-bottom:.08em}
-html[data-skin="carbonio"]:not(#z):not(#y) .rest:not(.over){background:linear-gradient(180deg,#1d2228,#14181d);border:1px solid rgba(var(--acc-rgb),.45)}
-html[data-skin="campo"]:not(#z):not(#y) #court{opacity:.45}
-html[data-skin="campo"]:not(#z):not(#y) #court .ln{stroke-width:.42}
-html[data-skin="campo"]:not(#z):not(#y) #court .net{stroke-width:.7}
-html[data-skin="campo"]:not(#z):not(#y) :is(details.mn>summary,p.note,p.grp){width:fit-content;max-width:calc(100% + 16px)}
-html[data-skin="manga"]:not(#z):not(#y) .gold-end i{background:repeating-linear-gradient(100deg,transparent 0 18px,rgba(255,214,90,.55) 18px 24px);mix-blend-mode:normal}
-html[data-skin="manga"]:not(#z):not(#y) .gold-end::before{box-shadow:inset 0 0 0 4px #ffd65a}
-html[data-skin="manga"][data-var="2"]:not(#z):not(#y) .tabs button[aria-pressed="true"]{background:#1a191e;border-color:var(--acc);color:var(--acc);box-shadow:3px 3px 0 var(--acc)}
+
+
+
+
+
+
+
+
+
+
 /* Giro 6 */
-html[data-skin="manga"]:not(#z):not(#y) .gold-end::before{box-shadow:inset 0 0 0 4px #ffd65a}
-html[data-skin="campo"]:not(#z):not(#y) .back{background:color-mix(in srgb,var(--bg) 70%,transparent);border-radius:6px;padding-inline:8px;margin-inline:-8px;width:fit-content}
-html[data-skin="campo"]:not(#z):not(#y) :is(details.mn>summary,p.note,p.grp){background:color-mix(in srgb,var(--bg) 70%,transparent)}
-html[data-skin="campo"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.banner,.sheet) :is(p.note,p.grp){background:none;padding:0;margin-inline:0;width:auto;max-width:none}
-html[data-skin="campo"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:var(--acc);color:#10140a;border-color:transparent}
-html[data-skin="manga"]:not(#z):not(#y) .rest:not(.over){background:#1a191e}
-html[data-skin="manga"][data-var="1"]:not(#z):not(#y) .tgt b{text-shadow:1.5px 1.5px 0 rgba(var(--acc-rgb),.75)}
+
+
+
+
+
+
+
 /* Giro 7 */
 html[data-skin="eclisse"]:not(#z):not(#y) .wu .wub .btn:not(.ghost){background:color-mix(in srgb,var(--fg) 14%,transparent);color:var(--fg);border-color:rgba(var(--cor-rgb),.35)}
-html[data-skin="campo"]:not(#z):not(#y) #court{-webkit-mask-image:linear-gradient(transparent 0 92px,#000 136px);mask-image:linear-gradient(transparent 0 92px,#000 136px)}
-html[data-skin="campo"]:not(#z):not(#y) :is(details.mn>summary,p.note,p.grp,.back){background:color-mix(in srgb,var(--bg) 80%,transparent)}
-html[data-skin="campo"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.banner,.sheet) :is(p.note,p.grp){background:none}
-html[data-skin="carbonio"]:not(#z):not(#y) .wu li em{color:#c3cad2}
+
+
+
+
 /* Giro 8: icone di palestra, padel e partita sempre di tre colori diversi */
 html[data-skin="vetro"][data-var="1"]:not(#z):not(#y){--match:#ffc35c}
 html[data-skin="eclisse"][data-var="2"]:not(#z):not(#y){--match:#ffc35c}
-html[data-skin="carbonio"][data-var="2"]:not(#z):not(#y){--pad:#c9a8ff;--match:#ffc35c}
-html[data-skin="manga"][data-var="1"]:not(#z):not(#y){--pad:#7fe6ff}
-html[data-skin="manga"][data-var="2"]:not(#z):not(#y){--match:#c9a8ff;--pad:#7fe6ff}
-html[data-skin="campo"]:not(#z):not(#y) details.mn>summary{border:1px solid rgba(242,247,255,.18)}
+
+
+
+
 html[data-skin="vetro"][data-var="2"]:not(#z):not(#y){--pad:#c3a6ff;--match:#ffc35c}
 html[data-skin="eclisse"][data-var="2"]:not(#z):not(#y){--pad:#6ff0c8}
-html[data-skin="manga"][data-var="1"]:not(#z):not(#y){--pad:#ff8fd0}
-html[data-skin="manga"]:not([data-var="1"]):not([data-var="2"]):not(#z):not(#y){--pad:#7fe6ff;--match:#c9a8ff}
-html[data-skin="campo"]:not(#z):not(#y) .head>button.back{background:none;padding-inline:0;margin-inline:0}
-html[data-skin="manga"]:not(#z):not(#y) select{color:var(--fg)}
+
+
+
+
 /* ===== VETRO "LASTRA" (2026-10-12): vetro solo su ciò che galleggia, schede piene, una luce dall'alto ===== */
 html[data-skin="vetro"]:not(#z):not(#y):not(#x){--bg:#0c0d16;--line:rgba(255,255,255,.09);--cardbg:#15161f;--card:#15161f;--card-2:#1d1e29;--field:#0e0f17;--navbg:rgba(14,15,24,.72)}
 html[data-skin="vetro"]:not(#z):not(#y):not(#x) body{background:#0c0d16}
@@ -1546,166 +1521,151 @@ html[data-skin="vetro"]:not(#z):not(#y):not(#x) .btn.hot{background:var(--acc);b
 html[data-skin="vetro"]:not(#z):not(#y):not(#x) .btn.hot::before,html[data-skin="vetro"]:not(#z):not(#y):not(#x) .btn.hot::after{display:none}
 html[data-skin="vetro"]:not(#z):not(#y):not(#x) body::before{background:radial-gradient(60% 55% at 50% 0%,rgba(235,240,255,.22),transparent 70%),radial-gradient(35% 35% at 50% 0%,rgba(var(--acc-rgb),.16),transparent 70%)}
 /* ===== STILE LAVAGNA (2026-10-12): gesso su ardesia, la lavagna del coach ===== */
-html[data-skin="lavagna"]{color-scheme:dark;--bg:#1d2521;--card:#222b26;--card-2:#28322c;--field:#19201c;--line:rgba(236,234,224,.2);--fg:#eeece4;--muted:#c6c9bf;--dim:#b0b4a9;
-  --chalk:#eeece4;--chalk-rgb:238,236,228;--acc:#ffd84d;--acc-rgb:255,216,77;--hot:var(--acc);--hot-ink:#1d2521;
-  --pad:#7fd0ff;--match:#ff94bd;--info:#7fd0ff;--go:#9fe6a0;--stop:#ff8a80;--adapt:#ffb366;
-  --grad:linear-gradient(var(--acc),var(--acc));--glow:rgba(0,0,0,0);--hl:rgba(255,255,255,.05);
-  --cardbg:rgba(27,34,30,.6);--tilebg:rgba(30,38,33,.6);--title:linear-gradient(var(--chalk),var(--chalk));--navbg:#171d1a;
-  --display:"Cabin Sketch","Bebas Neue",sans-serif}
-html[data-skin="lavagna"][data-var="1"]{--acc:#7fd0ff;--acc-rgb:127,208,255;--pad:#ffd84d;--match:#ff94bd;--info:#ffd84d}
-html[data-skin="lavagna"][data-var="2"]{--acc:#ff94bd;--acc-rgb:255,148,189;--pad:#7fd0ff;--match:#ffd84d;--info:#7fd0ff}
-html[data-skin="lavagna"]:not(#z):not(#y){--hot:var(--acc);--grad:linear-gradient(var(--acc),var(--acc))}
-html[data-skin="lavagna"]:not(#z):not(#y) body{background:#1d2521}
+
+
+
+
+
 /* la lavagna: ardesia con grana, ditate di cancellino e uno schema di gioco mezzo cancellato */
-html[data-skin="lavagna"]:not(#z):not(#y) body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:1;filter:none;animation:none;
-  background:
-   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .7 -.33'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),
-   url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 800' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%23eeece4' stroke-opacity='.11' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M70 120 L330 118 L332 690 L68 692 Z'/%3E%3Cpath d='M60 405 L340 403' stroke-dasharray='10 8'/%3E%3Cpath d='M70 205 L331 203 M69 605 L332 607 M200 205 L200 605'/%3E%3Cpath d='M120 300 l22 22 m0 -22 l-22 22 M260 470 l22 22 m0 -22 l-22 22'/%3E%3Ccircle cx='140' cy='520' r='13'/%3E%3Ccircle cx='265' cy='290' r='13'/%3E%3Cpath d='M150 335 C180 380 230 380 250 440' /%3E%3Cpath d='M240 428 l11 14 l4 -17'/%3E%3C/g%3E%3C/svg%3E") center/cover no-repeat,
-   radial-gradient(48% 14% at 24% 15%,rgba(255,255,255,.07),transparent 70%),
-   radial-gradient(55% 12% at 78% 63%,rgba(255,255,255,.055),transparent 70%),
-   radial-gradient(120% 70% at 50% 0%,#232c27,#1a211d 70%)}
+
 /* polvere di gesso che galleggia piano */
-html[data-skin="lavagna"]:not(#z):not(#y)::after{content:"";position:fixed;inset:-10% 0 0;z-index:-1;pointer-events:none;
-  background:radial-gradient(1.4px 1.4px at 12% 22%,rgba(255,255,255,.35) 50%,transparent 52%),radial-gradient(1px 1px at 68% 14%,rgba(255,255,255,.3) 50%,transparent 52%),radial-gradient(1.6px 1.6px at 84% 48%,rgba(255,255,255,.25) 50%,transparent 52%),radial-gradient(1px 1px at 33% 61%,rgba(255,255,255,.3) 50%,transparent 52%),radial-gradient(1.3px 1.3px at 52% 84%,rgba(255,255,255,.28) 50%,transparent 52%),radial-gradient(1px 1px at 8% 77%,rgba(255,255,255,.3) 50%,transparent 52%),radial-gradient(1.2px 1.2px at 91% 91%,rgba(255,255,255,.25) 50%,transparent 52%)}
-@media (prefers-reduced-motion:no-preference){html[data-skin="lavagna"]:not(#z):not(#y)::after{animation:lvDust 26s ease-in-out infinite alternate}}
+
+
 @keyframes lvDust{from{transform:translateY(0)}to{transform:translateY(5%) translateX(1.5%)}}
 
 /* tipografia: titoli e numeri scritti col gesso */
-html[data-skin="lavagna"]:not(#z):not(#y) :is(h1,h2,h3,.hero .big,.tgt b,.kpi b,.timer .t,.rest .tv,.dayr .d,.set .i,.tile b,.pitem b,details.h summary b,.edx .top b){font-family:var(--display);font-weight:700;letter-spacing:.005em;color:var(--chalk);background:none;-webkit-text-fill-color:currentColor;text-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.hero .lbl,.kicker){color:var(--acc);letter-spacing:.14em}
-html[data-skin="lavagna"]:not(#z):not(#y) .hero div.big{display:block;width:fit-content;padding-bottom:6px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M3 6 C40 2 80 9 120 5 S180 3 197 6' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E") left bottom/100% 9px no-repeat;-webkit-background-clip:border-box;background-clip:border-box}
-html[data-skin="lavagna"]:not(#z):not(#y) .hero .big{-webkit-mask:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .tgt b{color:var(--chalk)}
+
+
+
+
+
 
 /* riquadri disegnati a mano */
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.hero,.banner){position:relative;background:var(--cardbg);border:0;border-radius:6px;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.hero,.banner)::before{display:none}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.card,.ex,.status,details.h,.hero,.banner)::after{content:"";position:absolute;inset:0;border:1.8px solid rgba(var(--chalk-rgb),.42);border-radius:7px 4px 8px 5px;pointer-events:none;filter:url(#chalk);animation:none;background:none;opacity:1;transform:none;box-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .ex.cur::after{border:2.4px solid var(--acc);border-color:rgba(var(--acc-rgb),.95)}
-html[data-skin="lavagna"]:not(#z):not(#y) .hero::after{border-width:2.2px;border-color:rgba(var(--chalk-rgb),.55)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.ctx button,.xrow,.dayr,.tile,.gear,.pitem,.opt,.edx,.arx,.tabs button){background:rgba(34,43,38,.75);border:1.4px solid rgba(var(--chalk-rgb),.2);border-radius:5px;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .tabs button[aria-pressed="true"]{border-color:var(--acc);color:var(--fg);background:rgba(var(--acc-rgb),.1)}
-html[data-skin="lavagna"]:not(#z):not(#y) .tabs button[aria-pressed="true"] *{color:inherit}
+
+
+
+
+
+
+
+
 /* campi: si scrive sulla riga */
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.field,select,.inl input,.edx input,.edx select,.ed input,.ed select){background:rgba(0,0,0,.16);border:0;border-bottom:2px solid rgba(var(--chalk-rgb),.38);border-radius:4px 4px 0 0;box-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .set.done .field{border-bottom-color:rgba(159,230,160,.6)}
+
+
 
 /* bottoni: quello principale è colorato a tratteggio col gesso */
-html[data-skin="lavagna"]:not(#z):not(#y) button.btn.hot,html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot{background:repeating-linear-gradient(-62deg,var(--acc) 0 3px,rgba(var(--acc-rgb),.82) 3px 4.5px);color:var(--hot-ink);border:0;border-radius:6px 4px 7px 5px;box-shadow:none;text-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot::after,html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot::before{display:none;animation:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .btn:not(.hot){background:transparent;border:1.6px solid rgba(var(--chalk-rgb),.38);border-radius:6px 4px 7px 5px;box-shadow:none;color:var(--fg)}
-html[data-skin="lavagna"]:not(#z):not(#y) .btn.danger{border-color:rgba(255,138,128,.6);color:var(--stop)}
-html[data-skin="lavagna"]:not(#z):not(#y) .chip{background:transparent;border:1.4px solid currentColor;border-radius:5px}
+
+
+
+
+
 
 /* spunta: casella a gesso, e quando la segni una sbuffata di polvere */
-html[data-skin="lavagna"]:not(#z):not(#y) .tick{position:relative;background:transparent;border:1.6px solid rgba(var(--chalk-rgb),.3);border-radius:6px 4px 6px 4px;color:var(--dim)}
-html[data-skin="lavagna"]:not(#z):not(#y) .tick.pop{animation:lvTick .3s var(--ease-out)}
-html[data-skin="lavagna"]:not(#z):not(#y) .tick.pop::after{content:"";position:absolute;inset:-14px;border-radius:50%;pointer-events:none;border:0;box-shadow:none;
-  background:radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.9) 50%,transparent 55%),radial-gradient(1.6px 1.6px at 78% 22%,rgba(255,255,255,.8) 50%,transparent 55%),radial-gradient(2.2px 2.2px at 85% 70%,rgba(255,255,255,.85) 50%,transparent 55%),radial-gradient(1.5px 1.5px at 30% 82%,rgba(255,255,255,.8) 50%,transparent 55%),radial-gradient(1.8px 1.8px at 50% 8%,rgba(255,255,255,.7) 50%,transparent 55%),radial-gradient(1.4px 1.4px at 6% 55%,rgba(255,255,255,.7) 50%,transparent 55%),radial-gradient(1.6px 1.6px at 96% 45%,rgba(255,255,255,.7) 50%,transparent 55%),radial-gradient(40% 40% at 50% 50%,rgba(255,255,255,.18),transparent 70%);
-  animation:lvPuff .3s var(--ease-out) forwards}
+
+
+
 @keyframes lvTick{from{transform:scale(.9)}to{transform:scale(1)}}
 @keyframes lvPuff{from{opacity:1;transform:scale(.6)}to{opacity:0;transform:scale(1.25)}}
 
 /* timer: anello tracciato col gesso */
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer,.rest):not(.over) .ra{stroke:var(--acc);filter:url(#chalk)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer,.rest) .rk{stroke:var(--chalk);opacity:.16;stroke-dasharray:3 4}
-html[data-skin="lavagna"]:not(#z):not(#y) div.timer:not(.over){background:#1a211d;border:1.8px solid rgba(var(--chalk-rgb),.38);border-radius:8px 5px 9px 6px;box-shadow:0 14px 30px -12px rgba(0,0,0,.8);-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .rest:not(.over){background:rgba(255,255,255,.03);border:1.6px solid rgba(var(--chalk-rgb),.3);border-radius:6px;box-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer,.rest):not(.over) button{background:transparent;border:1.4px solid rgba(var(--acc-rgb),.7);color:var(--acc);border-radius:5px}
+
+
+
+
+
 
 /* barra di avanzamento: tratteggio */
-html[data-skin="lavagna"]:not(#z):not(#y) .pbar{background:transparent;border:1.4px solid rgba(var(--chalk-rgb),.28);border-radius:3px;height:8px}
-html[data-skin="lavagna"]:not(#z):not(#y) .pbar i{border-radius:0;background:repeating-linear-gradient(-62deg,var(--acc) 0 2.5px,transparent 2.5px 5px)}
+
+
 
 /* intestazione e barra: la cornice di legno con la mensola dei gessetti */
-html[data-skin="lavagna"]:not(#z):not(#y) .thead{background:#1d2521;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 1.5px 0 rgba(var(--chalk-rgb),.14)}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar{background:linear-gradient(#4b3624,#3a2a1c 5px,#171d1a 5px);border-top:0;padding-top:5px;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 -6px 18px rgba(0,0,0,.35)}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar button{color:var(--muted);background:none}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar button[aria-current="page"]{color:var(--acc);background:none}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar button[aria-current="page"] svg{filter:none;stroke:var(--acc)}
-html[data-skin="lavagna"]:not(#z):not(#y) .sheet{background:#202925;border-top:2px solid rgba(var(--chalk-rgb),.3);-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="lavagna"]:not(#z):not(#y) #aurw{background:radial-gradient(70% 35% at 50% 100%,rgba(var(--acc-rgb),.16),transparent 70%);opacity:calc(var(--p,0) * .8)}
-html[data-skin="lavagna"]:not(#z):not(#y) #court{display:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .rest .rr .tv{font-size:25px;letter-spacing:-.02em}
-html[data-skin="lavagna"]:not(#z):not(#y) .timer .tr .t{font-size:max(22px,1.2941rem);letter-spacing:-.02em}
+
+
+
+
+
+
+
+
+
+
 /* stemmi del rango disegnati col gesso */
-html[data-skin="lavagna"] .rbd :is(.hx,.wg,.cr){fill:rgba(29,37,33,.85);stroke:currentColor;stroke-width:2.6;filter:url(#chalk)}
-html[data-skin="lavagna"] .rbd .in{fill:none;stroke:currentColor;stroke-opacity:.45;stroke-dasharray:3 3}
-html[data-skin="lavagna"] .rbd .gl,html[data-skin="lavagna"] .rbd circle{fill:currentColor}
-html[data-skin="lavagna"] .rbd .gs{display:none}
+
+
+
+
 /* Lavagna, giro 2 */
-html[data-skin="lavagna"]:not(#z):not(#y) div.timer:not(.over){color:var(--fg)}
-html[data-skin="lavagna"]:not(#z):not(#y) div.timer:not(.over) .l{color:var(--fg)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer .tr .t,.rest .rr .tv){font:800 max(22px,1.2941rem)/1 "Manrope",system-ui,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--chalk)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rest .rr .tv{font-size:24px}
-html[data-skin="lavagna"]:not(#z):not(#y) .timer .tr .t{font-size:max(20px,1.1765rem)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-gl{display:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-mz{filter:url(#chalk)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-mz>g{stroke:rgba(var(--chalk-rgb),.75);stroke-width:1.1}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig svg{-webkit-mask:repeating-linear-gradient(-55deg,#000 0 2.4px,rgba(0,0,0,.6) 2.4px 4.2px);mask:repeating-linear-gradient(-55deg,#000 0 2.4px,rgba(0,0,0,.6) 2.4px 4.2px)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-bar{background:transparent;border:1.4px solid rgba(var(--chalk-rgb),.3);border-radius:3px}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-bar i{border-radius:0;box-shadow:none;background:repeating-linear-gradient(-62deg,var(--acc) 0 2.5px,transparent 2.5px 5px)}
-html[data-skin="lavagna"]:not(#z):not(#y) .pill{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor;border-radius:5px}
-html[data-skin="lavagna"]:not(#z):not(#y) .seg{background:transparent;border:1.4px solid rgba(var(--chalk-rgb),.25);border-radius:6px}
-html[data-skin="lavagna"]:not(#z):not(#y) .seg button{border-radius:4px}
-html[data-skin="lavagna"]:not(#z):not(#y) .seg button[aria-pressed="true"]{background:rgba(var(--acc-rgb),.12);color:var(--fg);box-shadow:inset 0 0 0 1.6px var(--acc)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.tile,.dayr,.xrow,.ctx button,.tabs button,.pitem,.opt){border-radius:7px 4px 8px 5px}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* serie: si scrive sulla riga, + e − sono segni di gesso */
-html[data-skin="lavagna"]:not(#z):not(#y) .set .field,html[data-skin="lavagna"]:not(#z):not(#y) .set .field.pmf{background:transparent;border:0;border-bottom:2px solid rgba(var(--chalk-rgb),.4);border-radius:0;box-shadow:none;outline:0}
-html[data-skin="lavagna"]:not(#z):not(#y) .set .field:focus-within{border-bottom-color:var(--acc)}
+
+
 /* serie fatta più tenue, ma non il timbro PR: l'opacità va sui figli, non sul campo che lo contiene */
-html[data-skin="lavagna"]:not(#z):not(#y) .set.done .field{border-bottom-color:rgba(var(--chalk-rgb),.16)}
-html[data-skin="lavagna"]:not(#z):not(#y) .set.done .field>:not(.prs){opacity:.8}
-html[data-skin="lavagna"]:not(#z):not(#y) .pm{background:none;color:var(--muted);font-family:var(--display);font-size:max(22px,1.2941rem)}
+
+
+
 /* spunta fatta: segno di gesso nel colore della variante */
-html[data-skin="lavagna"]:not(#z):not(#y) button.tick[aria-pressed="true"]{background:transparent!important;color:var(--acc)!important;box-shadow:none!important;border:2px solid var(--acc);font-size:max(22px,1.2941rem)}
+
 /* primo bottone: tratteggio che si vede */
-html[data-skin="lavagna"]:not(#z):not(#y) button.btn.hot,html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot{background:repeating-linear-gradient(-55deg,var(--acc) 0 3.5px,rgba(var(--acc-rgb),.74) 3.5px 6.5px)}
+
 /* mensola di legno dei gessetti */
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar{background:linear-gradient(#5b412a,#4a3422 3px,#3a291b 9px,#241a12 11px,#171d1a 11px);padding-top:11px}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar button[aria-current="page"]::before,html[data-skin="lavagna"]:not(#z):not(#y) nav.bar button[aria-current="page"]::after{background:var(--acc);border-radius:2px;filter:url(#chalk)}
+
+
 /* Lavagna, giro 3 */
-html[data-skin="lavagna"]{--rk-n:rgba(238,236,228,.07);--rk-c:rgba(238,236,228,.09);--rk-0:rgba(238,236,228,.04)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-mz .mz{filter:saturate(.55) brightness(1.22)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-mz .mz.sel{stroke:var(--acc);stroke-width:1.8}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.tile,.dayr,.xrow,.pitem,.opt,.ctx button,.tabs button,.sbtn,.btn:not(.hot),div.timer:not(.over),.rest:not(.over),.seg,.rk-seg){position:relative;border-color:transparent!important;box-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) div.timer:not(.over){position:fixed;background:#1c2420;border-radius:5px}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.tile,.dayr,.xrow,.pitem,.opt,.ctx button,.tabs button,.sbtn,.btn:not(.hot),div.timer:not(.over),.rest:not(.over),.seg,.rk-seg)::after{content:"";position:absolute;inset:0;border:1.6px solid rgba(var(--chalk-rgb),.3);border-radius:6px 3px 7px 4px;pointer-events:none;filter:url(#chalk)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(div.timer:not(.over),.rest:not(.over))::after{border-color:rgba(var(--chalk-rgb),.42);border-width:1.8px}
-html[data-skin="lavagna"]:not(#z):not(#y) .rest:not(.over){background:#1c2420;border-radius:5px}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.tabs button[aria-pressed="true"],.dayr.today,.dayr[aria-current])::after{border-color:var(--acc)}
-html[data-skin="lavagna"]:not(#z):not(#y) .btn.danger::after{border-color:rgba(255,138,128,.6)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-seg{background:transparent;border-radius:6px}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-seg button{border-radius:4px}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-seg button[aria-pressed="true"]{background:rgba(var(--acc-rgb),.14);color:var(--fg)}
-html[data-skin="lavagna"]:not(#z):not(#y) .seg button[aria-pressed="true"]{box-shadow:none;background:repeating-linear-gradient(-55deg,rgba(var(--acc-rgb),.22) 0 3px,rgba(var(--acc-rgb),.08) 3px 6px);outline:1.6px solid rgba(var(--acc-rgb),.8);outline-offset:-1.6px}
-html[data-skin="lavagna"]:not(#z):not(#y) .set.now .field{border-color:transparent!important;border-bottom-color:rgba(var(--chalk-rgb),.7)!important;box-shadow:none!important}
-html[data-skin="lavagna"]:not(#z):not(#y) .pm{font-family:"Manrope",system-ui,sans-serif;font-weight:700;font-size:max(20px,1.1765rem);color:var(--muted)}
-html[data-skin="lavagna"]:not(#z):not(#y) button.btn.hot,html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot{border-radius:3px 6px 4px 5px}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar{background:linear-gradient(#7a5a3c,#5b412a 1px,#4a3422 4px,#3a291b 9px,#241a12 11px,#171d1a 11px)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Lavagna, giro 4 */
-html[data-skin="lavagna"]:not(#z):not(#y) .dayr.t:not(#q)::after{border-color:var(--acc);border-width:2.2px}
-html[data-skin="lavagna"]:not(#z):not(#y) .dayr.t .d{color:var(--acc)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.rk-m,.bal-r,.rk-flip,.rk-i,.qm,.swap,.gear,.tick:not([aria-pressed="true"]),.timer button,.rest button){position:relative;border-color:transparent!important;box-shadow:none;border-radius:5px}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.rk-m,.bal-r,.gear){background:rgba(34,43,38,.75)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.rk-m,.bal-r,.rk-flip,.rk-i,.qm,.swap,.gear,.tick:not([aria-pressed="true"]),.timer button,.rest button)::before{content:"";position:absolute;inset:0;border:1.5px solid rgba(var(--chalk-rgb),.32);border-radius:6px 3px 7px 4px;pointer-events:none;filter:url(#chalk);background:none;display:block;animation:none;transform:none}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer,.rest) button::before{border-color:rgba(var(--acc-rgb),.75)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-m.sel::before,html[data-skin="lavagna"]:not(#z):not(#y) .rk-m[aria-pressed="true"]::before{border-color:var(--acc)}
-html[data-skin="lavagna"] .rk-fig ellipse{fill:none;stroke:rgba(238,236,228,.6);stroke-width:1.1}
-html[data-skin="lavagna"]{--rk-n:rgba(238,236,228,.03);--rk-c:rgba(238,236,228,.05);--rk-0:rgba(238,236,228,.02)}
+
+
+
+
+
+
+
+
+
 /* bottone principale: gesso passato a mano, bordi irregolari */
-html[data-skin="lavagna"]:not(#z):not(#y) button.btn.hot:not(.fxgo),html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot:not(.fxgo){position:relative;}
-html[data-skin="lavagna"]:not(#z):not(#y) button.btn.hot,html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot{isolation:isolate;background:transparent}
-html[data-skin="lavagna"]:not(#z):not(#y) .btn.hot::before{content:"";display:block;position:absolute;inset:0;z-index:-1;border-radius:4px;filter:url(#chalkb);animation:none;
-  background:repeating-linear-gradient(-55deg,rgba(0,0,0,0) 0 4px,rgba(29,37,33,.16) 4px 5.5px),var(--acc)}
+
+
+
 /* Lavagna, giro 5 */
-html[data-skin="lavagna"]:not(#z):not(#y) .wd2.t{position:relative;background:rgba(var(--acc-rgb),.07);box-shadow:none}
-html[data-skin="lavagna"]:not(#z):not(#y) .wd2.t::before{content:"";position:absolute;inset:0;border:2px solid var(--acc);border-radius:7px 4px 8px 5px;pointer-events:none;filter:url(#chalk)}
-html[data-skin="lavagna"]:not(#z):not(#y) nav.bar .ndot::before{width:30px;height:3px;border-radius:0;background:var(--acc);box-shadow:none;filter:url(#chalkb)}
-html[data-skin="lavagna"]:not(#z):not(#y) :is(.timer,.rest) button:not(#q)::before{border-color:rgba(var(--acc-rgb),.7)}
-html[data-skin="lavagna"]:not(#z):not(#y) .rk-fig .rk-mz .mz{filter:saturate(.4) brightness(1.25)}
-html[data-skin="lavagna"]:not(#z):not(#y) .sumfig .rk-fig svg{-webkit-mask:none;mask:none}
-html[data-skin="lavagna"]:not(#z):not(#y):not(#x) .sumfig .rk-fig .rk-mz .mz{filter:none}
+
+
+
+
+
+
+
 
 /* tenuta a tempo */
 .hold{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border:0;border-radius:10px;background:var(--hot);color:var(--hot-ink);font-weight:800;font-size:max(14px,0.8235rem);touch-action:manipulation}
@@ -1731,8 +1691,8 @@ body.ho-on{overflow:hidden}
 .ho-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(100%,420px)}
 @media (prefers-reduced-motion:no-preference){.hold-ov.soon .ho-t{animation:hoPulse 1s ease-in-out infinite}}
 @keyframes hoPulse{50%{transform:scale(1.06)}}
-html[data-skin="lavagna"] .ho-ring .ra{filter:url(#chalk)}
-html[data-skin="lavagna"] .ho-ring .rk{stroke-dasharray:3 4;opacity:.2}
+
+
 /* ===== TRANSIZIONE OGGI -> ALLENAMENTO (2026-10-13): la scheda di Oggi diventa l'intestazione dell'Allenamento (View Transitions; senza supporto o con riduzione movimento resta la dissolvenza) ===== */
 :root{--ease-in-out:cubic-bezier(.77,0,.175,1)}
 html.vt-sed .hero{view-transition-name:sed}
@@ -1752,7 +1712,7 @@ html.vt-sed::view-transition-old(root){animation:vtOut .14s var(--ease-out) both
 html.vt-sed::view-transition-new(root){animation:vtIn .14s var(--ease-out) both}
 ::view-transition-group(bar),::view-transition-old(bar),::view-transition-new(bar){animation:none}
 ::view-transition-old(bar){display:none}
-html[data-skin="manga"]::view-transition-group(sed){border-radius:0}
+
 html.vt-back::view-transition-group(sed),html.vt-back::view-transition-group(sed-t){animation-duration:.28s}
 
 /* ===== AVATAR: SAGOMA CHE CRESCE (2026-10-13) ===== */
@@ -1775,7 +1735,7 @@ html.vt-back::view-transition-group(sed),html.vt-back::view-transition-group(sed
 ::view-transition-old(*.vx),::view-transition-new(*.vx){height:100%;width:100%;object-fit:none;object-position:top left}
 ::view-transition-old(*.vx){animation:vtOut .16s var(--ease-out) both}
 ::view-transition-new(*.vx){animation:vtIn .16s var(--ease-out) both}
-html[data-skin="manga"]::view-transition-group(*.vx){border-radius:0}
+
 html.vt-ex nav.bar,html.vt-wf nav.bar,html.vt-swap nav.bar{view-transition-name:bar}
 html.vt-ex .thead,html.vt-wf .thead,html.vt-swap .thead{view-transition-name:thd}
 html.vt-ex #timer:not([hidden]):not(.enter),html.vt-wf #timer:not([hidden]):not(.enter),html.vt-swap #timer:not([hidden]):not(.enter){view-transition-name:tmr}
@@ -1789,17 +1749,17 @@ html.vt-ex::view-transition-new(root){animation:vtIn .14s var(--ease-out) both}
 ::view-transition-group(vt-src){animation-duration:.32s;animation-timing-function:cubic-bezier(.32,.72,0,1);overflow:clip;border-radius:20px 20px 0 0}
 ::view-transition-old(vt-src){animation:vtOut .06s var(--ease-out) both}
 ::view-transition-new(vt-src){animation:vtIn .06s var(--ease-out) both}
-html[data-skin="manga"]::view-transition-group(vt-src){border-radius:0}
+
 /* Sotto il foglio la pagina cambia di colpo: si muove solo il foglio, niente strati sovrapposti */
 html.vt-sh::view-transition-old(root){animation:none;display:none}
 html.vt-sh::view-transition-new(root){animation:none}
 /* 3. Cambio stile: il nuovo stile si allarga a cerchio dal punto toccato (animazione in JS sul nuovo stato) */
 html.vt-skin::view-transition-old(root),html.vt-skin::view-transition-new(root){animation:none;mix-blend-mode:normal}
 /* "Recupero finito" sul verde: cifre LED (Carbonio) e gesso (Lavagna) in inchiostro scuro, Murano giorno in bianco sul suo verde scuro */
-html[data-skin="carbonio"]:not(#z):not(#y):not(#x) :is(.rest,.timer).over .seg7 .on{fill:#06140c;stroke:#06140c;filter:none}
-html[data-skin="carbonio"]:not(#z):not(#y):not(#x) :is(.rest,.timer).over .seg7 .off{fill:rgba(6,20,12,.06)}
-html[data-skin="carbonio"]:not(#z):not(#y):not(#x) :is(.rest,.timer).over .lu{color:#06140c}
-html[data-skin="lavagna"]:not(#z):not(#y):not(#x) :is(.rest.over .tv,.timer.over .t){color:#06140c}
+
+
+
+
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not([data-sera]) :is(.rest,div.timer).over{color:#fff}
 /* timer fluttuante di giorno: riflesso più leggero e verde un filo più scuro, così "Recupero finito" resta ≥4,5:1 anche col testo grande */
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not([data-sera]) div.timer.over{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 48%),#0b6a43}
@@ -1813,23 +1773,23 @@ html.vt-sera::view-transition-old(root),html.vt-sera::view-transition-new(root){
 
 /* ===== Revisione v42, secondo giro (2026-10-13) ===== */
 /* Pericolo distinto dall'accento: rosso-arancio dove l'accento è già rosso o rosa, rosa chiaro in Campo per il contrasto sui tre fondi */
-html[data-skin="eclisse"][data-var="0"]:not(#z):not(#y),html[data-skin="manga"][data-var="0"]:not(#z):not(#y){--stop:#ff6a3d}
-html[data-skin="campo"]:not(#z):not(#y){--stop:#ff8a9a}
+html[data-skin="eclisse"][data-var="0"]:not(#z):not(#y){--stop:#ff6a3d}
+
 /* Avvisi (azzurro) lontani dall'accento nelle varianti blu e viola */
 html[data-skin="vetro"][data-var="1"]:not(#z):not(#y){--info:#d2bcff}
-html[data-skin="eclisse"][data-var="2"]:not(#z):not(#y),html[data-skin="manga"][data-var="1"]:not(#z):not(#y){--info:#7ee0e6}
+html[data-skin="eclisse"][data-var="2"]:not(#z):not(#y){--info:#7ee0e6}
 /* Grigio terziario più distinto dal secondario, sempre sopra 4,5 di contrasto */
 html[data-skin="eclisse"]:not(#z){--dim:#8a8695}
-html[data-skin="campo"][data-var="0"]:not(#z),html[data-skin="campo"]:not([data-var]):not(#z){--dim:#8299c2}
-html[data-skin="campo"][data-var="1"]:not(#z){--dim:#c4907a}
-html[data-skin="campo"][data-var="2"]:not(#z){--dim:#84b493}
-html[data-skin="lavagna"]:not(#z){--dim:#a2a69b}
-html[data-skin="carbonio"]:not(#z){--dim:#8a949f}
+
+
+
+
+
 /* Carbonio Rosso: numeri delle serie e segmenti scelti in un rosso più chiaro */
-html[data-skin="carbonio"][data-var="1"]:not(#z):not(#y) .set .i{color:#ff8a80}
-html[data-skin="carbonio"][data-var="1"]:not(#z):not(#y) .seg button[aria-pressed="true"]{color:#ff6b61}
+
+
 /* Serie sotto le ripetizioni: numero giallo in tutti gli stili (Carbonio Ambra con un giallo più freddo per staccarsi dall'accento) */
-html[data-skin="carbonio"][data-var="0"]:not(#z){--adapt:#ffe680}
+
 :root:not(#z):not(#y) .set.low .i{color:var(--adapt)!important;text-shadow:none;opacity:1}
 /* Testo che segue la dimensione del testo di iOS: mai sotto la misura del design, cresce con il testo grande */
 :root:not(#z) :is(.note,.prog,.msg,.kgchk,.spec,.xrow,.banner b,.ask .t,.swq p,.oldd p){font-size:max(14px,.8235rem)}
@@ -1838,12 +1798,12 @@ html[data-skin="carbonio"][data-var="0"]:not(#z){--adapt:#ffe680}
 
 /* ===== Revisione v44, terzo giro (2026-10-14) ===== */
 /* Fogli di scelta: in Manga e Lavagna l'opzione scelta ha bordo e fondo dell'accento come negli altri stili */
-html[data-skin="manga"][data-skin]:not(#z) .opt[aria-pressed="true"]{border-color:var(--hot);box-shadow:3px 3px 0 color-mix(in srgb,var(--hot) 45%,transparent);background:color-mix(in srgb,var(--hot) 14%,#1a191e)}
-html[data-skin="lavagna"]:not(#z):not(#y) .opt[aria-pressed="true"]{background:color-mix(in srgb,var(--hot) 16%,rgba(34,43,38,.75))}
-html[data-skin="lavagna"]:not(#z):not(#y) .opt[aria-pressed="true"]::after{border-color:var(--hot);border-width:2px}
+
+
+
 /* Carbonio: sulla scheda colorata le cifre LCD diventano chiare (l'accento resta nel bagliore) */
-html[data-skin="carbonio"]:not(#z):not(#y) .ex.cur.tint .tgt .seg7 .on{fill:var(--fg);filter:drop-shadow(0 0 1px rgba(0,0,0,.6)) drop-shadow(0 0 6px rgba(var(--acc-rgb),.35))}
-html[data-skin="carbonio"]:not(#z):not(#y) .ex.cur.tint .tgt .seg7 .off{fill:rgba(0,0,0,.12)}
+
+
 /* Scheda colorata: anche i testi in colore (+1 rip, prossima serie, numeri delle serie, tasti del recupero) si schiariscono verso il bianco */
 :root:not(#z):not(#y):not(#x) .ex.cur.tint :is(.prog,.tgt small){color:color-mix(in srgb,var(--go) 40%,var(--fg))}
 :root:not(#z):not(#y):not(#x) .ex.cur.tint :is(.prog.down,.tgt small.down){color:color-mix(in srgb,var(--adapt) 40%,var(--fg))}
@@ -1863,7 +1823,7 @@ html[data-skin="eclisse"]:not(#z):not(#y) .hero .big{font-size:clamp(40px,11.5vw
 .tgl{cursor:pointer}
 #omsg:empty{display:none}
 /* Manga: tasti −/+ larghi 34 px come negli altri stili (sotto 361 px 28 px come gli altri); il bordo da 2 px toglie spazio al numero, che si stringe appena per far stare "122,5" */
-@media (max-width:399px){html[data-skin="manga"]:not(#z):not(#y) .set .field input{letter-spacing:-.04em}}
+
 
 /* ===== Revisione v46, quarto giro (2026-10-14) ===== */
 /* Seduta libera: il tasto disattivato resta pieno, la lista non si legge attraverso */
@@ -1912,8 +1872,8 @@ html:not(#z):not(#y):not(#x) .sheet .fxgo:disabled::before,html:not(#z):not(#y):
 /* Seduta libera: sotto il tasto fisso la lista non si vede (fascia dal tasto al fondo del foglio) */
 html:not(#z):not(#y):not(#x) .sheet .fxgo,html:not(#z):not(#y):not(#x) .sheet .fxgo:disabled{box-shadow:0 -12px 24px rgba(0,0,0,.45),0 40px 0 30px var(--bg)}
 html[data-skin="vetro"]:not(#z):not(#y):not(#x) .sheet .fxgo,html[data-skin="vetro"]:not(#z):not(#y):not(#x) .sheet .fxgo:disabled{box-shadow:0 -12px 24px rgba(0,0,0,.45),0 40px 0 30px rgb(22,23,34)}
-html[data-skin="lavagna"]:not(#z):not(#y):not(#x) .sheet .fxgo,html[data-skin="lavagna"]:not(#z):not(#y):not(#x) .sheet .fxgo:disabled{box-shadow:0 -12px 24px rgba(0,0,0,.45),0 40px 0 30px #202925}
-html[data-skin="manga"]:not(#z):not(#y):not(#x) .sheet .fxgo,html[data-skin="manga"]:not(#z):not(#y):not(#x) .sheet .fxgo:disabled{box-shadow:0 40px 0 30px #0f0e12,0 -6px 0 6px #0f0e12}
+
+
 /* ===== v61 oro e velo (GOLD-1, COL-2, STL-6) =====
    Velo Tramonto mescolato al colore della scheda in tutti gli stili (come Murano sera): lo stile resta riconoscibile a fine esercizio.
    Scheda dorata: oro pieno e coprente con scritte scure (inchiostro) negli stili scuri e in Murano sera, come Murano giorno.
@@ -1923,14 +1883,14 @@ html:not([data-skin="vetro"]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.c
 html:not([data-skin="vetro"]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur>.fq{background:radial-gradient(130% 100% at 25% 15%,color-mix(in srgb,color-mix(in srgb,var(--fc0,var(--go)) 42%,var(--card)) 80%,transparent),color-mix(in srgb,color-mix(in srgb,var(--fc0,var(--go)) 42%,var(--card)) 55%,transparent) 70%)}
 :is(html:not([data-skin="vetro"]),html[data-skin="vetro"][data-sera]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur>.fg{background:linear-gradient(135deg,#ffe193,#f5c65e 50%,#e6ab45)}
 /* COL-5: link, "Salva", "Avvia scarico" e adattamenti (--info) seguono la variante: accento schiarito col testo, invece dell'azzurro fisso. Lavagna e Murano lo fanno già */
-html:is([data-skin="carbonio"],[data-skin="manga"],[data-skin="eclisse"],[data-skin="campo"]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5){--info:color-mix(in srgb,var(--acc) 58%,var(--fg))}
+html:is([data-skin="eclisse"]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5){--info:color-mix(in srgb,var(--acc) 58%,var(--fg))}
 /* COL-6: la scheda in corso prende una luce dall'alto nel colore della variante (stessa superficie dello stile, uno strato in più), così Ambra/Rosso/Ciano, Rosa/Oro/Plasma, ecc. si riconoscono anche in Allenamento */
-html[data-skin="carbonio"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur{background:linear-gradient(180deg,rgba(var(--acc-rgb),.2),rgba(var(--acc-rgb),.05) 200px,rgba(var(--acc-rgb),.045)),linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0) 28%),repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px),linear-gradient(180deg,#232930,#14181d)}
-html[data-skin="manga"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur{background:linear-gradient(180deg,rgba(var(--acc-rgb),.2),rgba(var(--acc-rgb),.05) 200px,rgba(var(--acc-rgb),.05)),#1a191e}
+
+
 html[data-skin="eclisse"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur{background:linear-gradient(180deg,rgba(var(--acc-rgb),.2),rgba(var(--acc-rgb),.06) 200px,rgba(var(--acc-rgb),.05)),var(--cardbg)}
-html[data-skin="lavagna"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur{background:linear-gradient(180deg,rgba(var(--acc-rgb),.2),rgba(var(--acc-rgb),.06) 200px,rgba(var(--acc-rgb),.05)),var(--cardbg)}
+
 /* Lavagna: il nome dell'esercizio in corso scritto col gesso colorato della variante */
-html[data-skin="lavagna"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur:not(.gold) h3{color:var(--acc)}
+
 /* COL-7: nel riepilogo il rango di partenza resta più piccolo del nuovo (la gerarchia la fa la misura), ma non più spento a metà */
 :root:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .rk-pr .rbd.o{opacity:.9}
 html[data-skin="vetro"]:not([data-sera]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .rk-pr .rbd.o{opacity:1}
@@ -1951,13 +1911,13 @@ html[data-skin="vetro"]:not([data-sera]):not(#g1):not(#g2):not(#g3):not(#g4):not
 :root:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold .spec span.ad{color:var(--info);background:color-mix(in srgb,#7a5414 14%,transparent)}
 html[data-skin="vetro"]:not([data-sera]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold .spec span.ad{background:none}
 /* isole proprie di alcuni stili: Manga ha la domanda su fondo scuro, Eclisse il recupero quasi trasparente (prende il fondo della scheda) */
-html[data-skin="manga"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold .ask{--fg:var(--gx-fg);--muted:var(--gx-mut);--dim:var(--gx-dim);color:var(--fg)}
+
 html[data-skin="eclisse"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold .rest:not(.over){background:linear-gradient(180deg,rgba(var(--cor-rgb),.08),rgba(var(--cor-rgb),.03)),var(--cardbg)}
 /* Lavagna: campi, scelte e spunte sono gesso senza fondo, quindi sull'oro diventano inchiostro anche loro */
-html[data-skin="lavagna"][data-skin][data-skin]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold{--chalk:var(--gold-ink);--chalk-rgb:42,26,4}
-html[data-skin="lavagna"][data-skin][data-skin]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold :is(.field,.tick,.seg){--fg:var(--gold-ink);--muted:var(--gold-ink2);--dim:var(--gold-ink2)}
-html[data-skin="lavagna"][data-skin][data-skin]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold :is(.rest,.timer){--chalk:var(--gx-chalk);--chalk-rgb:var(--gx-chalkrgb)}
-html[data-skin="lavagna"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.gold button.tick[aria-pressed="true"]{color:var(--gold-ink)!important;border-color:var(--gold-ink)}
+
+
+
+
 /* Progressi: il ? accanto al titolo va a capo invece di uscire dalla scheda */
 :root:not(#z):not(#y) .rk-h{flex-wrap:wrap;row-gap:6px}
 :root:not(#z):not(#y) .rk-h h3{min-width:0;overflow-wrap:break-word}
@@ -1978,11 +1938,11 @@ html[data-skin="lavagna"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5) .ex.cur.g
 /* 2 fine recupero: la prossima serie resta illuminata finché non la spunti (v54) */
 .set.lit{position:relative}
 /* Lavagna: bordo a gesso come le spunte */
-html[data-skin="lavagna"]:not(#z) .set.lit::after{border-radius:7px 5px 8px 4px;box-shadow:none;border-color:var(--acc);opacity:.9}
+
 .set.lit::after{content:"";position:absolute;inset:-4px -6px;border-radius:12px;border:2px solid var(--go);box-shadow:0 0 14px color-mix(in srgb,var(--go) 35%,transparent);pointer-events:none}
 .set.lit.litin::after{animation:litIn .32s var(--ease-out) both}
 @keyframes litIn{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
-html[data-skin="manga"] .set.lit::after{border-radius:0}
+
 @media (prefers-reduced-motion:reduce){.set.lit.litin::after{animation:none}}
 /* 3 ⇄ Cambia: l'esercizio vecchio esce di lato, la variante entra nello stesso posto */
 ::view-transition-group(swp){animation-duration:.3s;animation-timing-function:var(--ease-out);overflow:clip;border-radius:16px}
@@ -1991,7 +1951,7 @@ html[data-skin="manga"] .set.lit::after{border-radius:0}
 ::view-transition-new(swp){animation:swIn .3s var(--ease-out) both}
 @keyframes swOut{to{opacity:0;transform:translateX(-18%)}}
 @keyframes swIn{from{opacity:0;transform:translateX(18%)}}
-html[data-skin="manga"]::view-transition-group(swp){border-radius:0}
+
 html.vt-swap::view-transition-old(root){animation:vtOut .14s var(--ease-out) both}
 html.vt-swap::view-transition-new(root){animation:vtIn .14s var(--ease-out) both}
 /* 4 avvicinamento fatto: le righe A si richiudono in una pillola */
@@ -2003,8 +1963,8 @@ html.vt-swap::view-transition-new(root){animation:vtIn .14s var(--ease-out) both
 .wpill .wck{flex:none}
 @media (max-width:360px){.wpill{gap:6px;padding:8px 10px}.wpill .i{width:14px}.wpill .wn{display:none}}
 .wpill .wck{margin-left:auto;color:var(--go);font-weight:800}
-html[data-skin="manga"] .wpill{border-radius:0;border:2px solid var(--fg)}
-html[data-skin="lavagna"] .wpill{border-radius:4px}
+
+
 ::view-transition-group(*.wmv){animation-duration:.32s;animation-timing-function:var(--ease-out)}
 ::view-transition-old(*.wmv){display:none}
 ::view-transition-new(*.wmv){animation:none}
@@ -2024,7 +1984,7 @@ html.vt-wf::view-transition-new(root){animation:vtIn .14s var(--ease-out) both}
 @container (max-width:12.5em){.exhead h3{hyphens:auto;-webkit-hyphens:auto;hyphenate-limit-chars:10 5 4;-webkit-hyphenate-limit-before:5;-webkit-hyphenate-limit-after:4}}
 /* GRF-2: il numero delle tessere si rimpicciolisce solo quando non ci sta (--n = caratteri, --tkc = larghezza media di una cifra del font) */
 .tile{container-type:inline-size}
-html[data-skin="vetro"]{--tkc:.58}html[data-skin="carbonio"],html[data-skin="campo"]{--tkc:.37}html[data-skin="eclisse"]{--tkc:.6}html[data-skin="lavagna"]{--tkc:.54}
+html[data-skin="vetro"]{--tkc:.58}html[data-skin="eclisse"]{--tkc:.6}
 /* GRF-3: "22,5 kg × 10" sempre su una riga; il numero si adatta alla larghezza della scheda */
 .tgt{container-type:inline-size}
 :root:not(#g1):not(#g2) .tgt b{white-space:nowrap}
@@ -2032,9 +1992,9 @@ html[data-skin="eclisse"]:not(#g1):not(#g2) .tgt b{font-size:min(44px,15cqi)}
 /* "+30 s" sotto Chiudi: il testo va a capo dopo il punto; se non entra nemmeno così, i tasti scendono su una riga loro */
 :root:not(#g1):not(#g2) .rest .tl,:root:not(#g1):not(#g2) .timer .l{flex:1 1 0;min-width:min-content}
 /* GRF-4: Campo Terra rossa ed Erba, azzurro degli avvisi un po' più chiaro (≥5:1 sul velo) */
-html[data-skin="campo"][data-var="1"]:not(#g1):not(#g2),html[data-skin="campo"][data-var="2"]:not(#g1):not(#g2){--info:#b3c6ff}
+
 /* GRF-6: Manga Blu, il blu del testo (Settimana) più chiaro del blu dei bottoni */
-html[data-skin="manga"][data-var="1"] :where(.c-gym){color:#4a8cff}
+
 /* USA-5: −/+ con l'area di tocco allargata verso il numero (stessa larghezza disegnata) e 16 px tra "+ kg" e "− rip" */
 :root:not(#g1):not(#g2) .set .field .pm:first-child::after{inset:0 -6px 0 -1px}
 :root:not(#g1):not(#g2) .set .field .pm:last-child::after{inset:0 -1px 0 -6px}
@@ -2220,32 +2180,32 @@ html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5)[data-sera] 
    accostato alla variante (azzurro-pervinca sul rosso, lilla sul rosa e sul rubino), ΔE ≥ 56 dallo stop e ≥ 4,5:1 sul fondo.
    Campo: l'accento è lo stesso lime in tutte e tre le varianti, quindi --info segue il fondo della variante (Ardesia lime, Terra rossa
    pervinca, Erba acqua) */
-html[data-skin="carbonio"][data-var="1"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#a5c8ff}
-html[data-skin="manga"][data-var="0"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#8fc3ff}
+
+
 html[data-skin="eclisse"][data-var="0"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#d4a8ff}
 html[data-skin="vetro"][data-var="1"]:not([data-sera]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#5b2a86}
 html[data-skin="vetro"][data-var="1"][data-sera]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#c9b3ff}
-html[data-skin="campo"][data-var="1"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#b8c8ff}
-html[data-skin="campo"][data-var="2"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#8fe3ff}
+
+
 /* Lavagna: Gesso giallo e Gesso rosa avevano lo stesso azzurro: sul rosa --info è un gesso lilla (ΔE 64 dallo stop, 8,1:1) */
-html[data-skin="lavagna"][data-var="2"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6){--info:#c6b8ff}
+
 /* REG-2 (v62): chip accesi ("Ultima serie in myo-rep", superserie, range) sulla scheda in corso di Carbonio e Manga, e segno M della myo-rep
    in Manga (in Carbonio la M ha già i suoi colori, 6,9-9,6:1):
    la luce dall'alto di COL-6 passava sotto il chip trasparente e l'accento puro scendeva a 4,0-4,45:1. Il chip ha un fondo suo (la scheda)
    e l'accento è schiarito del 20 % col bianco: resta rosso/blu/giallo della variante, ≥ 5,4:1. La scheda dorata non cambia; con il velo
    (.tint) la M resta come prima (--muted, regola delle serie velate) */
-html:is([data-skin="carbonio"],[data-skin="manga"]):not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6) .ex.cur:not(.gold) .chip.hot{background:var(--card)!important;color:color-mix(in srgb,var(--hot) 80%,#fff)!important}
-html[data-skin="manga"]:not(#g1):not(#g2):not(#g3):not(#g4):not(#g5):not(#g6) .ex.cur:not(.gold):not(.tint) .set.myom .i{color:color-mix(in srgb,var(--hot) 80%,#fff)}
+
+
 
 /* ===== FIRMA DEGLI STILI (v63, 2026-11-09): sagoma, Andamento, riepilogo, avvisi, icone e passaggi tra le schermate col materiale di ogni stile ===== */
 /* 1 Sagoma: la trama sta su un livello a parte (.rk-tx), sopra i muscoli colorati; i colori del rango non cambiano */
 .rk-fig .rk-tx{display:none;pointer-events:none;stroke:none}
 .rk-fig .rk-tx .lag{opacity:0}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-tx{display:inline;fill:url(#rk-ht)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-tx .mz{mask:url(#rk-htm)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-mz .mz.rk-r{fill:var(--rf)}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-tx{display:inline;fill:url(#rk-sl)}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-gl{opacity:.8}
+
+
+
+
+
 /* Eclisse: muscoli neri come la luna, bordo e alone nel colore del rango come la corona */
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-mz .mz.rk-r{fill:#060608}
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-mz .mz.rk-r:not(.sel){stroke-width:1.5}
@@ -2263,50 +2223,50 @@ html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):
 
 /* 5 Andamento: la linea nel materiale dello stile */
 .rk-hist .and-a{fill:none;stroke:none}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist svg{background:linear-gradient(rgba(var(--acc-rgb,255,176,0),.09) 1px,transparent 1px) 0 0/100% 12px,linear-gradient(90deg,rgba(var(--acc-rgb,255,176,0),.09) 1px,transparent 1px) 0 0/12px 100%,#07090b;border-radius:8px;box-shadow:inset 0 0 0 1px #2a3038}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:var(--acc);filter:url(#and-glow)}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{fill:var(--acc);filter:url(#and-glow)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:rgba(var(--chalk-rgb),.96);stroke-width:3.6;filter:url(#chalkb)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{fill:rgba(var(--chalk-rgb),.96);filter:url(#chalkb)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-dot{fill:var(--acc)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-a{fill:url(#and-hatch)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:var(--fg);stroke-width:3.4;stroke-linejoin:miter;stroke-linecap:square}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{fill:var(--fg);stroke:var(--card);stroke-width:1.5}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-dot{fill:var(--acc)}
+
+
+
+
+
+
+
+
+
+
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-a{fill:url(#and-fade)}
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:#fffaf2;stroke-width:2;filter:url(#and-glow)}
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{fill:#fffaf2;filter:url(#and-glow)}
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-dot{fill:var(--acc)}
 html[data-skin="vetro"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:url(#and-cane);stroke-width:4}
 html[data-skin="vetro"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{stroke:var(--card);stroke-width:1.2}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:var(--fg);stroke-width:2}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{fill:#e4ff3a;stroke:#10140a;stroke-width:1}
+
+
 
 /* 6 Riepilogo di fine seduta: l'oggetto del mondo di ogni stile */
 /* Carbonio: scontrino stampato, con il bordo strappato */
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr,.sumc){--fg:#1b1c1e;--muted:#4f5257;--dim:#5f6267;--go:#0b6b2e;--stop:#a3122a;background:#efece4;color:#1b1c1e;border:0;border-radius:3px 3px 0 0;box-shadow:none;padding:14px 14px 20px;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.94em;letter-spacing:0;-webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 7px repeat-x;mask:linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 7px repeat-x}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr,.sumc) :is(b,span,em,li,div){color:inherit;font-family:inherit}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr,.sumc)>b{display:block;text-transform:uppercase;letter-spacing:.03em;border-bottom:1.5px dashed #9c978b;padding-bottom:6px}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr li,.sumc>div){border-bottom:1px dashed #c3beb1}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr li,.sumc>div):last-child{border-bottom:0}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumc em.up{color:#0b6b2e}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumc em.dn{color:#a3122a}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) :is(.sumr,.sumc) :is(.blade,.rim){display:none}
+
+
+
+
+
+
+
+
 /* Campo: tabellone di fine partita */
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles{gap:0;background:#04102a;border:2px solid #2b4f8f;border-radius:6px;padding:4px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.5)}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile{background:transparent;border:0;border-radius:0;box-shadow:none}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile+.tile{border-left:1px solid #2b4f8f}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile b{color:#e4ff3a;text-shadow:0 0 8px rgba(228,255,58,.45)}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile span{color:#c4d3ef}
+
+
+
+
+
 /* Lavagna: la lavagna del coach, con la cornice di legno */
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh){box-shadow:inset 0 9px 0 #5b412a,inset 0 11px 0 #3a291b,inset 7px 0 0 #4a3422,inset -7px 0 0 #4a3422}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .grab{margin-top:12px}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumh{position:relative;width:fit-content;padding-bottom:6px}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumh::after{content:"";position:absolute;left:0;right:-6px;bottom:0;height:3px;background:var(--acc);border-radius:2px;filter:url(#chalkb)}
+
+
+
+
 /* Manga: l'ultima tavola del capitolo, a vignette */
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile{border:2.5px solid #ece6d6;border-radius:2px;box-shadow:4px 4px 0 var(--acc,#ff2340)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumh{background:repeating-linear-gradient(100deg,transparent 0 9px,rgba(236,230,214,.08) 9px 10px);padding:6px 8px;margin-inline:-8px;border-bottom:2.5px solid #ece6d6}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .sumr{background:radial-gradient(circle,rgba(236,230,214,.1) 1px,transparent 1.4px) 0 0/6px 6px,var(--card);border:2.5px solid #ece6d6;border-radius:2px}
+
+
+
 /* Murano: i numeri incisi su una lastra di vetro colorato */
 html[data-skin="vetro"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles{gap:0;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,var(--m-s1,#3158d4),var(--m-s2,#1a37a0));box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 24px -14px rgba(0,0,0,.5)}
 html[data-skin="vetro"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile{background:transparent;border:0;border-radius:0;box-shadow:none}
@@ -2318,39 +2278,39 @@ html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):
 
 /* 7 Avvisi di Oggi */
 /* Lavagna: foglietto appuntato con la puntina */
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner{--muted:#4a4231;--info:#1d4f8f;background:#efe7cf;color:#2a2416;border-radius:2px;transform:rotate(-.5deg);box-shadow:0 6px 12px -6px rgba(0,0,0,.6)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner.bk{transform:rotate(.45deg)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner::after{display:none!important}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner::before{content:"";display:block!important;position:absolute;top:-5px;left:50%;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8c7a,#c8321e 60%,#7a1a0d);box-shadow:0 2px 2px rgba(0,0,0,.45);pointer-events:none}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner :is(b,button,.ic){filter:none}
+
+
+
+
+
 /* Carbonio: targhetta di metallo con quattro viti */
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner{background:radial-gradient(circle at 7px 7px,#8b939c 0 1.6px,#2a2f35 2px,transparent 2.6px),radial-gradient(circle at calc(100% - 7px) 7px,#8b939c 0 1.6px,#2a2f35 2px,transparent 2.6px),radial-gradient(circle at 7px calc(100% - 7px),#8b939c 0 1.6px,#2a2f35 2px,transparent 2.6px),radial-gradient(circle at calc(100% - 7px) calc(100% - 7px),#8b939c 0 1.6px,#2a2f35 2px,transparent 2.6px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),linear-gradient(180deg,#22272d,#181b20);border:1px solid #3a424c;border-radius:6px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 2px 0 rgba(0,0,0,.4)}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner b{text-transform:uppercase;letter-spacing:.06em}
+
+
 /* Campo: cartellone a bordo campo */
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner{background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(255,255,255,.035) 14px 28px),var(--cardbg,var(--card));border:1.5px solid color-mix(in srgb,var(--info) 55%,transparent);border-radius:4px}
-html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner b{text-transform:uppercase;letter-spacing:.05em}
+
+
 /* Eclisse: un filo di corona sul bordo alto */
 html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .banner{box-shadow:inset 0 1.5px 0 rgba(var(--acc2-rgb,155,107,255),.7),0 -8px 18px -14px rgba(var(--acc2-rgb,155,107,255),.9)}
 
 /* 8 Icone della barra in basso: a pixel LED in Carbonio, a tratto grosso in Manga, a mano col gesso in Lavagna */
 nav.bar svg .icp{display:none;fill:currentColor;stroke:none}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) nav.bar svg .ic0{display:none}
-html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) nav.bar svg .icp{display:inline}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) nav.bar svg{stroke-width:2.7;stroke-linecap:square;stroke-linejoin:miter}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) nav.bar svg .ic0{filter:url(#wob)}
-html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) nav.bar svg{stroke-width:2.2}
+
+
+
+
+
 
 /* 4 Passaggi tra le schermate della barra in basso, uno per stile (sotto i 300 ms; con Riduci movimento resta la dissolvenza breve) */
 @media (prefers-reduced-motion:no-preference){
-  html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-r{animation:fxMangaR .24s var(--ease-out)}
-  html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-l{animation:fxMangaL .24s var(--ease-out)}
-  html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-r{animation:fxGessoR .26s var(--ease-out)}
-  html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-l{animation:fxGessoL .26s var(--ease-out)}
-  html[data-skin="carbonio"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) :is(.app.in-r,.app.in-l){animation:fxLed .22s steps(6,end)}
+  
+  
+  
+  
+  
   html[data-skin="eclisse"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) :is(.app.in-r,.app.in-l){animation:fxLuna .28s var(--ease-out)}
   html[data-skin="vetro"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) :is(.app.in-r,.app.in-l){animation:fxVetro .22s var(--ease-out)}
-  html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-r{animation:fxCampoR .22s var(--ease-out)}
-  html[data-skin="campo"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .app.in-l{animation:fxCampoL .22s var(--ease-out)}
+  
+  
 }
 @keyframes fxMangaR{from{clip-path:polygon(100% 0,140% 0,100% 100%,100% 100%)}to{clip-path:polygon(-40% 0,140% 0,140% 100%,0 100%)}}
 @keyframes fxMangaL{from{clip-path:polygon(0 0,0 0,-40% 100%,0 100%)}to{clip-path:polygon(0 0,140% 0,100% 100%,-40% 100%)}}
@@ -2364,43 +2324,32 @@ html[data-skin="lavagna"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):
 
 /* ===== 3 CAMPO GIORNO E SERA (v63, 2026-11-09): di giorno campo all'aperto, chiaro; dalle 19 alle 7 (o con "Sera") la partita in notturna con i riflettori. Stesso interruttore "Giorno e sera" di Murano. data-giorno solo su Campo ===== */
 /* Sera: due coni di luce dei riflettori sulla scheda di Oggi */
-html[data-skin="campo"]:not([data-giorno]):not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .hero{background:radial-gradient(55% 70% at 2% -14%,rgba(255,251,226,.26),rgba(255,251,226,.06) 38%,transparent 52%),radial-gradient(55% 70% at 98% -14%,rgba(255,251,226,.26),rgba(255,251,226,.06) 38%,transparent 52%),var(--cardbg)}
+
 /* Giorno: colori */
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8){color-scheme:light;--bg:#e6eef9;--card:#fbfdff;--card-2:#eef3fb;--field:#f2f6fc;--line:#c3d2ea;--fg:#0b1d45;--muted:#42557a;--dim:#55688c;
-  --acc:#4a6800;--acc-rgb:74,104,0;--hot:#4a6800;--hot-ink:#ffffff;--grad:linear-gradient(90deg,#6a8f00,#4a6800);--glow:rgba(74,104,0,.25);--hl:rgba(30,80,200,.12);
-  --go:#0e6e35;--stop:#c0263d;--adapt:#8a5d00;--info:#1d4fbf;--pad:#0a6f96;--match:#7a3fc4;
-  --cardbg:linear-gradient(170deg,#ffffff,#f1f6fd);--tilebg:#f3f7fd;--navbg:rgba(246,249,255,.95);--title:linear-gradient(#0b1d45,#0b1d45);
-  --bgimg:radial-gradient(520px 360px at 85% -40px,rgba(255,236,150,.55),transparent 70%),radial-gradient(600px 420px at 50% 0%,rgba(80,150,255,.22),transparent 65%),#e6eef9;
-  --rk-n:rgba(11,29,69,.08);--rk-c:rgba(11,29,69,.12);--rk-0:rgba(11,29,69,.05)}
-html[data-skin="campo"][data-giorno][data-var="1"]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8){--bg:#f5e9e0;--card:#fffaf6;--card-2:#f8ece3;--field:#fbf3ee;--line:#e3c6b3;--fg:#3a1708;--muted:#6d4332;--dim:#7f5848;--hl:rgba(200,90,40,.12);
-  --cardbg:linear-gradient(170deg,#fffaf6,#f7e9de);--tilebg:#fbf1ea;--navbg:rgba(253,246,241,.95);--title:linear-gradient(#3a1708,#3a1708);--info:#1d4fbf;
-  --bgimg:radial-gradient(520px 360px at 85% -40px,rgba(255,226,140,.55),transparent 70%),radial-gradient(600px 420px at 50% 0%,rgba(220,110,60,.2),transparent 65%),#f5e9e0;
-  --rk-n:rgba(58,23,8,.08);--rk-c:rgba(58,23,8,.12);--rk-0:rgba(58,23,8,.05)}
-html[data-skin="campo"][data-giorno][data-var="2"]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8){--bg:#e7f3ea;--card:#fafffb;--card-2:#ebf6ee;--field:#f2faf4;--line:#bfdcc8;--fg:#0b2a16;--muted:#3c624b;--dim:#4f735d;--hl:rgba(30,140,70,.12);
-  --cardbg:linear-gradient(170deg,#fbfffc,#ecf7ef);--tilebg:#f1f9f3;--navbg:rgba(245,252,247,.95);--title:linear-gradient(#0b2a16,#0b2a16);--info:#1d5fa8;
-  --bgimg:radial-gradient(520px 360px at 85% -40px,rgba(255,236,150,.55),transparent 70%),radial-gradient(600px 420px at 50% 0%,rgba(70,170,100,.2),transparent 65%),#e7f3ea;
-  --rk-n:rgba(11,42,22,.08);--rk-c:rgba(11,42,22,.12);--rk-0:rgba(11,42,22,.05)}
+
+
+
 /* Giorno: il campo disegnato sul fondo e quello nella scheda di Oggi a righe scure, la rete resta del colore della pallina */
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) #court .ln{stroke:var(--fg)}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) #court .net{stroke:#9fbf00}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) #court{opacity:.16}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .hero::after{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 48' fill='none' stroke='%230b1d45' stroke-linecap='round'%3E%3Crect x='2' y='2' width='84' height='44' rx='1.5' stroke-width='1.6' stroke-opacity='.55'/%3E%3Cpath d='M15 2v44M73 2v44M15 24h58' stroke-width='1.2' stroke-opacity='.4'/%3E%3Cpath d='M44 -1v50' stroke-width='2.4' stroke-opacity='.8'/%3E%3C/svg%3E") center/contain no-repeat}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .hero::before{box-shadow:0 0 0 1px rgba(11,29,69,.35),0 1px 3px rgba(11,29,69,.3);background:#e4ff3a}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) :is(.card,.ex,.status,details.h,.banner,details.mn>summary){border-color:var(--line)}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) :is(.card,.ex,.status,details.h){box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 8px 20px -14px rgba(11,29,69,.35)}
+
+
+
+
+
+
+
 /* tasto principale: la pallina, lime pieno con l'inchiostro scuro */
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) :is(.btn.hot,.wu .wub .btn:not(.ghost)){background:linear-gradient(160deg,#f2ff7a,#e4ff3a 45%,#c6ea12);color:#10140a;border-color:rgba(74,104,0,.35)}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .banner{background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(11,29,69,.025) 14px 28px),color-mix(in srgb,var(--info) 7%,var(--card))}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .sbar{background:var(--fg)!important;-webkit-backdrop-filter:none;backdrop-filter:none}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .rk-hist .and-l{stroke:var(--fg)}
+
+
+
+
 
 /* v63 correzioni della verifica: Campo giorno */
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .rest.over{background:#5fd38f;border-color:#5fd38f}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) .rk-seg button[aria-pressed="true"]{background:var(--card);color:var(--fg);box-shadow:0 1px 3px rgba(11,29,69,.18),0 0 0 1px var(--line)}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) button.tick[aria-pressed="true"]{color:#fff!important}
-html[data-skin="campo"][data-giorno]:not(#c1):not(#c2):not(#c3):not(#c4):not(#c5):not(#c6):not(#c7):not(#c8) :is(.xrow .ck:not(.o),.wd2 .dk){color:#fff}
+
+
+
+
 html[data-skin="vetro"]:not([data-sera]):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:url(#and-cane-d)}
-html[data-skin="manga"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-fig .rk-mz .mz.sel{stroke:var(--acc);stroke-width:2.4}
+
 
 /* ===== FIABA (2026-11-12): libro illustrato di giorno. Struttura chiara presa da Murano (token --m-*), identità propria: cielo pastello, pergamena, filo d'oro, blu reale ===== */
 html[data-skin="fiaba"]{--bg:#0b0a1f;--card:rgba(255,255,255,.06);--card-2:rgba(255,255,255,.09);--field:rgba(5,4,20,.45);--line:rgba(255,255,255,.13);--fg:#f4f2ff;--muted:#aaa7cc;--dim:#7d79a3;
@@ -2776,40 +2725,6 @@ const ALTS={
  s6:[["cavo","Curl al cavo basso",{step:5,eq:"mac"}],["martello","Curl a martello",{step:1,note:"Kg = un manubrio.",eq:"db"}],["macchina","Curl alla macchina",{step:5,eq:"mac"}]],
  s7:[["corda","Pushdown con corda",{step:5,eq:"mac"}],["sopra","Estensioni al cavo sopra la testa",{step:5,eq:"mac"}],["kick","Kickback con manubrio",{side:true,step:1,note:"Kg = un manubrio.",eq:"db"}]],
  s8:[["plank","Plank",{t:"time",lo:20,hi:40,side:false,note:"Tenuta in secondi."}],["bird","Bird dog",{}]],
- a1:[["smith","Panca piana al Smith",{note:"Kg = dischi (barra esclusa). Fermati a 3-4 cm dal petto, gomiti a 45°.",step:2.5,eq:"bar"}],["cavi","Chest press ai cavi in piedi",{step:5,eq:"mac"}],["pushup","Piegamenti zavorrati",{t:"bw",note:"Kg = zavorra sulla schiena.",step:2,eq:"zav"}],["hammer","Chest press altra macchina (Hammer)",{step:5,eq:"mac"}],["manubri","Panca piana con manubri",{step:2,note:"Kg = un manubrio. Gomiti a 45°, fermati prima che la spalla tiri.",eq:"db"}]],
- a2:[["lat","Lat machine presa neutra",{t:"comp",step:5,eq:"mac"}],["latmono","Lat machine a un braccio",{t:"comp",side:true,step:5,eq:"mac"}],["latstretta","Pulldown presa stretta",{t:"comp",step:5,eq:"mac"}]],
- a3:[["cpinc","Chest press inclinata alla macchina",{step:5,eq:"mac"}],["croci","Croci ai cavi dal basso",{t:"iso",lo:10,hi:15,step:5,eq:"mac"}],["landmine","Landmine press",{side:true,oh:true,note:"Kg = dischi sul bilanciere.",step:2.5,eq:"bar"}],["manubri","Panca inclinata con manubri",{step:2,note:"Kg = un manubrio. Gomiti a 45°, fermati prima che la spalla tiri.",eq:"db"}]],
- a4:[["tbar","Rematore T-bar con appoggio",{step:2.5,eq:"bar"}],["pulley","Pulley basso",{step:5,eq:"mac"}],["manubrio","Rematore manubrio su panca",{side:true,step:2,note:"Kg = un manubrio.",eq:"db"}],["incman","Rematore manubri petto su panca inclinata",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- a5:[["manubri","Alzate laterali manubri",{step:2,eq:"db"}],["macchina","Alzate laterali alla macchina",{step:5,eq:"mac"}]],
- a6:[["cavo","Curl al cavo basso",{step:5,eq:"mac"}],["ez","Curl bilanciere EZ",{step:2.5,eq:"bar"}],["piedi","Curl manubri in piedi",{eq:"db"}],["martello","Curl a martello",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- a7:[["corda","Pushdown con corda",{step:5,eq:"mac"}],["ez","French press EZ su panca",{step:2.5,eq:"bar"}],["manubrio","Estensioni manubrio sopra la testa",{step:2,eq:"db"}],["skull","Skull crusher con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- a8:[["elastico","Extrarotazione con elastico",{eq:"altro",note:"Kg = lascia vuoto se usi l'elastico."}],["manubrio","Extrarotazione da sdraiato con manubrio",{step:2,eq:"db"}]],
- g1:[["ostacolo","Salti laterali sopra un ostacolo",{}],["bound","Lateral bound con arrivo bloccato",{}]],
- g2:[["sjump","Squat jump",{}],["lungo","Salto in lungo da fermo",{}]],
- g3:[["hack","Hack squat",{step:2.5,eq:"bar"}],["pressa","Pressa 45°",{step:5,eq:"mac"}],["smith","Squat al Smith",{step:2.5,note:"Kg = dischi (barra esclusa).",eq:"bar"}],["goblet","Goblet squat",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- g4:[["rdlman","Stacco rumeno con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}],["goodm","Good morning",{step:2.5,eq:"bar"}],["pullthr","Pull-through al cavo",{t:"iso",step:5,eq:"mac"}]],
- g5:[["affondi","Affondi camminati",{note:"Kg = un manubrio.",eq:"db"}],["stepup","Step-up su panca",{note:"Kg = un manubrio.",eq:"db"}],["smith","Split squat al Smith",{step:2.5,note:"Kg = dischi (barra esclusa).",eq:"bar"}],["affman","Affondi indietro con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- g6:[["legcurl","Leg curl seduto, discesa in 4 s",{t:"iso",lo:8,hi:10,step:5,note:"Eccentrico lento.",eq:"mac"}],["ghr","Glute-ham raise",{step:2,eq:"zav"}]],
- g7:[["adduttori","Adduttori alla macchina",{t:"iso",lo:12,hi:15,step:5,side:false,eq:"mac"}],["copbreve","Copenhagen a leva corta (ginocchio)",{}]],
- g8:[["pressa","Calf alla pressa",{step:5,eq:"mac"}],["smith","Calf al Smith",{step:2.5,note:"Kg = dischi (barra esclusa).",eq:"bar"}],["mono","Calf a una gamba con manubrio",{side:true,step:2,eq:"db"}]],
- g9:[["palla","Lancio rotazionale palla medica",{t:"perf"}],["elastico","Woodchop con elastico",{eq:"altro"}],["manubrio","Woodchop con manubrio",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- b10:[["macchina","Shoulder press alla macchina",{side:false,step:5,note:"Presa neutra se c'è.",eq:"mac"}],["manubri","Lento manubri seduto",{side:false,lo:6,hi:10,step:2,note:"Kg = un manubrio. Presa neutra.",eq:"db"}],["smith","Lento al Smith",{side:false,step:2.5,note:"Kg = dischi (barra esclusa).",eq:"bar"}],["arnold","Arnold press",{side:false,step:2,note:"Kg = un manubrio. Da evitare se la spalla tira.",eq:"db"}]],
- b1:[["macchina","Shoulder press alla macchina",{step:5,eq:"mac"}],["landmine","Landmine press",{side:true,step:2.5,eq:"bar"}],["smith","Lento al Smith",{step:2.5,note:"Kg = dischi (barra esclusa).",eq:"bar"}],["arnold","Arnold press",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- b2:[["trazioni","Trazioni presa neutra",{t:"bw",note:"Kg = zavorra.",step:2,eq:"zav"}],["mono","Pulldown a un braccio al cavo",{side:true,step:5,eq:"mac"}],["larga","Lat machine presa larga",{step:5,eq:"mac"}],["pullover","Pullover con manubrio",{t:"iso",lo:10,hi:12,step:2,note:"Un manubrio tenuto con due mani.",eq:"db"}]],
- b3:[["butterfly","Butterfly alla macchina",{step:5,eq:"mac"}],["cpinc","Chest press inclinata alla macchina",{t:"comp",lo:8,hi:12,step:5,eq:"mac"}],["crociman","Croci su panca inclinata con manubri",{step:2,note:"Kg = un manubrio. Gomiti a 45°, fermati prima che la spalla tiri.",eq:"db"}],["incman","Panca inclinata con manubri",{t:"comp",lo:8,hi:12,step:2,note:"Kg = un manubrio. Gomiti a 45°, fermati prima che la spalla tiri.",eq:"db"}]],
- b4:[["unbraccio","Pulley a un braccio",{side:true,step:2.5,eq:"cavl",note:"Busto fermo: tira col gomito, senza ruotare."}],["macchina","Rematore alla macchina",{step:5,eq:"mac"}],["manubrio","Rematore manubrio su panca",{side:true,step:2,eq:"db"}],["tbar","Rematore T-bar",{step:2.5,eq:"bar"}]],
- b5:[["cavo","Alzate laterali al cavo",{step:2.5,eq:"cavl"}],["macchina","Alzate laterali alla macchina",{step:5,eq:"mac"}]],
- b6:[["reverse","Reverse fly alla macchina",{step:5,eq:"mac"}],["elastico","Face pull con elastico",{eq:"altro"}],["manubri","Reverse fly con manubri a busto flesso",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- b7:[["macchina","Curl alla macchina",{step:5,eq:"mac"}],["cavo","Curl al cavo",{step:5,eq:"mac"}],["ez","Curl bilanciere EZ",{step:2.5,eq:"bar"}],["manubrio","Curl Scott con manubrio",{side:true,step:2,note:"Kg = un manubrio.",eq:"db"}],["martello","Curl a martello",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- b8:[["barra","Pushdown al cavo",{step:5,eq:"mac"}],["dip","Dip alle parallele",{t:"bw",note:"Kg = zavorra.",step:2,eq:"zav"}],["sopra","Estensioni al cavo sopra la testa",{step:5,eq:"mac"}],["kickman","Kickback con manubri",{t:"iso",step:2,note:"Kg = un manubrio.",eq:"db"}],["skull","Skull crusher con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- b9:[["elastico","Estensione del polso con elastico",{eq:"altro"}],["flexbar","Flexbar (Tyler twist)",{eq:"altro"}]],
- c1:[["croci","Croci ai cavi",{step:5,eq:"mac"}],["cp","Chest press leggera alla macchina",{step:5,eq:"mac"}],["crociman","Croci con manubri su panca piana",{step:2,note:"Kg = un manubrio. Gomiti a 45°, fermati prima che la spalla tiri.",eq:"db"}]],
- c2:[["macchina","Pullover alla macchina",{step:5,eq:"mac"}],["manubrio","Pullover con manubrio",{step:2,eq:"db"}]],
- c3:[["manubri","Alzate laterali manubri",{step:2,eq:"db"}],["macchina","Alzate laterali alla macchina",{step:5,eq:"mac"}]],
- c4:[["facepull","Face pull",{step:5,eq:"mac"}],["cavi","Reverse fly ai cavi",{step:5,eq:"mac"}],["manubri","Reverse fly con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- c5:[["inclinata","Curl panca inclinata",{step:2,eq:"db"}],["cavobasso","Curl al cavo basso",{step:5,eq:"mac"}],["martello","Curl a martello",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- c6:[["french","French press al cavo",{step:5,eq:"mac"}],["kickback","Kickback al cavo",{side:true,step:5,eq:"mac"}],["kickman","Kickback con manubri",{step:2,note:"Kg = un manubrio.",eq:"db"}]],
- c7:[["elastico","Pallof press con elastico",{eq:"altro"}],["deadbug","Dead bug con cavo",{step:5,eq:"mac"}]]
 };
 const EQS=[["mac","Macchina o cavo",5],["cavl","Cavo singolo (alzate, extrarotazioni)",2.5],["bar","Bilanciere o Smith",2.5],["db","Manubri",1],["zav","Zavorra (dischi o kettlebell)",2],["altro","Altro",null]];
 const eqOf=e=>e.eq||(e.t==="bw"?"zav":e.step===5?"mac":e.step===2.5?"bar":e.step===2?"db":"altro");
