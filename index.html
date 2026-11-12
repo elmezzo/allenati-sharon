@@ -939,7 +939,7 @@ html:not([data-skin="vetro"]):not(#z):not(#y):not(#x) .ex.cur.tint:not(.gold){--
 .rk-flip{border:1px solid var(--line);background:var(--field);color:var(--muted);border-radius:999px;padding:5px 11px;font-size:max(12px,0.7059rem);font-weight:700;margin-left:auto}
 .rk-h .rk-seg{margin-right:0}
 .rk-hist{display:flex;flex-direction:column;gap:6px}
-.rk-hist .l{display:flex;justify-content:space-between;align-items:baseline}
+.rk-hist .l{display:flex;justify-content:space-between;align-items:baseline;gap:4px 8px;flex-wrap:wrap}
 .rk-hist .l b{font-size:max(14px,0.8235rem)}
 .rk-hist .l span{font-size:max(12px,0.7059rem);color:var(--muted);font-weight:700}
 .rk-hist svg{width:100%;height:auto;display:block}
@@ -1704,6 +1704,10 @@ html[data-skin="eclisse"] .hold-ov.mm .ho-t{font-size:clamp(56px,16vw,92px)}
 html[data-skin="vetro"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) :is(.timer .t,.rest .tv,.set .i,.dayr .d){font-family:var(--ui);font-weight:800;font-variant-numeric:tabular-nums lining-nums}
 html[data-skin="fiaba"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .c-rest{color:#4f5585}
 html[data-skin="fiaba"][data-var="2"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .tabs button[aria-pressed="true"]{background:#0a6a4c}
+/* Freccia disabilitata: si attenua solo il segno, il cerchio resta pieno (copre il filetto d'oro) */
+:root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button:disabled{opacity:1;color:color-mix(in srgb,var(--fg) 28%,transparent)}
+:root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .ho-btns #hoX{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--muted) 60%,transparent)}
+@media (max-width:339px){.ho-btns{grid-template-columns:1fr}}
 /* Frecce del paginatore: un cerchio pieno, si capisce che si toccano */
 :root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button{position:relative;z-index:1;color:var(--fg)}
 :root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--card-2,rgba(127,127,127,.15));box-shadow:inset 0 0 0 1px var(--line);z-index:-1}
@@ -4065,7 +4069,9 @@ document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;const w=[...d
 function openSheet(build){
   const wrap=document.createElement("div");wrap.className="sheet-wrap";wrap.dataset.esc=1;const back=document.activeElement,id="sh"+(++sheetN);
   const esc_=e=>{if(e.key==="Escape"&&document.body.lastElementChild===wrap)close()};
-  const close=()=>{document.removeEventListener("keydown",esc_);sheetOut(wrap);try{back&&back.isConnected&&back.focus({preventScroll:true})}catch(e){}};
+  const backId=back&&back.id;
+  // Il pulsante che ha aperto il foglio può essere stato ridisegnato: si cerca per id, altrimenti il titolo della schermata
+  const close=()=>{document.removeEventListener("keydown",esc_);sheetOut(wrap);const f=()=>{try{const t=back&&back.isConnected?back:(backId&&document.getElementById(backId))||app.querySelector("h1,.big");if(t){if(!t.matches("button,a,input,select,[tabindex]"))t.setAttribute("tabindex","-1");t.focus({preventScroll:true})}}catch(e){}};f();setTimeout(f,260)};
   const draw=()=>{wrap.innerHTML=`<div class="sheet" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>${build.html()}<button class="btn ghost" data-close>Chiudi</button></div>`;const h=wrap.querySelector(".sheet h2");if(h){h.id=id;wrap.firstElementChild.setAttribute("aria-labelledby",id)}wrap.querySelector("[data-close]").onclick=close;build.bind(wrap,draw,close)};
   wrap.onclick=e=>{if(e.target===wrap)close()};document.body.appendChild(wrap);draw();sheetFx(wrap,close);document.addEventListener("keydown",esc_);
   try{wrap.firstElementChild.focus({preventScroll:true})}catch(e){}
@@ -4139,13 +4145,13 @@ function renderToday(){
   <header class="head"><span class="today-d">${esc(cap(WD_LONG[d.getDay()]))} ${d.getDate()} ${d.toLocaleDateString("it-IT",{month:"long"})}${phaseStart()?` · ${PH[phaseAt()].n} settimana ${Math.floor(dayDiff(phaseStart(),k)/7)+1}`:""}</span></header>
   ${oldBoxes(null,a.gym)}<p class="msg" id="omsg" aria-live="polite">${bootMsg?esc(bootMsg):""}</p>
   ${doneS?`<section class="card hero done">
-    <div class="big">${esc(doneS.planName||big)}</div>
+    <div class="big" role="heading" aria-level="1">${esc(doneS.planName||big)}</div>
     <span class="pill go"><span class="dot"></span>Seduta fatta alle ${doneAt}</span>
     <div class="meta"><span><b>${doneSt.n}</b> serie</span>${doneS.dur?`<span><b>${doneS.dur}</b> min</span>`:""}<span><b>${Math.round(doneSt.vol).toLocaleString("it-IT")}</b> kg sollevati</span></div>
     <button class="btn" id="seeSum">Vedi il riepilogo</button>
     <button class="link" id="freeGo">${PLAN.LIB&&S.draft.LIB?"Continua la seduta libera":"Seduta libera fuori dal piano"}</button>
   </section>`:`<section class="card hero">
-    <div class="big">${esc(big)}</div>
+    <div class="big" role="heading" aria-level="1">${esc(big)}</div>
     ${hasGym?`<div class="meta"><span><b>${nEx}</b> esercizi</span><span>circa <b>${estMin(a.gym,mods)}</b> min</span></div><span class="pill ${a.level}"><span class="dot"></span>${esc(a.title)}</span>`:""}
     <div class="hn">${a.notes.map(n=>`<p>${esc(n)}</p>`).join("")}</div>
     ${hasGym&&a.level!=="stop"?`<button class="btn hot" id="startGym">${runN?`Continua · ${runN}/${runT} serie`:"Inizia"} ${I("arrow")}</button>`:""}
@@ -4332,7 +4338,7 @@ function renderTrain(only){
   // La scheda del giorno scelto va al centro della fila solo in orizzontale: scrollIntoView spostava anche la pagina (in cima, a ogni ridisegno intero)
   const tb=!patch&&document.querySelector('.tabs button[aria-pressed="true"]');if(tb){const tr=tb.parentElement.getBoundingClientRect(),r=tb.getBoundingClientRect();tb.parentElement.scrollLeft+=r.left+r.width/2-(tr.left+tr.width/2)}
   const fb=document.getElementById("finish");if(fb)fb.onclick=()=>{const miss=mP;
-    if(miss>0&&!arm2(fb,`Mancano ${miss} serie · tocca ancora`,"Termina e salva"))return;
+    if(miss>0&&!arm2(fb,`Mancano ${miss} serie · tocca ancora`,"Termina e salva")){const mm=document.getElementById("msg");if(mm&&fb.dataset.arm==="1"){mm.className="msg";mm.textContent=`Mancano ${miss} serie: tocca ancora Termina e salva per salvare lo stesso.`}return}
     finish(g,mods,null,miss)};
   const rd=document.getElementById("redoSv");if(rd)rd.onclick=()=>{if(!arm2(rd,"Tocca di nuovo: riapri la seduta","Riapri la seduta per correggerla o finirla"))return;
     const ex={};for(const id in svd.sets)ex[id]=svd.sets[id].map(x=>({kg:x.kg,reps:x.reps,done:true,...(x.myo?{myo:x.myo.slice()}:{}),...(x.pr?{pr:1}:{}),...(x.xs?{xs:1}:{})}));
