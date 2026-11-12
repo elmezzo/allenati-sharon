@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#dfe6ff">
 <script>/* stile giusto prima del primo disegno, niente lampo scuro all'avvio */
-try{var _s=JSON.parse(localStorage.getItem("allenati-sharon.v1")||"{}"),_h=document.documentElement,_k=_s.skin||"fiaba",_m=_s.sera||"auto",_o=new Date().getHours();_h.dataset.skin=_k;_h.dataset.var=String((_s.vars||{})[_k]||0);var _n=_m==="sera"||(_m==="auto"&&(_o>=19||_o<7));if(_k==="vetro"&&_n)_h.dataset.sera="";if(_k==="campo"&&!_n)_h.dataset.giorno="";var _t=document.querySelector('meta[name="theme-color"]');if(_t)_t.content=_k==="campo"&&!_n?["#e6eef9","#f5e9e0","#e7f3ea"][(_s.vars||{}).campo||0]||"#e6eef9":_k!=="vetro"?"#10151d":_h.hasAttribute("data-sera")?"#0f1932":"#edf1f5"}catch(e){}</script>
+try{var _s=JSON.parse(localStorage.getItem("allenati-sharon.v1")||"{}"),_h=document.documentElement,_k=_s.skin||"fiaba",_m=_s.sera||"auto",_o=new Date().getHours();_h.dataset.skin=_k;_h.dataset.var=String((_s.vars||{})[_k]||0);var _n=_m==="sera"||(_m==="auto"&&(_o>=19||_o<7));if(_k==="vetro"&&_n)_h.dataset.sera="";if(_k==="campo"&&!_n)_h.dataset.giorno="";var _t=document.querySelector('meta[name="theme-color"]');if(_t)_t.content=_k==="campo"&&!_n?["#e6eef9","#f5e9e0","#e7f3ea"][(_s.vars||{}).campo||0]||"#e6eef9":_k==="fiaba"?"#dfe6ff":_k!=="vetro"?"#10151d":_h.hasAttribute("data-sera")?"#0f1932":"#edf1f5"}catch(e){}</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,9 +15,17 @@ try{var _s=JSON.parse(localStorage.getItem("allenati-sharon.v1")||"{}"),_h=docum
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <!--APP-START-->
 <title>Allenati Sharon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda:opsz,wght@6..96,500..900&family=Big+Shoulders+Display:wght@700;800&family=Cabin+Sketch:wght@400;700&family=Manrope:wght@400;500;600;700;800&family=Dela+Gothic+One&family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,600..800,100,1;1,9..144,600..800,100,1&family=Nunito:wght@500;600;700;800&display=swap">
+<link rel="preload" href="fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<style>/* caratteri ospitati nell'app: funzionano offline dalla prima apertura */
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:600 800;font-display:swap;src:url(fonts/fraunces.woff2) format("woff2")}
+@font-face{font-family:"Fraunces";font-style:italic;font-weight:600 800;font-display:swap;src:url(fonts/fraunces-italic.woff2) format("woff2")}
+@font-face{font-family:"Nunito";font-style:normal;font-weight:500 800;font-display:swap;src:url(fonts/nunito.woff2) format("woff2")}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:500 900;font-display:swap;src:url(fonts/bodoni-moda.woff2) format("woff2")}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:700 800;font-display:swap;src:url(fonts/big-shoulders.woff2) format("woff2")}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/manrope.woff2) format("woff2")}
+@font-face{font-family:"Syne";font-style:normal;font-weight:600 800;font-display:swap;src:url(fonts/syne.woff2) format("woff2")}
+</style>
 <style>
 /* Layout: app a schermo intero da telefono, scuro per scelta (stile "Notte"). Header con giorno, contenuto scorrevole, timer sopra la barra di navigazione in basso. */
 :root{
@@ -2874,7 +2882,7 @@ function normS(){const obj=v=>v&&typeof v==="object"&&!Array.isArray(v),arr=v=>A
   // Piani vecchi: solo versioni con un piano leggibile (nome ed esercizi), altrimenti Impostazioni non si apre
   S.archive=S.archive.filter(x=>x.key&&x.id&&obj(x.plan)&&typeof x.plan.name==="string"&&Array.isArray(x.plan.ex));S.archive.forEach(x=>{x.plan.ex=x.plan.ex.filter(e=>obj(e)&&typeof e.n==="string")});if(S.free&&!(obj(S.free)&&Array.isArray(S.free.ex)))delete S.free;if(S.deload&&!(obj(S.deload)&&S.deload.from&&S.deload.to))delete S.deload;if(S.timer&&!obj(S.timer))delete S.timer;for(const key of ["setup","station","eqmax","eqf","vars"])if(S[key]!=null&&!obj(S[key]))delete S[key];
   if(S.rkSeen!=null&&(typeof S.rkSeen!=="object"||Array.isArray(S.rkSeen)))delete S.rkSeen;if(S.dlFx!=null&&(typeof S.dlFx!=="object"||!Array.isArray(S.dlFx.ex)))delete S.dlFx;
-  for(const key of ["lastDeload","fullDay","deloadSnooze","bkSnooze","bodySnooze","lastBackup"])if(S[key]!=null&&typeof S[key]!=="string")delete S[key];if(S.view!=null&&!["oggi","train","prog","set","imp","edit"].includes(S.view))S.view="oggi";if(S.vars)for(const k in S.vars)if(![0,1,2].includes(S.vars[k]))delete S.vars[k];fixDupIds()}
+  for(const key of ["lastDeload","fullDay","deloadSnooze","bkSnooze","instSnooze","bodySnooze","lastBackup"])if(S[key]!=null&&typeof S[key]!=="string")delete S[key];if(S.view!=null&&!["oggi","train","prog","set","imp","edit"].includes(S.view))S.view="oggi";if(S.vars)for(const k in S.vars)if(![0,1,2].includes(S.vars[k]))delete S.vars[k];fixDupIds()}
 // Piani duplicati (o con esercizi presi dalla libreria) prima della v57: stessi id di un altro piano, e le sedute della copia cambiavano la proposta dell'originale.
 // Il primo piano che usa un id (la scheda, poi i tuoi nell'ordine) lo tiene; negli altri l'esercizio prende un id nuovo e sedute, bozze, varianti scelte e versioni vecchie lo seguono.
 // Lo storico resta in comune per nome (famIds) e ogni piano torna ad avere il suo range.
@@ -4104,6 +4112,12 @@ function bkOk(b){if(!b||!b.isConnected)return;const old=b.querySelector(":scope>
   pa.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:320,delay:80,easing:"cubic-bezier(.23,1,.32,1)",fill:"backwards"})}
 // lastBackup si segna solo dopo che il file è partito (condivisione riuscita o download avviato), mai prima
 function dlBackup(){try{const b=new Blob([JSON.stringify(S,null,1)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="allenati-sharon-"+iso(today())+".json";document.body.appendChild(a);a.click();a.remove();S.lastBackup=iso(today());save();return true}catch(e){return false}}
+// Su iPhone, in Safari senza installare l'app, i dati possono sparire dopo qualche giorno di non uso: si invita a installarla
+const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+function installDue(){return IOS&&!navigator.standalone&&!matchMedia("(display-mode: standalone)").matches&&!(S.instSnooze&&S.instSnooze>iso(today()))}
+// Versione nuova scaricata dal service worker: si propone di ricaricare (mai durante un allenamento in corso)
+let newVer=false;
+if("serviceWorker" in navigator)navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.type==="nuova-versione"){newVer=true;if(view==="oggi")renderToday()}});
 function backupDue(){const L=S.sessions||[];if(L.length<3)return null;const k=iso(today());if(S.bkSnooze&&S.bkSnooze>k)return null;
   const from=S.lastBackup||L.map(dayOf).sort()[0],days=dayDiff(from,k);return days>=14?{days,never:!S.lastBackup,n:L.length}:null}
 // Titolo che si adatta: prima rimpicciolisce fino a stare su una riga (non sotto il 72% della misura dello stile);
@@ -4134,6 +4148,8 @@ function renderToday(){
   let dl="";
   if(deloadOn())dl=`<div class="banner">${I("bolt")}<div><b>Scarico in corso</b><span>Fino a ${fmtShort(S.deload.to)}: metà serie, stessi carichi, 3-4 in canna.</span></div><button id="endDl">Termina</button></div>`;
   else{const w=deloadAdvice();if(w)dl=`<div class="banner">${I("bolt")}<div><b>Scarico consigliato</b><span>${esc(cap(w.join(" e ")))}.</span></div><button id="startDl">Avvia scarico</button><button id="snoozeDl" class="sec">Non ora</button></div>`}
+  if(newVer)dl+=`<div class="banner">${I("info")}<div><b>Nuova versione pronta</b><span>Tocca Aggiorna per usarla subito. I tuoi dati restano.</span></div><button id="newVer">Aggiorna</button></div>`;
+  if(installDue())dl+=`<div class="banner bk">${I("info")}<div><b>Installa l'app sul telefono</b><span>In Safari tocca Condividi e poi «Aggiungi alla schermata Home». Così si apre a schermo intero e i dati non rischiano di cancellarsi.</span></div><button id="instLater" class="sec">Non ora</button></div>`;
   const bk=backupDue();if(bk)dl+=`<div class="banner bk">${I("info")}<div><b>Salva un backup</b><span>${bk.never?`${bk.n} sedute salvate solo su questo telefono, mai copiate.`:`Ultimo backup ${bk.days} giorni fa.`} Se cancelli l'app o cambi telefono le perdi.</span></div><button id="bkNow">Salva</button><button id="bkLater" class="sec">Non ora</button></div>`;
   app.innerHTML=`
   <header class="head"><span class="today-d">${esc(cap(WD_LONG[d.getDay()]))} ${d.getDate()} ${d.toLocaleDateString("it-IT",{month:"long"})}${phaseStart()?` · ${PH[phaseAt()].n} settimana ${Math.floor(dayDiff(phaseStart(),k)/7)+1}`:""}</span></header>
@@ -4175,6 +4191,8 @@ function renderToday(){
   const cg=document.getElementById("chGym");if(cg)cg.onclick=()=>pickSheet("Palestra oggi",[{v:"none",l:"Niente palestra"},...GYM_ORDER.filter(x=>x!=="LIB").map(g=>({v:g,l:PLAN[g].name,sub:PLAN[g].sub})),{v:"@free",l:PLAN.LIB&&S.draft.LIB?"Continua la seduta libera":"Seduta libera",sub:"Esercizi scelti al volo, fuori dal piano"}],a.gym,v=>{if(v==="@free"){if(PLAN.LIB&&S.draft.LIB){gymSel="LIB";go("train")}else setTimeout(freeSheet,240);return}setO(today(),"gym",v)});
   const sd=document.getElementById("startDl");if(sd)sd.onclick=()=>{snap();startDeload();renderToday();undoable("Scarico avviato.","omsg");reviewSheet(S.cycles[S.cycles.length-1])};
   const bkN=document.getElementById("bkNow");if(bkN)bkN.onclick=async()=>{await shareBackup();renderToday()};
+  const nv=document.getElementById("newVer");if(nv)nv.onclick=()=>location.reload();
+  const iL=document.getElementById("instLater");if(iL)iL.onclick=()=>{S.instSnooze=iso(addDays(today(),14));save();renderToday()};
   const bkL=document.getElementById("bkLater");if(bkL)bkL.onclick=()=>{S.bkSnooze=iso(addDays(today(),7));save();renderToday()};
   const zd=document.getElementById("snoozeDl");if(zd)zd.onclick=()=>{S.deloadSnooze=iso(addDays(today(),7));save();renderToday()};
   // Termina: prima un tocco che dice se conterà come scarico fatto o se viene annullato, poi la conferma

@@ -1,25 +1,37 @@
-const CACHE="allenati-sharon-v1";
-const CORE=["./","index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png"];
-const isFont=u=>/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(new URL(u).hostname);
-// I font (foglio di Google Fonts e file woff2) non sono in CORE: si copiano dalle cache vecchie prima che activate le cancelli,
-// così la prima apertura offline dopo un aggiornamento ha ancora i font. Se la copia non riesce l'installazione va avanti lo stesso
-async function keepFonts(c){for(const k of await caches.keys()){if(k===CACHE)continue;const o=await caches.open(k);for(const r of await o.keys())if(isFont(r.url)&&!(await c.match(r))){const hit=await o.match(r);if(hit)await c.put(r,hit)}}}
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE).then(()=>keepFonts(c).catch(()=>{}))).then(()=>self.skipWaiting()))});
+// Alza la versione a ogni rilascio: le icone, il manifest e i caratteri vengono riscaricati
+const CACHE="allenati-sharon-v2";
+const CORE=["index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png",
+  "fonts/fraunces.woff2","fonts/fraunces-italic.woff2","fonts/nunito.woff2","fonts/bodoni-moda.woff2","fonts/big-shoulders.woff2","fonts/manrope.woff2","fonts/syne.woff2"];
+self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+
+// Scarica la pagina e, se è cambiata, la salva e avvisa l'app (che propone "Aggiorna")
+async function refreshPage(req){
+  const r=await fetch(req,{cache:"no-store"});
+  if(!r.ok)return null;
+  const c=await caches.open(CACHE);
+  const old=await c.match("index.html");
+  const body=await r.clone().text();
+  const changed=!old||(await old.text())!==body;
+  if(changed){
+    await c.put("index.html",new Response(body,{headers:{"Content-Type":"text/html; charset=utf-8"}}));
+    if(old){const cs=await self.clients.matchAll({type:"window"});cs.forEach(x=>x.postMessage({type:"nuova-versione"}))}
+  }
+  return r;
+}
+
 self.addEventListener("fetch",e=>{
   const req=e.request;if(req.method!=="GET")return;
   const url=new URL(req.url);
-  // pagina: rete prima, senza la cache del browser (così gli aggiornamenti arrivano subito), ma se la rete non risponde entro 2,5 s apre la copia salvata;
-  // la risposta della rete, se arriva dopo, aggiorna comunque la copia per la prossima apertura
+  // Pagina: subito la copia salvata (si apre anche con rete lenta o assente in palestra),
+  // intanto controlla la versione nuova in background. Senza copia (primissima apertura) va in rete.
   if(req.mode==="navigate"){
-    const net=fetch(req,{cache:"no-store"}).then(r=>{if(r.ok){const c=r.clone();caches.open(CACHE).then(x=>x.put("index.html",c))}return r});
-    e.waitUntil(net.catch(()=>{}));
-    e.respondWith(new Promise(res=>{let done=false;const fin=r=>{if(!done&&r){done=true;res(r)}};
-      const t=setTimeout(()=>caches.match("index.html").then(hit=>{if(hit)fin(hit)}),2500);
-      net.then(r=>{clearTimeout(t);fin(r)}).catch(()=>{clearTimeout(t);caches.match("index.html").then(hit=>fin(hit||Response.error()))})}));
+    const net=refreshPage(req).catch(()=>null);
+    e.waitUntil(net);
+    e.respondWith(caches.match("index.html").then(hit=>hit||net.then(r=>r||Response.error())));
     return}
-  // font e file statici: cache prima
-  if(url.origin===location.origin||url.hostname.endsWith("fonts.googleapis.com")||url.hostname.endsWith("fonts.gstatic.com")){
-    e.respondWith(caches.match(req).then(hit=>hit||fetch(req).then(r=>{const c=r.clone();caches.open(CACHE).then(x=>x.put(req,c));return r})));
+  // File dell'app: dalla cache, altrimenti rete (salvando solo risposte valide)
+  if(url.origin===location.origin){
+    e.respondWith(caches.match(req,{ignoreSearch:true}).then(hit=>hit||fetch(req).then(r=>{if(r.ok){const c=r.clone();caches.open(CACHE).then(x=>x.put(req,c))}return r})));
   }
 });
