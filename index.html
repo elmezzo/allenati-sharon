@@ -2873,16 +2873,18 @@ const XS_MAX=10;
 function normS(){const obj=v=>v&&typeof v==="object"&&!Array.isArray(v),arr=v=>Array.isArray(v)?v:[];
   S.sessions=arr(S.sessions).filter(x=>obj(x)&&typeof x.date==="string"&&!isNaN(new Date(x.date)));S.sessions.forEach(x=>{if(!obj(x.sets))x.sets={};for(const k in x.sets)if(!Array.isArray(x.sets[k]))delete x.sets[k];else x.sets[k]=x.sets[k].filter(obj);if(!obj(x.names))x.names={};if(!Array.isArray(x.mods))x.mods=[]});S.sessions=S.sessions.filter(x=>Object.keys(x.sets).length);
   // Ogni campo col suo tipo: un backup modificato a mano o rotto non deve bloccare le schermate
-  const wk=obj(S.week)?S.week:{};S.week={};for(let i=0;i<7;i++){const w=obj(wk[i])?wk[i]:DEFAULT_WEEK[i];S.week[i]={padel:typeof w.padel==="string"?w.padel:"none",gym:typeof w.gym==="string"?w.gym:"none"}}
-  S.overrides=obj(S.overrides)?S.overrides:{};for(const k in S.overrides)if(!obj(S.overrides[k]))delete S.overrides[k];S.energy=obj(S.energy)?S.energy:{};S.normal=obj(S.normal)?S.normal:{};S.pauseGo=obj(S.pauseGo)?S.pauseGo:{};
+  const wk=obj(S.week)?S.week:{};S.week={};for(let i=0;i<7;i++){const w=obj(wk[i])?wk[i]:DEFAULT_WEEK[i];S.week[i]={padel:"none",gym:typeof w.gym==="string"?w.gym:"none"}}
+  S.overrides=obj(S.overrides)?S.overrides:{};for(const k in S.overrides)if(!obj(S.overrides[k]))delete S.overrides[k];else if("padel" in S.overrides[k])S.overrides[k].padel="none";S.energy=obj(S.energy)?S.energy:{};S.normal=obj(S.normal)?S.normal:{};S.pauseGo=obj(S.pauseGo)?S.pauseGo:{};
   for(const key of ["draft","oldDraft"]){S[key]=obj(S[key])?S[key]:{};for(const g in S[key]){const d=S[key][g];if(!obj(d)||!obj(d.ex)){delete S[key][g];continue}for(const id in d.ex)if(!Array.isArray(d.ex[id]))delete d.ex[id];else{let xn=0;d.ex[id]=d.ex[id].map(x=>obj(x)?x:{}).filter(x=>{if(x.xs==null)return true;if(x.xs!==1&&x.xs!==true){delete x.xs;return true}x.xs=1;return !!x.done||++xn<=XS_MAX})}if(d.ramp!=null){if(!obj(d.ramp))delete d.ramp;else for(const id in d.ramp)if(!Array.isArray(d.ramp[id]))delete d.ramp[id];else d.ramp[id]=d.ramp[id].map(x=>obj(x)?x:{})}if(typeof d.date!=="string")d.date=iso(today());for(const f of ["start","last","idle"])if(d[f]!=null&&!(typeof d[f]==="number"&&isFinite(d[f])))delete d[f];if(d.mods!=null&&!Array.isArray(d.mods))delete d.mods;if(d.xs!=null){if(!obj(d.xs))delete d.xs;else for(const id in d.xs){const v=Math.floor(+d.xs[id]);if(v>0)d.xs[id]=Math.min(XS_MAX,v);else delete d.xs[id]}}}}
   S.plans=obj(S.plans)?S.plans:{};for(const k in S.plans)if(!obj(S.plans[k])||!Array.isArray(S.plans[k].ex))delete S.plans[k];else S.plans[k].ex=S.plans[k].ex.filter(e=>obj(e)&&e.id&&typeof e.n==="string");
   S.swaps=obj(S.swaps)?S.swaps:{};for(const k in S.swaps)if(!obj(S.swaps[k]))delete S.swaps[k];S.customAlts=obj(S.customAlts)?S.customAlts:{};for(const k in S.customAlts)S.customAlts[k]=arr(S.customAlts[k]).filter(a=>obj(a)&&a.k&&typeof a.n==="string");if(S.skin!=null&&!["fiaba","vetro","eclisse"].includes(S.skin))S.skin="fiaba";S.pain=obj(S.pain)?S.pain:{};
   for(const key of ["archive","body","phases","cycles"])S[key]=arr(S[key]).filter(obj);
   // Piani vecchi: solo versioni con un piano leggibile (nome ed esercizi), altrimenti Impostazioni non si apre
-  S.archive=S.archive.filter(x=>x.key&&x.id&&obj(x.plan)&&typeof x.plan.name==="string"&&Array.isArray(x.plan.ex));S.archive.forEach(x=>{x.plan.ex=x.plan.ex.filter(e=>obj(e)&&typeof e.n==="string")});if(S.free&&!(obj(S.free)&&Array.isArray(S.free.ex)))delete S.free;if(S.deload&&!(obj(S.deload)&&S.deload.from&&S.deload.to))delete S.deload;if(S.timer&&!obj(S.timer))delete S.timer;for(const key of ["setup","station","eqmax","eqf","vars"])if(S[key]!=null&&!obj(S[key]))delete S[key];
+  S.archive=S.archive.filter(x=>x.key&&x.id&&obj(x.plan)&&typeof x.plan.name==="string"&&Array.isArray(x.plan.ex));S.archive.forEach(x=>{x.plan.ex=x.plan.ex.filter(e=>obj(e)&&typeof e.n==="string")});if(S.free&&!(obj(S.free)&&Array.isArray(S.free.ex)))delete S.free;if(S.deload&&!(obj(S.deload)&&S.deload.from&&S.deload.to))delete S.deload;if(S.timer&&!obj(S.timer))delete S.timer;if(S.hold&&!(obj(S.hold)&&typeof S.hold.g==="string"&&Array.isArray(S.hold.mods)&&typeof S.hold.end==="number"))delete S.hold;for(const key of ["setup","station","eqmax","eqf","vars"])if(S[key]!=null&&!obj(S[key]))delete S[key];
   if(S.rkSeen!=null&&(typeof S.rkSeen!=="object"||Array.isArray(S.rkSeen)))delete S.rkSeen;if(S.dlFx!=null&&(typeof S.dlFx!=="object"||!Array.isArray(S.dlFx.ex)))delete S.dlFx;
-  for(const key of ["lastDeload","fullDay","deloadSnooze","bkSnooze","instSnooze","bodySnooze","lastBackup"])if(S[key]!=null&&typeof S[key]!=="string")delete S[key];if(S.view!=null&&!["oggi","train","prog","set","imp","edit"].includes(S.view))S.view="oggi";if(S.vars)for(const k in S.vars)if(![0,1,2].includes(S.vars[k]))delete S.vars[k];fixDupIds()}
+  for(const key of ["lastDeload","fullDay","deloadSnooze","bkSnooze","instSnooze","bodySnooze","lastBackup"])if(S[key]!=null&&typeof S[key]!=="string")delete S[key];if(S.view!=null&&!["oggi","train","prog","set","imp","edit"].includes(S.view))S.view="oggi";if(S.vars)for(const k in S.vars)if(![0,1,2].includes(S.vars[k]))delete S.vars[k];fixDupIds();
+  // Niente padel e solo sedute che esistono (un backup vecchio può avere le schede di un'altra app)
+  const okG=g=>g==="none"||g in BUILTIN||g in S.plans;for(let i=0;i<7;i++)if(!okG(S.week[i].gym))S.week[i].gym="none";for(const k in S.overrides){const o=S.overrides[k];if(typeof o.gym==="string"&&!okG(o.gym))delete o.gym}}
 // Piani duplicati (o con esercizi presi dalla libreria) prima della v57: stessi id di un altro piano, e le sedute della copia cambiavano la proposta dell'originale.
 // Il primo piano che usa un id (la scheda, poi i tuoi nell'ordine) lo tiene; negli altri l'esercizio prende un id nuovo e sedute, bozze, varianti scelte e versioni vecchie lo seguono.
 // Lo storico resta in comune per nome (famIds) e ogni piano torna ad avere il suo range.
@@ -3089,11 +3091,12 @@ const workSets=(arr,lo)=>{const w=workKg(arr,lo);return w==null?arr:arr.filter(x
 function baseHist(ex){let h=history(ex.id).filter(x=>!x.deload);const sh=h.filter(x=>!x.from||sameRng(EX[x.from],ex));if(sh.length)h=sh;if(!h.length||!lgtS(h[0]))return h;const i=h.findIndex(x=>!lgtS(x));if(i<0)return h;
   const kO=x=>{const w=workKg(x.sets[ex.id],ex.lo);return w==null?-1:w},aR=x=>{const r=workSets(x.sets[ex.id],ex.lo).map(y=>num(y.reps)).filter(v=>v!=null);return r.length?r.reduce((a,v)=>a+v,0)/r.length:0},a=h[0],b=h[i];
   return kO(b)>kO(a)+1e-9||Math.abs(kO(b)-kO(a))<1e-9&&aR(b)>=aR(a)?h.slice(i):h}
-// Scelta di Sharon per esercizio: "Aumenta il peso" (S.noExt[id]) = niente range esteso né myo-rep quando il gradino è grosso, si sale di carico a fine range
+// Progressione per esercizio: di base "Aumenta il peso" (doppia progressione dentro il range, niente range esteso né myo-rep);
+// S.noExt[id]=0 = scelta di Sharon di salire con le ripetizioni oltre il range quando il gradino è grosso
 // Cardio (tapis roulant): esercizio a tempo misurato in minuti, durata fissa, nessuna progressione
 const tU=ex=>ex&&ex.cardio?"min":"s";
-const noExtOf=ex=>!!(S.noExt||{})[ex.id];
-function togNoExt(ex,g){S.noExt=S.noExt||{};if(S.noExt[ex.id])delete S.noExt[ex.id];else S.noExt[ex.id]=1;
+const noExtOf=ex=>(S.noExt||{})[ex.id]!==0;
+function togNoExt(ex,g){S.noExt=S.noExt||{};if(noExtOf(ex))S.noExt[ex.id]=0;else delete S.noExt[ex.id];
   // Valori già scritti nelle serie non ancora fatte: via, così prendono la proposta nuova
   if(g){const a=(draftFor(g).ex||{})[ex.id]||[];for(const c of a)if(c&&!c.done){delete c.kg;delete c.reps}}save()}
 // "Aumenta il peso": doppia progressione dentro il range della scheda (es. 25×13 → 25×14 → 25×15 → 30×12), mai oltre il massimo
@@ -3402,7 +3405,9 @@ function metricOf(ex,x){const r=num(x.reps),k=num(x.kg);if(r==null)return 0;if(e
 const PR_MIN=1.02;
 
 /* ================= STATE: current workout ================= */
-let view=S.view==="edit"?"set":(S.view||"oggi");let editPlan=null;
+// Il giorno dopo l'app si riapre su Oggi, non sull'ultima schermata vista
+const redoG=new Set();
+let view=S.viewDay!==new Date().toDateString()?"oggi":S.view==="edit"?"set":(S.view||"oggi");let editPlan=null;
 let gymSel=null;
 function currentGym(){const a=assess(today());if(gymSel&&PLAN[gymSel])return gymSel;moveOld();for(const g in S.draft||{})if(PLAN[g]&&draftOld(g))return g;if(a.gym in PLAN)return a.gym;return PLAN[S.gym]?S.gym:GYM_ORDER.find(k=>k!=="LIB")||"S1"}
 function draftFor(g){moveOld();S.draft[g]=S.draft[g]||{date:iso(today()),ex:{}};if(S.draft[g].date!==iso(today())&&!Object.values(S.draft[g].ex).some(a=>a.some(x=>x.done)))S.draft[g]={date:iso(today()),ex:{}};return S.draft[g]}
@@ -3436,7 +3441,7 @@ function render(){shownDay=iso(today());
   wakeSync();
 }
 let trainArrive=false;
-function go(v){goldFlush();if(v!=="train")nLost=null;const from=view,upd=()=>{view=v;if(v!=="edit"){S.view=v;save()}render();window.scrollTo(0,0);if(trainArrive){trainArrive=false;if(v==="train")nowReveal(false)}};
+function go(v){goldFlush();if(v!=="train")nLost=null;const from=view,upd=()=>{view=v;if(v!=="edit"){S.view=v;S.viewDay=new Date().toDateString();save()}render();window.scrollTo(0,0);if(trainArrive){trainArrive=false;if(v==="train")nowReveal(false)}};
   // Oggi <-> Allenamento: la scheda della seduta si trasforma nell'intestazione (e ritorno)
   const pair=(from==="oggi"&&v==="train")||(from==="train"&&v==="oggi");
   if(pair&&document.startViewTransition&&!RM()){const h=document.documentElement;h.classList.add("vt-sed");h.classList.toggle("vt-back",v==="oggi");
@@ -4276,18 +4281,20 @@ function renderTrain(only){
   if(curH.length&&askH.length){curH[0]=curH[0].replace("<!--ASK-->",askH.join(""));askH.length=0}
   const curReg=curH.join(""),CR="<!--CURREG-->";
   html=askH.join("")+(curReg?CR:"")+(nextH.some(h=>h.startsWith("<button")||h.startsWith("<div"))?`<p class="grp">Prossimi</p>`+nextH.join(""):"")+(doneH.length?`<p class="grp">Fatti</p>`+doneH.join(""):"");
-  const svd=dn?null:S.sessions.filter(x=>x.day===g&&iso(x.date)===iso(today())).slice(-1)[0];
-  const savedH=svd?`<section class="card alldone saved"><p><b>${esc(P.name)} salvata</b> alle ${new Date(svd.date).toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}.</p><button class="btn" id="seeSv">Vedi il riepilogo</button></section>`:"";
+  const svd=dn?null:S.sessions.filter(x=>x.day===g&&iso(x.date)===iso(today())).sort((a,b)=>b.date.localeCompare(a.date))[0];
+  // Seduta appena salvata: la lista vuota non si mostra (si rischierebbe di rifarla e salvarla due volte) finché non tocchi "Rifai"
+  const hideNew=!!svd&&!redoG.has(g);
+  const savedH=svd?`<section class="card alldone saved"><p><b>${esc(P.name)} salvata</b> alle ${new Date(+new Date(svd.date)+(svd.dur||0)*6e4).toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"})}.</p><button class="btn" id="seeSv">Vedi il riepilogo</button>${hideNew?`<button class="lnk" id="redoSv">Rifai la seduta da capo</button>`:""}</section>`:"";
   const dnwH=`<span class="dnc">${dn}</span> / <span class="dnt">${tot}</span> serie${dr.start&&mins>0?` · ${mins} min`:""}`;
   const bodyT=`${lostH}
   <div class="tabs" role="group" aria-label="Scheda">${GYM_ORDER.map(k=>{const wd=Object.entries(S.week).find(([,v])=>v.gym===k);return `<button data-k="${k}" aria-pressed="${k===g}"><small>${wd?WD[wd[0]]:"Extra"}</small><span class="tn">${esc(PLAN[k].name)}</span></button>`}).join("")}</div>
   ${oldBoxes(g)}
-  ${modNote}
-  ${warmupHTML(g,P,dr,dn)}
+  ${hideNew?"":modNote}
+  ${hideNew?"":warmupHTML(g,P,dr,dn)}
   ${savedH}
   ${!first&&dn?`<section class="card alldone"><p>Tutte le serie fatte.</p><button class="btn hot" id="finish">Termina e salva</button></section>`:""}
-  <div id="exs" class="exs">${html}</div>
-  ${!first&&dn?"":`<button class="btn hot" id="finish">Termina e salva</button>`}<button class="lnk clr" id="clear">Svuota la seduta</button>
+  <div id="exs" class="exs">${hideNew?"":html}</div>
+  ${hideNew?"":`${!first&&dn?"":`<button class="btn hot" id="finish">Termina e salva</button>`}<button class="lnk clr" id="clear">Svuota la seduta</button>`}
   <p class="msg" id="msg" aria-live="polite"></p>`;
   const key=g+"|"+P.title+"|"+bodyT,ex0=document.getElementById("exs"),curs=only&&view==="train"&&curReg&&key===rtKey&&ex0&&ex0===rtExs?[...ex0.querySelectorAll(":scope>article.ex.cur")]:[],patch=curs.length>0;
   if(patch){const th=app.querySelector(".thead"),dw=th&&th.querySelector(".dnw"),pb=th&&th.querySelector(".pbar");if(dw)dw.innerHTML=dnwH;if(pb)pb.setAttribute("aria-valuenow",pct);
@@ -4344,14 +4351,15 @@ function renderTrain(only){
   const rs=document.querySelector("#restIn [data-ts]");if(rs)rs.onclick=()=>{if(!tFresh())closeRest()};
   // La scheda del giorno scelto va al centro della fila solo in orizzontale: scrollIntoView spostava anche la pagina (in cima, a ogni ridisegno intero)
   const tb=!patch&&document.querySelector('.tabs button[aria-pressed="true"]');if(tb){const tr=tb.parentElement.getBoundingClientRect(),r=tb.getBoundingClientRect();tb.parentElement.scrollLeft+=r.left+r.width/2-(tr.left+tr.width/2)}
-  const fb=document.getElementById("finish");fb.onclick=()=>{const miss=mP;
+  const fb=document.getElementById("finish");if(fb)fb.onclick=()=>{const miss=mP;
     if(miss>0&&!arm2(fb,`Mancano ${miss} serie · tocca ancora`,"Termina e salva"))return;
     finish(g,mods,null,miss)};
+  const rd=document.getElementById("redoSv");if(rd)rd.onclick=()=>{redoG.add(g);renderTrain()};
   const sv=document.getElementById("seeSv");if(sv)sv.onclick=()=>sheetFrom(sv.closest(".card"),()=>summarySheet(svd));
   oldDraftBind();
   // Il riflesso del bottone passa una volta sola: dopo ogni spunta la scheda si ridisegna e non deve ripartire
   if(hadFin){const fb=document.getElementById("finish");if(fb)fb.classList.add("noshine")}
-  const c=document.getElementById("clear");c.onclick=()=>{if(!arm2(c,"Tocca di nuovo per svuotare","Svuota la seduta"))return;snap();delete S.draft[g];openEx[g]=null;stopTimer();save();renderTrain();undoable("Seduta svuotata.")};
+  const c=document.getElementById("clear");if(c)c.onclick=()=>{if(!arm2(c,"Tocca di nuovo per svuotare","Svuota la seduta"))return;snap();delete S.draft[g];openEx[g]=null;stopTimer();save();renderTrain();undoable("Seduta svuotata.")};
   if(!patch)fitTitles();
   trainFx(g,pct,mods);
   if(tOn)tick();
@@ -4518,8 +4526,8 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
   let pgDiff=false;if(pgOn&&(tg.pause||pgSel)){pgForce=!pgSel;try{const t2=tgFor(ex,mods,g);pgDiff=t2.kg!==tg.kg||(t2.reps||[]).join()!==(tg.reps||[]).join()}catch(e){}finally{pgForce=null}}
   const pgH0=pgDiff?`<button class="lnk pgo" data-pgo="${ex.id}">${pgSel?"Rimetti la ripresa dopo la pausa":"Progredisci comunque"}</button>`:"";
   // Range esteso o myo-rep perché il gradino è grosso: tasto per scegliere di salire di peso; con la scelta attiva, tasto per tornare indietro
-  const xOn=!mods.has("deload")&&hasKg&&!!last&&!["time","nordic","perf","bw"].includes(ex.t)&&!powEx(ex)&&(noExtOf(ex)||!(eqMax(ex)&&(tg.kg||0)>=eqMax(ex)));
-  const pgH=pgH0+(xOn?`<button class="lnk pgo" data-noext="${ex.id}">${noExtOf(ex)?"Torna a salire con le ripetizioni":"Preferisco aumentare il peso"}</button>`:"");
+  const xOn=!mods.has("deload")&&hasKg&&!!last&&!["time","nordic","perf","bw"].includes(ex.t)&&!powEx(ex)&&!(eqMax(ex)&&(tg.kg||0)>=eqMax(ex))&&(tg.kg||0)>0&&(["iso","prev"].includes(ex.t)||myoEx(ex)||ex.lo===ex.hi)&&stepOf(ex)/tg.kg>0.1;
+  const pgH=pgH0+(xOn?`<button class="lnk pgo" data-noext="${ex.id}">${noExtOf(ex)?"Preferisco salire con le ripetizioni":"Torna ad aumentare il peso"}</button>`:"");
   const over=tOn&&tEnd<=Date.now();
   const rest=withRest&&tOn?`<div class="rest ${over?"over":""}" id="restIn" role="timer"><span class="rr"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="rk" cx="32" cy="32" r="28"/><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg><i class="rg" aria-hidden="true"><i class="rh r1" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh r2" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh rd" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i></i><b class="tv"></b></span><span class="tl" aria-live="assertive">${over?"Recupero finito":"Recupero"+(tPlus?"\u00a0· +"+tPlus+"\u00a0s":"")}</span><span class="tb"><button data-ts>Chiudi</button><button data-tp>+15 s</button></span></div>`:"";
   // Scheda che si colora: a ogni serie un velo su tutta la scheda si intensifica piano; a esercizio finito passa l'oro in diagonale
@@ -4907,7 +4915,9 @@ function holdStart(g,exId,j,mods){audioUnlock();wakeOn();
   const tv=num(inp&&inp.value)||num(tgFor(ex,mods,g).reps[tIx(g,ex,mods,j)])||ex.lo,target=ex.cardio?Math.max(1,tv)*60:Math.max(5,tv);
   H={g,exId,j,mods,ex,target,sides:ex.side?2:1,side:0,held:[],phase:"prep",end:Date.now()+3000,last:-1,back:document.activeElement};
   T("hoName").textContent=ex.n;T("holdOv").hidden=false;document.body.classList.add("ho-on");T("hoStop").focus({preventScroll:true});
-  buzz(20);holdLoop();H.int=setInterval(holdLoop,100)}
+  buzz(20);holdLoop();H.int=setInterval(holdLoop,100);holdKeep()}
+// Tapis roulant: il timer si salva, così se iOS chiude l'app durante la camminata riparte da dove era
+function holdKeep(){if(!H||!H.ex.cardio)return;S.hold={g:H.g,exId:H.exId,j:H.j,mods:[...H.mods],phase:H.phase,end:H.end,t0:H.t0||null};save()}
 function holdSub(){const s=H.sides>1?(H.side?" · secondo lato":" · primo lato"):"";return H.ex.cardio?`${Math.round(H.target/60)} min`:`Serie ${H.j+1} · ${H.target} s${s}`}
 const hoFmt=s=>H&&H.ex.cardio&&H.phase==="hold"?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):String(s);
 function holdLoop(){if(!H)return;const ov=T("holdOv"),now=Date.now(),left=Math.max(0,Math.ceil((H.end-now)/1000)),ra=ov.querySelector(".ra");
@@ -4919,13 +4929,13 @@ function holdLoop(){if(!H)return;const ov=T("holdOv"),now=Date.now(),left=Math.m
     if(left!==H.last&&left>0)blip(520,.08)}
   H.last=left;
   if(now<H.end)return;
-  if(H.phase!=="hold"){H.phase="hold";H.end=now+H.target*1000;H.t0=now;H.last=-1;buzz(30);blip(990,.25);return}
+  if(H.phase!=="hold"){H.phase="hold";H.end=now+H.target*1000;H.t0=now;H.last=-1;buzz(30);blip(990,.25);holdKeep();return}
   H.held[H.side]=H.target;
   if(H.side+1<H.sides){H.side++;H.phase="switch";H.end=now+5000;H.last=-1;buzz(40);beep();return}
   beep();holdFinish()}
-function holdFinish(){if(!H)return;const h=H;clearInterval(h.int);H=null;
+function holdFinish(){if(!H)return;const h=H;clearInterval(h.int);H=null;if(S.hold){delete S.hold;save()}
   const ov=T("holdOv");ov.hidden=true;ov.classList.remove("soon");document.body.classList.remove("ho-on");
-  const vals=h.held.filter(v=>v!=null),s0=vals.length?Math.min(...vals):0,sec=h.ex.cardio?Math.round(s0/60):s0;
+  const vals=h.held.filter(v=>v!=null),s0=vals.length?Math.min(...vals):0,sec=h.ex.cardio?Math.ceil(s0/60):s0;
   if(sec<1){h.back&&h.back.focus&&h.back.focus({preventScroll:true});return}
   const c=cell(h.g,h.exId,h.j);c.reps=String(sec);save();
   const inp=document.querySelector(`#exs input[data-ex="${h.exId}"][data-j="${h.j}"][data-f="reps"]`);if(inp)inp.value=String(sec);
@@ -5939,6 +5949,8 @@ function loadDemo(){
 /* ================= BOOT ================= */
 applySkin();render();
 // Recupero in corso quando iOS ha chiuso l'app: riparte da dove era (se è finito da meno di 10 minuti)
+// Camminata sul tapis interrotta da iOS: si riapre il timer (se è già finita la serie si segna da sola); dopo 3 ore si lascia perdere
+if(S.hold){const x=S.hold;delete S.hold;save();if(PLAN[x.g]&&Date.now()-x.end<3*36e5)try{view="train";S.view="train";if(PLAN[x.g])gymSel=x.g;openEx[x.g]=x.exId;render();holdStart(x.g,x.exId,x.j,new Set(x.mods));H.phase=x.phase;H.end=x.end;H.t0=x.t0;holdKeep();holdLoop()}catch(e){if(H)holdCancel()}}
 if(S.timer&&S.timer.end>Date.now()-6e5){const x=S.timer;startTimer(x.tot,x.lbl,x.plus,x.end,x.ctx);if(view==="train")renderTrain()}else if(S.timer){delete S.timer;save()}
 // Luce che segue il telefono tolta su richiesta (2026-10-06)
 // Su iPhone gli stati premuti (:active) si vedono solo se la pagina ascolta i tocchi
