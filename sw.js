@@ -2,7 +2,7 @@
 const CACHE="allenati-sharon-v2";
 const CORE=["index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png",
   "fonts/fraunces.woff2","fonts/fraunces-italic.woff2","fonts/nunito.woff2","fonts/bodoni-moda.woff2","fonts/big-shoulders.woff2","fonts/manrope.woff2","fonts/syne.woff2"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:"reload"})))).then(()=>self.skipWaiting()))});
+self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:"no-cache"})))).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 
 // Scarica la pagina e, se è cambiata, la salva e avvisa l'app (che propone "Aggiorna")
@@ -20,6 +20,9 @@ async function refreshPage(req){
   }
   return r;
 }
+
+// L'app ripresa dallo sfondo chiede un controllo della versione
+self.addEventListener("message",e=>{if(e.data&&e.data.type==="controlla")e.waitUntil(refreshPage(new Request(self.registration.scope,{mode:"same-origin"})).catch(()=>{}))});
 
 self.addEventListener("fetch",e=>{
   const req=e.request;if(req.method!=="GET")return;
