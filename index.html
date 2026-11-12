@@ -3112,10 +3112,13 @@ function target0(ex,noMyo){
   const repsAt=nk=>Math.floor((Math.max(...heavy.map(x=>e1rm(kg,num(x.reps)+rirMid(ex.rir))))/nk-1)*30-rirMid(ex.rir)),floorR=ex.t==="iso"?Math.max(8,ex.lo-4):Math.max(6,ex.lo-6);
   // Ripetizioni (su tutte le serie) da cui il carico nuovo diventa raggiungibile; null = mai, nemmeno al mantenimento
   const rAt=(r,nk)=>Math.floor((e1rm(kg,r+rirMid(ex.rir))/nk-1)*30-rirMid(ex.rir));
-  // Pausa lunga (14+ giorni senza fare questo esercizio): la prima volta ripeti l'ultima seduta, stessi kg e ripetizioni; da 28 giorni 10% in meno sui kg (arrotondato al gradino)
+  // Pausa lunga (21+ giorni senza fare questo esercizio): la prima volta ripeti l'ultima seduta fatta bene, stessi kg e ripetizioni; da 35 giorni 10% in meno sui kg (arrotondato al gradino)
   // Con "Progredisci comunque" (pauseGo) si salta: progressione normale dall'ultima seduta
-  const gap=gapDays(ex);
-  if(gap>=21&&reps.length&&!pauseGo(ex)){let rp=pad(reps,ex.s),nk=kg,rc=0,rcU=true;
+  const gap=gapDays(ex),kg0=kg,reps0=reps;
+  if(gap>=21&&reps.length&&!pauseGo(ex)){let kg=kg0,rp=pad(reps0,ex.s),nk=kg,rc=0,rcU=true;
+    // L'ultima seduta era andata male (sotto floorR): si ripete l'ultima fatta bene
+    if(Math.min(...reps0)<floorR){const ok=h.slice(1).map(x=>{const w=workSets((x.sets[ex.id]||[]).filter(y=>num(y.reps)!=null),ex.lo),k=w.map(y=>num(y.kg)).filter(v=>v!=null),rr=w.map(y=>num(y.reps));return {x,k:k.length?Math.max(...k):null,rr}}).find(o=>!lgtS(o.x)&&o.rr.length&&Math.min(...o.rr)>=floorR&&(o.k==null)===(kg==null));
+      if(ok){kg=ok.k;nk=kg;rp=pad(ok.rr,ex.s)}}
     // Giorni dalla seduta che si ripete (stesso range): è quella che il testo nomina
     const gL=Math.round((new Date(iso(today())+"T00:00:00")-new Date(dayOf(last)+"T00:00:00"))/864e5),bw=ex.t==="bw"||eqOf(ex)==="zav";
     // -10% arrotondato al gradino. Se il gradino è troppo grosso per farlo (es. curl al cavo 30 kg col gradino da 5) o sei a corpo libero:
@@ -3175,7 +3178,12 @@ function target0(ex,noMyo){
   let nAt=0;while(nAt<h.length&&kOf(h[nAt])===kOf(last))nAt++;
   const tol=nAt<h.length&&kOf(h[nAt])<kOf(last)&&nAt<=3?2:0,shortOf=a=>a.reduce((t,r)=>t+(ex.lo-r>tol?ex.lo-r:0),0);
   const pS=h[1],prev=pS?workSets(pS.sets[ex.id],ex.lo).filter(x=>num(x.reps)!=null).map(x=>num(x.reps)):null;
-  const missTwice=!allIn&&!!pS&&eff!=="easy"&&!lgt(last)&&!lgt(pS)&&kOf(pS)===kOf(last)&&shortOf(reps)>=2&&shortOf(prev)>=2;
+  // Risalita dopo un aumento a ripetizioni ridotte (es. 30 → 35 kg a 6): il riferimento è la prima seduta al carico nuovo, non il minimo del range.
+  // Si scende solo se le ultime due sedute sono entrambe sotto quella prima seduta.
+  const avg=a=>a.length?a.reduce((t,r)=>t+r,0)/a.length:0,fS=nAt>0?h[nAt-1]:null,fR=fS?workSets(fS.sets[ex.id],ex.lo).map(x=>num(x.reps)).filter(v=>v!=null):[];
+  const climb=!allIn&&nAt<h.length&&kOf(h[nAt])>=0&&kOf(h[nAt])<kOf(last)&&fR.length>0&&Math.min(...fR)<ex.lo;
+  const missTwice=climb?nAt>=3&&eff!=="easy"&&!lgt(last)&&!lgt(pS)&&avg(reps)<avg(fR)&&!!prev&&avg(prev)<avg(fR)
+    :!allIn&&!!pS&&eff!=="easy"&&!lgt(last)&&!lgt(pS)&&kOf(pS)===kOf(last)&&shortOf(reps)>=2&&shortOf(prev)>=2;
   if(ex.t==="time"){
     // Copenhagen: si parte già con la caviglia (versione piena). A 30 s si allunga la tenuta di 10 s, poi discesa più lenta; la leva corta (ginocchio) torna alla caviglia
     if(allTop){const cop=/copenhagen/i.test(ex.n),lc=/leva corta/i.test(ex.n);
@@ -3234,7 +3242,7 @@ function target0(ex,noMyo){
     return {kg:nk,reps:Array(ex.s).fill(ex.lo),top,kind:"up",badge:`+${fk(nk-kg)} kg`,msg:easy?`Range chiuso ed era facile: doppio aumento, ${fk(nk)} kg, riparti da ${ex.lo} ripetizioni.`:big?`Arrivata a ${Math.min(...hReps)} ripetizioni: passa a ${fk(nk)} kg e riparti da ${ex.lo}.`:`Tutte le serie al limite alto: ${fk(nk)} kg e riparti da ${ex.lo} ripetizioni.${eNo?" Era facile, ma un doppio aumento supererebbe il 10%.":""}`};
   }
   const sm=a=>a.reduce((t,r)=>t+r,0);
-  if(missTwice&&kg&&!(prev&&prev.length&&sm(reps)/reps.length>sm(prev)/prev.length)){
+  if(missTwice&&kg&&(climb||!(prev&&prev.length&&sm(reps)/reps.length>sm(prev)/prev.length))){
     let nk=ex.t==="bw"?Math.max(0,roundStep(kg-(bwNow()+kg)*0.1,st)):Math.max(st,roundStep(kg*0.9,st));if(nk>=kg&&kg-st>=0)nk=Math.max(0,kg-st);
     // Carico di prima tra il -10% e quello di oggi (es. 40 → 42,5 non regge): si torna lì, non più in basso
     const kp=h.map(kOf).find(v=>v<kg-1e-9);if(kp!=null&&kp>nk&&kp<kg)nk=kp;
@@ -3245,6 +3253,7 @@ function target0(ex,noMyo){
     const back=h.find(x=>kOf(x)===nk&&!lgt(x)),bR=back?Math.min(...workSets(back.sets[ex.id],ex.lo).map(x=>num(x.reps)).filter(v=>v!=null)):Math.floor((Math.max(...heavy.map(x=>e1rm(ex.t==="bw"?bwNow()+kg:kg,num(x.reps)+rirMid(ex.rir))))/(ex.t==="bw"?bwNow()+nk:nk)-1)*30-rirMid(ex.rir)),r0=Math.max(ex.lo,Math.min(ex.hi-1,bR));
     return {kg:nk,reps:Array(ex.s).fill(r0),top,kind:"down",badge:`-${fk(kg-nk)} kg`,msg:`Due sedute sotto le ${ex.lo} ripetizioni: scendi a ${fk(nk)} kg${back&&r0>ex.lo?` e riparti da ${r0}${r0===bR?", come facevi lì":""}`:" e ricostruisci"}.`};
   }
+  if(climb&&!missTwice&&kg>0)return {kg,reps:pad(reps.map(r=>r<ex.lo?Math.min(ex.lo,r+1):Math.min(top,r)),ex.s,Math.min(ex.lo,Math.max(...reps))),top,kind:"up",badge:"+1 rip",alt:sw,msg:`Stesso carico: una ripetizione in più sulle serie sotto le ${ex.lo}, una alla volta finché ci arrivi. Se oggi non sale, va bene uguale.`};
   // Serie mancanti (seduta con una serie in meno): si riempiono con l'ultima fatta, non con il minimo del range
   if(!allIn&&kg>0&&ex.t!=="bw"&&((ex.t==="iso"||ex.t==="prev")&&st/kg>0.15||nX&&st/kg>0.1)&&!(missTwice&&prev&&sm(reps)<sm(prev)))return {kg,reps:pad(reps.map(r=>r<ex.lo?Math.min(ex.lo,r+1):Math.min(top,r)),ex.s),top,kind:"up",badge:"+1 rip",alt:sw,msg:`Stesso carico: il gradino da ${fk(st)} kg è grosso. Le serie sotto ${ex.lo} una ripetizione in più, le altre come l'ultima volta.${swT}`};
   if(!allIn)return {kg,reps:pad(reps.map(r=>r<ex.lo?ex.lo:Math.min(top,r)),ex.s),top,kind:"flat",badge:"=",msg:`${kg==null&&ex.t!=="bw"&&eqOf(ex)==="altro"?"Stesso elastico":"Stesso carico"}: porta a ${ex.lo} le serie rimaste sotto, le altre come l'ultima volta.`};
@@ -4182,7 +4191,7 @@ function renderToday(){
   const sd=document.getElementById("startDl");if(sd)sd.onclick=()=>{snap();startDeload();renderToday();undoable("Scarico avviato.","omsg");reviewSheet(S.cycles[S.cycles.length-1])};
   const bkN=document.getElementById("bkNow");if(bkN)bkN.onclick=async()=>{await shareBackup();renderToday()};
   const nv=document.getElementById("newVer");if(nv)nv.onclick=()=>location.reload();
-  const iB=document.getElementById("instBk");if(iB)iB.onclick=async()=>{await shareBackup();renderToday()};
+  const iB=document.getElementById("instBk");if(iB)iB.onclick=async()=>{const r=await shareBackup();renderToday();const m=document.getElementById("omsg")||document.getElementById("msg");if(m&&r!=="no"){m.className="msg "+(r==="ok"?"ok":"err");m.textContent=r==="ok"?"Backup salvato. Ora installa l'app e importalo da Impostazioni.":"Il backup non si è salvato: riprova da Impostazioni.";msgShow(m)}};
   const iL=document.getElementById("instLater");if(iL)iL.onclick=()=>{S.instSnooze=iso(addDays(today(),14));save();renderToday()};
   const bkL=document.getElementById("bkLater");if(bkL)bkL.onclick=()=>{S.bkSnooze=iso(addDays(today(),7));save();renderToday()};
   const zd=document.getElementById("snoozeDl");if(zd)zd.onclick=()=>{S.deloadSnooze=iso(addDays(today(),7));save();renderToday()};
@@ -4409,7 +4418,7 @@ function wakeOff(){if(wl){wl.release().catch(()=>{});wl=null}}
 function wakeSync(){const live=view==="train"&&Object.values(S.draft||{}).some(d=>d&&d.start&&Date.now()-d.start<4*36e5);live&&S.awake!==false?wakeOn():wakeOff()}
 document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")wakeSync()});
 let actx=null;
-function audioUnlock(){if(S.sound===false)return;try{if(navigator.audioSession)navigator.audioSession.type=S.loud?"playback":"auto";actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==="suspended")actx.resume();
+function audioUnlock(){if(S.sound===false)return;if(audioUnlock.done&&actx&&actx.state==="running"&&audioUnlock.ld===!!S.loud)return;audioUnlock.ld=!!S.loud;try{if(navigator.audioSession)navigator.audioSession.type=S.loud?"playback":"auto";actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==="suspended")actx.resume();
   if(!audioUnlock.done){const b=actx.createBuffer(1,1,22050),src=actx.createBufferSource();src.buffer=b;src.connect(actx.destination);src.start(0);audioUnlock.done=1}}catch(e){}}
 function beep(){if(S.sound===false||!actx)return;try{const t=actx.currentTime+.02;[[0,880],[.2,880],[.4,1320]].forEach(([d,f])=>{const o=actx.createOscillator(),gn=actx.createGain();o.type="sine";o.frequency.value=f;gn.gain.setValueAtTime(.0001,t+d);gn.gain.exponentialRampToValueAtTime(.4,t+d+.02);gn.gain.exponentialRampToValueAtTime(.0001,t+d+(d>.3?.32:.16));o.connect(gn);gn.connect(actx.destination);o.start(t+d);o.stop(t+d+.35)})}catch(e){}}
 function swipeBind(g,L,curId,mods){
@@ -4506,7 +4515,7 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
   if(myoA)spec.push(`<span class="ad">ultima&nbsp;a&nbsp;cedimento</span>`);
   if(!ex.cardio)spec.push(`<span>${ex.rest?(ex.rest>=120?fk(ex.rest/60)+"&nbsp;min":ex.rest+"&nbsp;s"):"Subito il prossimo"}</span>`);
   if(padAfter(mods)&&ex.strap)chips.push(`<span class="chip adapt">Fasce da polso: risparmi la presa per il padel</span>`);
-  if(tg.top&&tg.top>ex.hi&&!mods.has("deload")&&tg.reps.every(r=>r>=ex.lo)&&!["time","nordic","perf"].includes(ex.t)){const mx=eqMax(ex);chips.push(`<span class="chip hot">Range esteso fino a ${tg.top}: ${mx&&(tg.kg||0)>=mx?`${fk(mx)} kg è il massimo del pacco`:`il prossimo gradino è ${pct(Math.round(stepOf(ex)/Math.max(1,tg.kg||lastKg(ex)||1)*100))}`}</span>`)}
+  if(tg.top&&tg.top>ex.hi&&!mods.has("deload")&&tg.reps.every(r=>r>=ex.lo)&&!["time","nordic","perf"].includes(ex.t)){const mx=eqMax(ex),nX0=noExtOf(ex);chips.push(`<span class="chip hot">${nX0?"Fino a "+tg.top+" ripetizioni prima di salire":"Range esteso fino a "+tg.top}: ${mx&&(tg.kg||0)>=mx?`${fk(mx)} kg è il massimo del pacco`:`il prossimo gradino è ${pct(Math.round(stepOf(ex)/Math.max(1,tg.kg||lastKg(ex)||1)*100))}`}</span>`)}
   const stallTxt=!mods.has("deload")&&!tg.hold&&tg.kind!=="down"&&!(tg.kind==="up"&&tg.kg>0&&tg.kg>(lastKg(ex)||0))&&!((draftFor(g).ex[ex.id]||[]).some(x=>x.done&&x.pr)&&!brkNow.has(ex.id))&&stalled(ex)?(phaseAt()==="def"?`<p class="prog down"><span>In calo</span><span>Massimale sotto del 5% nelle ultime 2 sedute. In definizione basta tenere i carichi: se continua togli una serie o fai lo scarico.</span></p>`:`<p class="prog down fermo"><span>Fermo</span><span>Nessun miglioramento nelle ultime 3 sedute: prova una variante con ⇄ Cambia o togli una serie per due settimane.</span></p>`):"";
   // Pausa lunga: "Progredisci comunque" finché non hai fatto serie dell'esercizio. Mai nello scarico né nei giorni alleggeriti (lì i carichi restano fermi comunque)
   const pgOn=!nn&&!rows.some(r=>r.done)&&!mods.has("deload")&&!mods.has("light"),pgSel=pgOn&&pauseGo(ex)&&gapDays(ex)>=21;
@@ -5776,7 +5785,7 @@ function renderSettings(){
     <li><b>«Preferisco fare più ripetizioni prima di aumentare».</b> Compare quando il gradino è grosso rispetto al tuo carico (es. manubrio da 3 a 4 kg, +33%) e la scelta cambia davvero la proposta. Se lo tocchi, su quell'esercizio prima di salire di peso fai fino a 5 ripetizioni oltre il range (2 sugli esercizi a ripetizioni fisse come chest press e hip thrust); alle macchine l'ultima serie può diventare myo-rep (mini-serie da 5 con 15 s di pausa). «Torna ad aumentare il peso» rimette la regola normale.</li>
     <li><b>Com'era l'ultima serie.</b> Facile: la volta dopo due ripetizioni in più invece di una. Al limite: il peso non sale finché non chiudi con le ripetizioni in canna previste.</li>
     <li><b>Se resti sotto.</b> Una serie sotto il minimo: la volta dopo quella serie punta al minimo, o a una ripetizione in più alla volta se il peso è appena salito di un salto grosso. Se le ripetizioni stanno salendo non si scende mai. Due sedute di fila allo stesso peso con 2 o più ripetizioni sotto il minimo: −10% e si riparte (se il −10% sarebbe un salto troppo grosso, resti al peso e aggiungi una ripetizione alla volta). Nelle prime 3 sedute dopo un aumento stare 1-2 ripetizioni sotto è normale e non conta.</li>
-    <li><b>Dopo una pausa.</b> Saltare una seduta non conta. Da 21 giorni senza un esercizio ripeti l'ultima seduta; da 35 giorni circa 10% in meno (al gradino più vicino; se il gradino è troppo grosso, stesso peso con 3 ripetizioni in meno). «Progredisci comunque» ignora la pausa se ti senti bene.</li>
+    <li><b>Dopo una pausa.</b> Saltare una seduta non conta. Da 21 giorni senza un esercizio ripeti l'ultima seduta; da 35 giorni circa 10% in meno (al gradino più vicino; se il gradino è troppo grosso, stesso peso con fino a 3 ripetizioni in meno, mai sotto il minimo del range). Se l'ultima seduta era andata male, si riparte da quella fatta bene prima. «Progredisci comunque» ignora la pausa se ti senti bene.</li>
     <li><b>Giornata stanca.</b> Si sceglie da Energia in Oggi. Una serie in meno su tutto, stessi pesi e ripetizioni dell'ultima volta. Non conta come passo indietro.</li>
     <li><b>Scarico.</b> Una settimana con metà serie, stessi pesi e 3-4 ripetizioni in canna. L'app lo propone dopo 8 settimane o se 3 esercizi sono fermi da 3 sedute (mai prima di 4 settimane). Una pausa di 7 o più giorni vale già come scarico.</li>
     <li><b>Avvicinamento.</b> Sul primo multiarticolare della seduta, dopo il riscaldamento, una serie leggera a circa metà del peso di lavoro (due se il peso è alto).</li>

@@ -2,8 +2,14 @@
 const CACHE="allenati-sharon-v2";
 const CORE=["index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png",
   "fonts/fraunces.woff2","fonts/fraunces-italic.woff2","fonts/nunito.woff2","fonts/bodoni-moda.woff2","fonts/big-shoulders.woff2","fonts/manrope.woff2","fonts/syne.woff2"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:"no-cache"})))).then(()=>self.skipWaiting()))});
-self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+// Se cambia anche questo file la pagina nuova arriva qui: dopo l'attivazione si avvisano le pagine aperte (banner "Aggiorna")
+let pageChanged=false;
+self.addEventListener("install",e=>{e.waitUntil((async()=>{const c=await caches.open(CACHE),o=await c.match("index.html"),ot=o?await o.text():null;
+  await c.addAll(CORE.map(u=>new Request(u,{cache:"no-cache"})));
+  if(ot!=null){const n=await c.match("index.html");pageChanged=!!n&&(await n.text())!==ot}
+  await self.skipWaiting()})())});
+self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())
+  .then(async()=>{if(pageChanged){const cs=await self.clients.matchAll({type:"window"});cs.forEach(x=>x.postMessage({type:"nuova-versione"}))}}))});
 
 // Scarica la pagina e, se è cambiata, la salva e avvisa l'app (che propone "Aggiorna")
 async function refreshPage(req){
