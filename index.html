@@ -714,7 +714,7 @@ html.boot .seg7 .on{animation:flick .9s steps(1) both}
 
 
 
-.skins{grid-template-columns:repeat(2,1fr)}
+.skins{grid-template-columns:repeat(3,1fr)}
 @media (prefers-reduced-motion:reduce){:is(.tick,.xrow .ck).pop,:is(.tick,.xrow .ck).pop::after,:is(.tick,.xrow .ck).pop::before,.pbar.shine i::after,.app.in-r,.app.in-l{animation:none}}
 /* ===== CONTENUTI v3 ===== */
 .wu ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;counter-reset:w}
@@ -760,7 +760,8 @@ body{overflow-anchor:none}
 .rk-h{display:flex;align-items:center;gap:8px}
 .rk-h h3{margin-right:auto}
 .rk-seg{display:flex;background:var(--field);border:1px solid var(--line);border-radius:999px;padding:2px}
-.rk-seg button{border:0;background:none;padding:5px 11px;border-radius:999px;font-size:max(12px,0.7059rem);font-weight:700;color:var(--muted)}
+.rk-seg button::after{content:"";position:absolute;inset:-9px 0}
+.rk-seg button{position:relative;border:0;background:none;padding:5px 11px;border-radius:999px;font-size:max(12px,0.7059rem);font-weight:700;color:var(--muted)}
 .rk-seg button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:var(--fg)}
 .rk-i{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--field);color:var(--muted);font-weight:800;font-size:max(14px,0.8235rem);flex:none}
 .rk-g{display:grid;grid-template-columns:1.05fr 1fr;gap:6px;align-items:center}
@@ -927,7 +928,7 @@ html:not([data-skin="vetro"]):not(#z):not(#y):not(#x) .ex.cur.tint:not(.gold){--
 .tgl{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
 .tgl:first-of-type{border-top:0}
 .tgl b{display:block;font-size:max(14px,0.8235rem)}
-.tgl small{display:block;font-size:max(12px,0.7059rem);color:var(--muted)}
+.tgl small{display:block;font-size:max(13px,0.7647rem);line-height:1.4;color:var(--muted)}
 .tgl button{flex:none;width:52px;height:30px;border-radius:99px;border:1px solid var(--line);background:var(--field);position:relative;padding:0}
 .tgl button::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:var(--muted);transition:transform .2s}
 .tgl button[aria-checked="true"]{background:color-mix(in srgb,var(--hot) 55%,transparent);border-color:var(--hot)}
@@ -1024,7 +1025,7 @@ details.wu[open] ol{margin-top:12px}
 :root:not(#z) details.h summary{min-height:44px;align-items:center;margin-block:-6px}
 :root:not(#z) :is(.link,.back,.pain-l,[data-pain]){min-height:44px}
 :root:not(#z) :is(.edx input,.edx select,.ed input,.ed select){font-size:max(17px,1rem)}
-.rk-note{margin:0;font-size:max(12px,0.7059rem);color:var(--muted)}
+.rk-note{margin:0;font-size:max(13px,0.7647rem);color:var(--muted)}
 :root:not(#z) .wd2 small{font-size:max(11px,0.6471rem);letter-spacing:-.01em;padding:0}
 :root:not(#z) .mrow{grid-template-columns:96px 1fr 32px}
 :root:not(#z) .swap{min-height:44px}
@@ -1673,6 +1674,8 @@ html[data-skin="vetro"]:not(#z):not(#y):not(#x) body::before{background:radial-g
 .set:not(.now) .hold{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1.5px var(--line)}
 .hold-ov{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:calc(env(safe-area-inset-top,0px) + 20px) 20px calc(env(safe-area-inset-bottom,0px) + 24px);text-align:center}
 .hold-ov[hidden]{display:none}
+html[data-skin="fiaba"][data-var="1"] .hold-ov{background:linear-gradient(180deg,#fde6ef,#fff4f0)}
+html[data-skin="fiaba"][data-var="2"] .hold-ov{background:linear-gradient(180deg,#dcf3e8,#f4fbf2)}
 body.ho-on{overflow:hidden}
 .ho-top{display:flex;flex-direction:column;gap:4px}
 .ho-top b{font:400 30px/1.05 var(--display);color:var(--fg);text-wrap:balance}
@@ -1689,6 +1692,14 @@ body.ho-on{overflow:hidden}
 .hold-ov.soon .ho-t{color:var(--adapt)}
 .ho-msg{margin:0;font-size:max(17px,1rem);font-weight:700;color:var(--fg);min-height:1.45em}
 .ho-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:min(100%,420px)}
+.ho-btns .btn{min-height:52px}
+:root:not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) .ho-btns #hoX{border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1.5px var(--line2,var(--line));color:var(--fg)}
+:root:not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) .ho-btns #hoStop{border-radius:999px}
+html[data-skin="eclisse"] .hold-ov.mm .ho-t{font-size:clamp(56px,16vw,92px)}
+.ho-ring svg{overflow:visible}
+/* Recupero flottante aperto: la pagina ha spazio sotto, così le ultime serie non restano coperte da recupero e barra */
+html:has(#timer:not([hidden])){scroll-padding-bottom:190px}
+html:has(#timer:not([hidden])) #app::after{content:"";display:block;height:110px}
 @media (prefers-reduced-motion:no-preference){.hold-ov.soon .ho-t{animation:hoPulse 1s ease-in-out infinite}}
 @keyframes hoPulse{50%{transform:scale(1.06)}}
 
@@ -2063,6 +2074,7 @@ html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4) div.timer .t{font-si
 /* bottone principale: una goccia di vetro colorato */
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4) .btn.hot{color:#fff;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0) 48%),var(--m-s2);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -2px 0 rgba(0,0,0,.18),0 6px 16px -6px rgba(var(--m-acc-rgb),.5)}
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-sera] .btn.hot{background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 48%),var(--m-s1);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.25),0 6px 16px -6px rgba(0,0,0,.6)}
+html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-sera] .set.now .hold{background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0) 48%),var(--m-s1);color:#fff}
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4) .btn.hot::before,html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4) .btn.hot::after{display:none}
 /* la lastra: la seduta di oggi è un pezzo di vetro colorato */
 html[data-skin="vetro"]:not(#m1):not(#m2):not(#m3):not(#m4) .card.hero{background:radial-gradient(120% 70% at 18% 0%,rgba(255,255,255,.22),transparent 55%),linear-gradient(160deg,var(--m-s1),var(--m-s2) 55%,var(--m-s3));border:1px solid var(--m-s3);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.25),0 18px 34px -16px rgba(var(--m-acc-rgb),.55)}
@@ -2552,10 +2564,10 @@ html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not([data-s
 html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:url(#and-cane);stroke-width:4}
 html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-p{stroke:var(--card);stroke-width:1.2}
 html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles{gap:0;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,var(--m-s1,#3158d4),var(--m-s2,#1a37a0));box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 10px 24px -14px rgba(0,0,0,.5)}
-html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile{background:transparent;border:0;border-radius:0;box-shadow:none}
-html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile+.tile{border-left:1px solid rgba(255,255,255,.2)}
-html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile b{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25)}
-html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile span{color:rgba(255,255,255,.86)}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile{background:transparent;border:0;border-radius:0;box-shadow:none}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile+.tile{border-left:1px solid rgba(255,255,255,.2)}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile b{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.25)}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#m5):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .sheet:has(.sumh) .tiles .tile span{color:rgba(255,255,255,.86)}
 @media (prefers-reduced-motion:no-preference){html[data-skin="fiaba"]:not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) :is(.app.in-r,.app.in-l){animation:fxVetro .22s var(--ease-out)}}
 html[data-skin="fiaba"]:not([data-sera]):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rk-hist .and-l{stroke:url(#and-cane-d)}
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4){color-scheme:light;
@@ -2569,8 +2581,8 @@ html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4){color-scheme:light;
  --gold:#d9a441;--gold-rgb:217,164,65;
  --display:"Fraunces",Georgia,"Times New Roman",serif;--ui:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
  --bgimg:radial-gradient(ellipse 150px 40px at 14% 9%,rgba(255,255,255,.95) 55%,transparent 72%),radial-gradient(ellipse 90px 34px at 24% 7%,rgba(255,255,255,.95) 55%,transparent 72%),radial-gradient(ellipse 170px 44px at 86% 30%,rgba(255,255,255,.8) 55%,transparent 72%),radial-gradient(ellipse 100px 36px at 76% 28%,rgba(255,255,255,.8) 55%,transparent 72%),radial-gradient(ellipse 160px 40px at 10% 62%,rgba(255,255,255,.6) 55%,transparent 72%),radial-gradient(ellipse 180px 46px at 92% 84%,rgba(255,255,255,.65) 55%,transparent 72%),linear-gradient(180deg,#c3dbff 0%,#dfe4ff 38%,#efe3fb 70%,#fde3ee 100%)}
-html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-var="1"]{--m-acc:#b8336a;--m-acc-rgb:184,51,106;--m-s1:#d8508a;--m-s2:#b8336a;--m-s3:#8e2150}
-html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-var="2"]{--m-acc:#0f7a5c;--m-acc-rgb:15,122,92;--m-s1:#1f9a76;--m-s2:#0f7a5c;--m-s3:#0a5a44}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-var="1"]{--m-acc:#a82d60;--m-acc-rgb:168,45,96;--m-s1:#c23f78;--m-s2:#a82d60;--m-s3:#80204a}
+html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4)[data-var="2"]{--m-acc:#0d6e53;--m-acc-rgb:13,110,83;--m-s1:#16805f;--m-s2:#0d6e53;--m-s3:#08513d}
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) body{background:var(--bgimg);background-attachment:fixed}
 /* Titoli: corsivo morbido da libro di fiabe, stellina d'oro */
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) :is(h1,h2,h3,.hero .big,details.h summary b,.tgt b,.kpi b,.wd b,.dayr .d,.set .i){font-family:var(--display);font-variation-settings:"SOFT" 100,"WONK" 1;letter-spacing:0;text-transform:none}
@@ -4091,7 +4103,7 @@ function renderToday(){
   const runG=hasGym&&!doneS&&S.draft&&S.draft[a.gym]&&!draftOld(a.gym)?a.gym:null;let runN=0,runT=0;
   if(runG){const L=trainList(runG,trainMods(runG));for(const {ex} of L){const n=setsShown(runG,ex,trainMods(runG));runT+=n;runN+=Math.min(n,doneCount(runG,ex.id))}}
   const doneSt=doneS?sessStats(doneS):null,doneAt=doneS?new Date(doneS.date).toLocaleTimeString("it-IT",{hour:"2-digit",minute:"2-digit"}):"";
-  const week=[...Array(7)].map((_,i)=>{const x=addDays(d,i),p=dayPlan(x);return `<button class="wd2 ${i===0?"t":""}" data-wd="${i}" data-dt="${iso(x)}" aria-label="${esc(cap(WD_LONG[x.getDay()]))}: cambia la seduta"><b>${WD[x.getDay()]}</b><span class="ics">${i===0&&doneS?dayIcons(p).replace(I("gym"),`<b class="dk" aria-label="Fatta">✓</b>`):dayIcons(p)}</span><small>${p.gym in PLAN?esc(PLAN[p.gym].name).replace(/ (\S{1,2})$/,"<br>$1"):p.padel==="match"?"Partita":p.padel==="train"?"Padel":"Riposo"}</small></button>`}).join("");
+  const week=[...Array(7)].map((_,i)=>{const x=addDays(d,i),p=dayPlan(x);return `<button class="wd2 ${i===0?"t":""}" data-wd="${i}" data-dt="${iso(x)}" aria-label="${esc(cap(WD_LONG[x.getDay()]))}: ${i===0&&doneS?"seduta fatta":p.gym in PLAN?esc(PLAN[p.gym].name):"riposo"}. Tocca per cambiare"><b>${WD[x.getDay()]}</b><span class="ics">${i===0&&doneS?dayIcons(p).replace(I("gym"),`<b class="dk" aria-label="Fatta">✓</b>`):dayIcons(p)}</span><small>${p.gym in PLAN?esc(PLAN[p.gym].name).replace(/ (\S{1,2})$/,"<br>$1"):p.padel==="match"?"Partita":p.padel==="train"?"Padel":"Riposo"}</small></button>`}).join("");
   let dl="";
   if(deloadOn())dl=`<div class="banner">${I("bolt")}<div><b>Scarico in corso</b><span>Fino a ${fmtShort(S.deload.to)}: metà serie, stessi carichi, 3-4 in canna.</span></div><button id="endDl">Termina</button></div>`;
   else{const w=deloadAdvice();if(w)dl=`<div class="banner">${I("bolt")}<div><b>Scarico consigliato</b><span>${esc(cap(w.join(" e ")))}.</span></div><button id="startDl">Avvia scarico</button><button id="snoozeDl" class="sec">Non ora</button></div>`}
@@ -4175,7 +4187,7 @@ function rowPlan(g,ex,mods){const dr=draftFor(g),rows=dr.ex[ex.id]||[],b=setsBas
 // Serie che si vedono (conteggi in alto, "fatte / totali", intestazione della scheda): mai meno delle righe, anche se dopo averle fatte le serie della scheda calano (es. 4+1 in seduta normale, poi Stanco)
 const setsShown=(g,ex,mods)=>{const n=setsFor(ex,mods);return n>0?Math.max(n,rowPlan(g,ex,mods).ord.length+((draftFor(g).pre||{})[ex.id]||0)):0};
 // "+ Aggiungi una serie": non sui salti (volume fisso), sulla myo-rep (è già il lavoro in più), nello scarico né oltre 10 serie in più
-const xsCan=(g,ex,mods,tg)=>setsFor(ex,mods)-((draftFor(g).pre||{})[ex.id]||0)>0&&!powEx(ex)&&ex.t!=="perf"&&!mods.has("deload")&&xsOf(mods,ex.id)<XS_MAX&&!(!["nordic","time"].includes(ex.t)&&myoOn(g,ex,mods,tg||tgFor(ex,mods,g)));
+const xsCan=(g,ex,mods,tg)=>!ex.cardio&&setsFor(ex,mods)-((draftFor(g).pre||{})[ex.id]||0)>0&&!powEx(ex)&&ex.t!=="perf"&&!mods.has("deload")&&xsOf(mods,ex.id)<XS_MAX&&!(!["nordic","time"].includes(ex.t)&&myoOn(g,ex,mods,tg||tgFor(ex,mods,g)));
 const tIx=(g,ex,mods,j)=>{const o=rowPlan(g,ex,mods).ord.find(x=>x.j===j);return o?o.t:j};
 const noEff=ex=>["perf","time","nordic"].includes(ex.t)||!!ex.mat||!!ex.cardio;
 // Voto dell'ultima serie: sempre modificabile (resta acceso fino alla prossima spunta e nella scheda dell'esercizio finito)
@@ -4429,7 +4441,7 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
     const pk=rpl.ord.slice(0,oi).map(o=>rows[o.j]).reverse().find(x=>x&&x.done&&num(x.kg)!=null);
     const kgV=r.kg!=null&&r.kg!==""?r.kg:r.done?"":pk?pk.kg:(tg.kg!=null?fk(tg.kg):"");
     const rpV=r.reps!=null?r.reps:String(tg.reps[t]??ex.lo),sn=isX?"in più":t+1;
-    const pm=(f,d)=>r.done?"":`<button class="pm" data-pm="${f}" data-d="${d}" data-ex="${ex.id}" data-j="${j}" aria-label="${d>0?"Più":"Meno"} ${f==="kg"?"kg":unit}, serie ${sn}">${d>0?"+":"−"}</button>`,fw=r.done?"label":"div";
+    const pm=(f,d)=>r.done||ex.cardio?"":`<button class="pm" data-pm="${f}" data-d="${d}" data-ex="${ex.id}" data-j="${j}" aria-label="${d>0?"Più":"Meno"} ${f==="kg"?"kg":unit}, serie ${sn}">${d>0?"+":"−"}</button>`,fw=r.done?"label":"div";
     const isM=myoA&&j===rpl.mj;
     // Serie fatta sotto le ripetizioni previste: numero e puntino gialli (la spunta resta quella normale)
     const low=r.done&&ex.t!=="perf"&&num(r.reps)!=null&&num(r.reps)<(+(r.tg??tg.reps[t]??ex.lo)||ex.lo);
@@ -4778,7 +4790,7 @@ function openSwap(g,baseId){
     <h2>Cambia esercizio</h2><p class="note" style="margin:0">Macchina occupata? Scegli una variante che lavora gli stessi muscoli. Serie e recupero restano quelli della scheda. Ogni variante ha carichi e progressi suoi.</p>
     <div class="seg" id="swScope" style="grid-template-columns:1fr 1fr"><button data-v="today" aria-pressed="${swapScope==="today"}">Solo oggi</button><button data-v="always" aria-pressed="${swapScope==="always"}">Sempre</button></div>
     <div class="opts">${opts.map(o=>`<button class="opt" data-k="${esc(o.k)}" aria-pressed="${(cur||"")===o.k}"><b>${esc(o.n)}</b>${o.sub?`<span>${esc(o.sub)}</span>`:""}</button>`).join("")}</div>
-    <div class="q"><span class="lab">Altro esercizio</span><div class="inl"><input id="swNew" placeholder="Es. Panca piana con bilanciere" maxlength="60"><button class="btn hot" id="swAdd" style="padding:12px 14px">Usa</button></div></div>
+    <div class="q"><span class="lab">Altro esercizio</span><div class="inl"><input id="swNew" aria-label="Altro esercizio" placeholder="Es. Hip thrust con bilanciere" maxlength="60"><button class="btn hot" id="swAdd" style="padding:12px 14px">Usa</button></div></div>
     <button class="btn ghost" id="swClose">Chiudi</button></div>`;
   const back=document.activeElement;document.body.appendChild(wrap);
   const close=()=>{sheetOut(wrap);try{back&&back.isConnected&&back.focus({preventScroll:true})}catch(e){}};
@@ -4851,7 +4863,7 @@ let tPlus=0;
 // Esercizi per lato: dopo il primo lato 5 s per girarsi, poi il secondo. A fine tenuta segna la serie da solo.
 let H=null;
 function blip(f,dur){if(S.sound===false||!actx)return;try{const t=actx.currentTime+.01,o=actx.createOscillator(),gn=actx.createGain();o.type="sine";o.frequency.value=f;gn.gain.setValueAtTime(.0001,t);gn.gain.exponentialRampToValueAtTime(.35,t+.02);gn.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(gn);gn.connect(actx.destination);o.start(t);o.stop(t+dur+.05)}catch(e){}}
-function holdStart(g,exId,j,mods){audioUnlock();wakeOn();
+function holdStart(g,exId,j,mods){audioUnlock();wakeOn();if(tOn)stopTimer();
   const ex=PLAN[g].ex.map(e=>effEx(g,e)).find(e=>e.id===exId)||exById(exId);
   const inp=document.querySelector(`#exs input[data-ex="${exId}"][data-j="${j}"][data-f="reps"]`);
   const tv=num(inp&&inp.value)||num(tgFor(ex,mods,g).reps[tIx(g,ex,mods,j)])||ex.lo,target=ex.cardio?Math.max(1,tv)*60:Math.max(5,tv);
@@ -4883,7 +4895,9 @@ function holdFinish(){if(!H)return;const h=H;clearInterval(h.int);H=null;if(S.ho
   const inp=document.querySelector(`#exs input[data-ex="${h.exId}"][data-j="${h.j}"][data-f="reps"]`);if(inp)inp.value=String(sec);
   if(!c.done)toggleSet(h.g,h.exId,h.j,h.mods)}
 function holdStop(){if(!H)return;if(H.phase==="hold"){const s=Math.floor((Date.now()-H.t0)/1000);H.held[H.side]=s}holdFinish()}
-function holdCancel(){if(!H)return;H.held=[];holdFinish()}
+// Annulla dopo 30 s di tenuta o camminata: chiede un secondo tocco, così un tocco sbagliato non butta via 18 minuti di tapis
+function holdCancel(){if(!H)return;const x=T("hoX");if(H.phase==="hold"&&Date.now()-H.t0>3e4&&x.dataset.arm!=="1"){x.dataset.arm="1";x.textContent="Tocca di nuovo: annulla";clearTimeout(x._t);x._t=setTimeout(()=>{x.dataset.arm="";x.textContent="Annulla"},3000);return}
+  x.dataset.arm="";x.textContent="Annulla";H.held=[];holdFinish()}
 T("hoStop").onclick=holdStop;T("hoX").onclick=holdCancel;
 document.addEventListener("keydown",e=>{if(H&&e.key==="Escape"){e.preventDefault();holdCancel()}});
 document.addEventListener("visibilitychange",()=>{if(H&&document.visibilityState==="visible")holdLoop()});
@@ -5783,7 +5797,7 @@ function renderEditor(){
   const lib=Object.keys(BUILTIN).map(k=>`<optgroup label="${esc(BUILTIN[k].name)}">${BUILTIN[k].ex.map(e=>`<option value="${e.id}">${esc(e.n)}</option>${altsOf(e).filter(a=>!a.custom).map(a=>`<option value="${e.id}~${a.k}">  ↳ ${esc(a.n)}</option>`).join("")}`).join("")}</optgroup>`).join("");
   app.innerHTML=`<header class="head"><h1>${esc(E.name||"Piano senza nome")}</h1><p class="note" style="margin:2px 0 0">${E.key?"Modifica del piano":"Piano nuovo"}</p></header>
   <section class="card ed">
-    <label>Nome del piano<input id="pName" value="${esc(E.name)}" maxlength="30" placeholder="Es. Upper D, Full body, Hotel"></label>
+    <label>Nome del piano<input id="pName" value="${esc(E.name)}" maxlength="30" placeholder="Es. Giorno 3, Total body, Hotel"></label>
     <label>Descrizione breve<input id="pSub" value="${esc(E.sub||"")}" maxlength="60" placeholder="Es. Petto e braccia, 45 minuti"></label>
     <div class="checks"><label><input type="checkbox" id="pLegs" ${E.legs?"checked":""}> Giorno gambe pesante</label></div>
   </section>
@@ -5866,19 +5880,19 @@ function clearDemo(){S.sessions=S.sessions.filter(x=>!x.demo);S.body=S.body.filt
 function loadDemo(){
   const now=today(),out=[];
   for(let w=7;w>=1;w--){
-    for(const [g,off] of [["A",0],["G",1],["B",2],["C",4]]){
+    for(const [g,off] of [["S1",0],["S2",3]]){
       const d=addDays(now,-(w*7)+off-((now.getDay()+6)%7));if(d>=now)continue;
       const sets={};
       for(const ex of PLAN[g].ex){
-        const base={a1:50,a2:0,a3:40,a4:45,a5:7.5,a6:10,a7:15,a8:5,g3:70,g4:60,g5:14,g8:40,g9:15,b1:16,b10:15,b2:50,b3:7.5,b4:45,b5:8,b6:20,b7:10,b8:20,b9:6,c1:40,c2:20,c3:5,c4:30,c5:7.5,c6:17.5,c7:15}[ex.id];
-        const prog=(7-w);const kg=base!=null?base+Math.floor(prog/2)*(ex.step||2.5):null;
+        const base={s1:60,s2:25,s3:20,s4:20,s5:40,s6:4,s7:5,t1:20,t2:25,t3:25,t4:25,t5:15,t6:20,t7:15,t8:4,t9:15}[ex.id];
+        const prog=(7-w);const kg=base!=null?base+Math.floor(prog/3)*(ex.step||2.5):null;
         const reps=Math.min(ex.hi,ex.lo+(prog%2)+(prog%3===0?1:0));
-        sets[ex.id]=[...Array(ex.s)].map(()=>({kg:kg!=null&&!["perf","nordic","time"].includes(ex.t)?String(kg):"",reps:String(ex.cardio?ex.lo:ex.t==="time"?Math.min(30,20+prog*2):reps)}));
+        sets[ex.id]=[...Array(ex.s)].map(()=>({kg:kg!=null&&!ex.mat&&!["perf","nordic","time"].includes(ex.t)?String(kg):"",reps:String(ex.cardio?ex.lo:ex.t==="time"?Math.min(30,20+prog*2):reps)}));
       }
       out.push({id:"demo"+w+g,day:g,date:d.toISOString(),sets,demo:true});
     }
   }
-  S.sessions=out;if(!S.body.some(x=>num(x.kg)>0))S.body.push({d:iso(today()),kg:70,demo:true});save();
+  S.sessions=out;if(!S.body.some(x=>num(x.kg)>0))S.body.push({d:iso(today()),kg:72,demo:true});save();
 }
 
 /* ================= BOOT ================= */
@@ -5890,6 +5904,10 @@ if(S.timer&&S.timer.end>Date.now()-6e5){const x=S.timer;startTimer(x.tot,x.lbl,x
 // Luce che segue il telefono tolta su richiesta (2026-10-06)
 // Su iPhone gli stati premuti (:active) si vedono solo se la pagina ascolta i tocchi
 document.addEventListener("touchstart",()=>{},{passive:true});
+// Foglio o cronometro a schermo intero aperto: la pagina dietro diventa inerte (Tab e lettori di schermo restano nel foglio)
+(()=>{const sync=()=>{const ws=[...document.querySelectorAll("body>.sheet-wrap")],ho=T("holdOv"),top=ws.length?ws[ws.length-1]:!ho.hidden?ho:null;
+  for(const el of [app,document.querySelector("nav.bar"),T("timer"),ho,...ws])if(el)el.inert=!!top&&el!==top};
+  const mo=new MutationObserver(sync);mo.observe(document.body,{childList:true});mo.observe(T("holdOv"),{attributes:true,attributeFilter:["hidden"]})})();
 if("serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js").catch(()=>{})}
 </script>
 <div class="ec-shoot" id="ecShoot" aria-hidden="true"></div>
