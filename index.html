@@ -45,7 +45,7 @@ html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:max(17px,1rem);line-height:1.45;overscroll-behavior-y:none}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer;touch-action:manipulation}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
 .app{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:calc(env(safe-area-inset-top,0px) + 14px) calc(var(--navh) + env(safe-area-inset-bottom,0px) + 96px);display:flex;flex-direction:column;gap:14px}
 .kicker{font:700 max(12px,0.7059rem)/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--hot)}
 h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.02em;margin:0;text-wrap:balance}
@@ -347,6 +347,7 @@ html[data-skin="vetro"]{--dim:#8f8bb8}
 .exhead .swap{min-height:40px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#tgo:focus-visible{width:auto;height:auto;clip:auto;left:8px;top:-36px;padding:6px 10px;border-radius:8px;background:var(--card);color:var(--fg)}
 .tick[aria-pressed="true"],html[data-skin] button.tick[aria-pressed="true"]{background:var(--go)!important;color:#062b1b!important;box-shadow:0 4px 14px color-mix(in srgb,var(--go) 35%,transparent)!important}
 /* oggi */
 .hero{gap:10px;padding:18px}
@@ -1699,6 +1700,18 @@ body.ho-on{overflow:hidden}
 :root:not(#z):not(#y):not(#x):not(#w):not(#v):not(#u):not(#t):not(#s):not(#r):not(#q):not(#p):not(#o) .ho-btns #hoStop{border-radius:999px}
 html[data-skin="eclisse"] .hold-ov.mm .ho-t{font-size:clamp(56px,16vw,92px)}
 .ho-ring svg{overflow:visible}
+/* Murano: Bodoni solo per titoli e numeri grandi; i numeri piccoli (recupero, numero serie) col sans, così 1 non sembra l */
+html[data-skin="vetro"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) :is(.timer .t,.rest .tv,.set .i,.dayr .d){font-family:var(--ui);font-weight:800;font-variant-numeric:tabular-nums lining-nums}
+html[data-skin="fiaba"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .c-rest{color:#4f5585}
+html[data-skin="fiaba"][data-var="2"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .tabs button[aria-pressed="true"]{background:#0a6a4c}
+/* Frecce del paginatore: un cerchio pieno, si capisce che si toccano */
+:root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button{position:relative;z-index:1;color:var(--fg)}
+:root:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--card-2,rgba(127,127,127,.15));box-shadow:inset 0 0 0 1px var(--line);z-index:-1}
+html[data-skin="fiaba"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button::before{background:var(--m-card,#fffaf0);box-shadow:inset 0 0 0 1.5px rgba(var(--gold-rgb),.7)}
+html[data-skin="fiaba"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pgr button{color:var(--m-ink)}
+/* Murano: traccia della barra di avanzamento visibile */
+html[data-skin="vetro"]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pbar{background:rgba(16,33,63,.14);box-shadow:inset 0 0 0 1px rgba(16,33,63,.12)}
+html[data-skin="vetro"][data-sera]:not(#n0):not(#n1):not(#n2):not(#n3):not(#n4):not(#n5):not(#n6):not(#n7):not(#n8):not(#n9):not(#n10):not(#n11):not(#n12):not(#n13) .pbar{background:rgba(214,226,255,.16);box-shadow:inset 0 0 0 1px rgba(214,226,255,.14)}
 /* Recupero flottante aperto: la pagina ha spazio sotto, così le ultime serie non restano coperte da recupero e barra */
 html:has(#timer:not([hidden])){scroll-padding-bottom:190px}
 html:has(#timer:not([hidden])) #app::after{content:"";display:block;height:110px}
@@ -2653,7 +2666,7 @@ html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):no
 <div class="sbar" aria-hidden="true"></div>
 <main class="app" id="app"></main>
 
-<div class="timer" id="timer" hidden role="timer" tabindex="0" aria-label="Recupero: tocca per tornare all'esercizio">
+<div class="timer" id="timer" hidden role="region" aria-label="Recupero"><button class="sr" id="tgo">Torna all'esercizio</button>
   <span class="tr"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="rk" cx="32" cy="32" r="28"/><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg><i class="rg" aria-hidden="true"><i class="rh r1" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh r2" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh rd" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i></i><span class="t" id="tval">0:00</span></span>
   <span class="l" id="tlbl" aria-live="polite">Recupero</span>
   <span class="tb"><button id="tstop">Chiudi</button><button id="tplus">+15 s</button></span>
@@ -3201,7 +3214,7 @@ function target0(ex,noMyo){
     // Multiarticolari a ripetizioni fisse (bulgarian con manubri): il massimale stimato non conta il peso del corpo, si sale e si riparte dal minimo
     // Di base (aumenta il peso) con un gradino oltre il 10% (es. shoulder press 15 → 20 kg): si sale, ma si punta alle ripetizioni che il carico nuovo permette
     if(!big&&nk>kg&&kg>0&&ex.t!=="bw"&&(nk-kg)/kg>0.1+1e-9){const rr=Math.min(ex.lo,Math.max(floorR,repsAt(nk)));
-      if(rr<ex.lo)return {kg:nk,reps:Array(ex.s).fill(rr),top,kind:"up",badge:`+${fk(nk-kg)} kg`,msg:`Arrivata a ${Math.min(...hReps)} ripetizioni: passa a ${fk(nk)} kg. Il salto è del ${Math.round((nk-kg)/kg*100)}%, quindi punta a ${rr} ripetizioni e risali una alla volta fino a ${ex.lo}. Se è troppo, tocca «Preferisco salire con le ripetizioni».`}}
+      if(rr<ex.lo)return {kg:nk,reps:Array(ex.s).fill(rr),top,kind:"up",badge:`+${fk(nk-kg)} kg`,msg:`Arrivata a ${Math.min(...hReps)} ripetizioni: passa a ${fk(nk)} kg. Il salto è del ${Math.round((nk-kg)/kg*100)}%, quindi punta a ${rr} ripetizioni e risali una alla volta fino a ${ex.lo}. Se è troppo, tocca «Preferisco fare più di ${ex.hi} ripetizioni prima di aumentare».`}}
     if(big&&!bigC&&nk>kg){const raw=repsAt(nk),rr=Math.min(ex.lo,raw);
       if(raw<floorR){const lo0=Math.min(...hReps),hr=Math.min(top+5,lo0+1),pc=Math.round((nk-kg)/kg*100),
         // Sopra le 12 ripetizioni la stima è imprecisa: niente numero
@@ -4113,17 +4126,18 @@ function renderToday(){
   else{const w=deloadAdvice();if(w)dl=`<div class="banner">${I("bolt")}<div><b>Scarico consigliato</b><span>${esc(cap(w.join(" e ")))}.</span></div><button id="startDl">Avvia scarico</button><button id="snoozeDl" class="sec">Non ora</button></div>`}
   if(newVer)dl+=`<div class="banner">${I("info")}<div><b>Nuova versione pronta</b><span>Tocca Aggiorna per usarla subito. I tuoi dati restano.</span></div><button id="newVer">Aggiorna</button></div>`;
   if(installDue())dl+=`<div class="banner bk">${I("info")}<div><b>Installa l'app sul telefono</b><span>${/CriOS|FxiOS|EdgiOS|Instagram|FBAN|FBAV|WhatsApp/.test(navigator.userAgent)?"Apri questa pagina in Safari, poi tocca Condividi e «Aggiungi alla schermata Home».":"In Safari tocca Condividi e poi «Aggiungi alla schermata Home»."} Così si apre a schermo intero e i dati non rischiano di cancellarsi.</span></div><button id="instLater" class="sec">Non ora</button></div>`;
-  const bk=backupDue();if(bk)dl+=`<div class="banner bk">${I("info")}<div><b>Salva un backup</b><span>${bk.never?`${bk.n} sedute salvate solo su questo telefono, mai copiate.`:`Ultimo backup ${bk.days} giorni fa.`} Se cancelli l'app o cambi telefono le perdi.</span></div><button id="bkNow">Salva</button><button id="bkLater" class="sec">Non ora</button></div>`;
+  // Un promemoria alla volta (installa, backup, peso): Oggi resta leggibile
+  const bk=installDue()?null:backupDue();if(bk)dl+=`<div class="banner bk">${I("info")}<div><b>Salva un backup</b><span>${bk.never?`${bk.n} sedute salvate solo su questo telefono, mai copiate.`:`Ultimo backup ${bk.days} giorni fa.`} Se cancelli l'app o cambi telefono le perdi.</span></div><button id="bkNow">Salva</button><button id="bkLater" class="sec">Non ora</button></div>`;
   app.innerHTML=`
   <header class="head"><span class="today-d">${esc(cap(WD_LONG[d.getDay()]))} ${d.getDate()} ${d.toLocaleDateString("it-IT",{month:"long"})}${phaseStart()?` · ${PH[phaseAt()].n} settimana ${Math.floor(dayDiff(phaseStart(),k)/7)+1}`:""}</span></header>
   ${oldBoxes(null,a.gym)}<p class="msg" id="omsg" aria-live="polite">${bootMsg?esc(bootMsg):""}</p>
-  ${doneS?`<section class="card hero done" aria-live="polite">
+  ${doneS?`<section class="card hero done">
     <div class="big">${esc(doneS.planName||big)}</div>
     <span class="pill go"><span class="dot"></span>Seduta fatta alle ${doneAt}</span>
     <div class="meta"><span><b>${doneSt.n}</b> serie</span>${doneS.dur?`<span><b>${doneS.dur}</b> min</span>`:""}<span><b>${Math.round(doneSt.vol).toLocaleString("it-IT")}</b> kg sollevati</span></div>
     <button class="btn" id="seeSum">Vedi il riepilogo</button>
     <button class="link" id="freeGo">${PLAN.LIB&&S.draft.LIB?"Continua la seduta libera":"Seduta libera fuori dal piano"}</button>
-  </section>`:`<section class="card hero" aria-live="polite">
+  </section>`:`<section class="card hero">
     <div class="big">${esc(big)}</div>
     ${hasGym?`<div class="meta"><span><b>${nEx}</b> esercizi</span><span>circa <b>${estMin(a.gym,mods)}</b> min</span></div><span class="pill ${a.level}"><span class="dot"></span>${esc(a.title)}</span>`:""}
     <div class="hn">${a.notes.map(n=>`<p>${esc(n)}</p>`).join("")}</div>
@@ -4138,7 +4152,7 @@ function renderToday(){
     <button id="cEn" aria-haspopup="dialog" aria-label="Energia di oggi: ${EN_LBL[a.energy]}. Cambia"><small>Energia</small><b>${EN_LBL[a.energy]}</b><span class="cen-c">Cambia ${I("chev")}</span></button>
   </div>
   ${dl}
-  ${bodyBanner()}
+  ${/class="banner bk"/.test(dl)?"":bodyBanner()}
   <section class="card wk" aria-label="Prossimi 7 giorni">${week}</section>`;
   // I tasti leggono la data al momento della scelta (un foglio aperto prima di mezzanotte non scrive su ieri)
   shownDay=k;
@@ -4487,7 +4501,9 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
   const pgH0=pgDiff?`<button class="lnk pgo" data-pgo="${ex.id}">${pgSel?"Rimetti la ripresa dopo la pausa":"Progredisci comunque"}</button>`:"";
   // Range esteso o myo-rep perché il gradino è grosso: tasto per scegliere di salire di peso; con la scelta attiva, tasto per tornare indietro
   const xOn=!mods.has("deload")&&hasKg&&!!last&&!["time","nordic","perf","bw"].includes(ex.t)&&!powEx(ex)&&!(eqMax(ex)&&(tg.kg||0)>=eqMax(ex))&&(tg.kg||0)>0&&(["iso","prev"].includes(ex.t)||myoEx(ex)||ex.lo===ex.hi||ex.t==="comp"&&stepOf(ex)/tg.kg>0.15)&&stepOf(ex)/tg.kg>0.1;
-  const pgH=pgH0+(xOn?`<button class="lnk pgo" data-noext="${ex.id}">${noExtOf(ex)?"Preferisco salire con le ripetizioni":"Torna ad aumentare il peso"}</button>`:"");
+  // Il tasto c'è solo se l'altra scelta cambia davvero la proposta di oggi (o se è già stata scelta)
+  let xDiff=!noExtOf(ex);if(xOn&&!xDiff){S.noExt=S.noExt||{};const had=ex.id in S.noExt,old=S.noExt[ex.id];S.noExt[ex.id]=0;try{const t2=tgFor(ex,mods,g);xDiff=t2.kg!==tg.kg||(t2.reps||[]).join()!==(tg.reps||[]).join()||!!t2.myo!==!!tg.myo}catch(e){}finally{if(had)S.noExt[ex.id]=old;else delete S.noExt[ex.id]}}
+  const pgH=pgH0+(xOn&&xDiff?`<button class="lnk pgo" data-noext="${ex.id}">${noExtOf(ex)?`Preferisco fare più di ${ex.hi} ripetizioni prima di aumentare`:`Torna ad aumentare il peso arrivata a ${ex.hi}`}</button>`:"");
   const over=tOn&&tEnd<=Date.now();
   const rest=withRest&&tOn?`<div class="rest ${over?"over":""}" id="restIn" role="timer"><span class="rr"><svg viewBox="0 0 64 64" aria-hidden="true"><circle class="rk" cx="32" cy="32" r="28"/><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg><i class="rg" aria-hidden="true"><i class="rh r1" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh r2" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i><i class="rh rd" aria-hidden="true"><b><svg viewBox="0 0 64 64"><circle class="ra rc" cx="32" cy="32" r="28" pathLength="100"/></svg></b></i></i><b class="tv"></b></span><span class="tl" aria-live="assertive">${over?"Recupero finito":"Recupero"+(tPlus?"\u00a0· +"+tPlus+"\u00a0s":"")}</span><span class="tb"><button data-ts>Chiudi</button><button data-tp>+15 s</button></span></div>`:"";
   // Scheda che si colora: a ogni serie un velo su tutta la scheda si intensifica piano; a esercizio finito passa l'oro in diagonale
@@ -5067,7 +5083,7 @@ T("tplus").onclick=()=>{if(!tFresh())addRest()};T("tstop").onclick=()=>{if(!tFre
 function timerGo(){goldFlush();const c=tCtx;if(c&&PLAN[c.g]){gymSel=c.g;const d=S.draft[c.g],ex=exById(c.ex),n=ex?setsShown(c.g,ex,trainMods(c.g)):0,dn=((d&&d.ex[c.ex])||[]).filter(x=>x&&x.done).length;openEx[c.g]=ex&&dn<n?c.ex:null}
   if(view!=="train")go("train");else renderTrain();requestAnimationFrame(()=>keepFocus(false,openEx[c&&c.g]||undefined))}
 T("timer").onclick=e=>{if(e.target.closest("button"))return;timerGo()};
-T("timer").onkeydown=e=>{if((e.key==="Enter"||e.key===" ")&&e.target===T("timer")){e.preventDefault();timerGo()}};
+T("tgo").onclick=e=>{e.stopPropagation();timerGo()};
 
 /* ================= PROGRESS ================= */
 let progEx=null,histN=8;
@@ -5743,7 +5759,7 @@ function renderSettings(){
   <section class="card"><h3>Regole che l'app applica</h3>
    <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px">
     <li><b>Come si sale.</b> Ogni volta prova a fare una ripetizione in più per serie. Quando chiudi tutte le serie al massimo del range (es. 15 su 12-15), l'app aumenta il peso di un gradino e riparti dal minimo. Gradino: +5 kg alle macchine e ai cavi col pacco pesi, +2,5 kg cavo singolo e Smith, +1 kg manubri. Se il range è fisso (es. 2×12), quando le chiudi tutte sali di peso. Se il gradino è un salto grosso (oltre il 10% del tuo peso), al peso nuovo punti a meno ripetizioni e risali una alla volta.</li>
-    <li><b>«Preferisco salire con le ripetizioni».</b> Compare dove il gradino è grosso rispetto al tuo carico (es. manubrio da 3 a 4 kg, +33%). Se lo tocchi, su quell'esercizio prima di salire di peso fai fino a 5 ripetizioni oltre il range (2 sugli esercizi a ripetizioni fisse come chest press e hip thrust); alle macchine l'ultima serie può diventare myo-rep (mini-serie da 5 con 15 s di pausa). «Torna ad aumentare il peso» rimette la regola normale.</li>
+    <li><b>«Preferisco fare più ripetizioni prima di aumentare».</b> Compare quando il gradino è grosso rispetto al tuo carico (es. manubrio da 3 a 4 kg, +33%) e la scelta cambia davvero la proposta. Se lo tocchi, su quell'esercizio prima di salire di peso fai fino a 5 ripetizioni oltre il range (2 sugli esercizi a ripetizioni fisse come chest press e hip thrust); alle macchine l'ultima serie può diventare myo-rep (mini-serie da 5 con 15 s di pausa). «Torna ad aumentare il peso» rimette la regola normale.</li>
     <li><b>Com'era l'ultima serie.</b> Facile: la volta dopo due ripetizioni in più invece di una. Al limite: il peso non sale finché non chiudi con le ripetizioni in canna previste.</li>
     <li><b>Se resti sotto.</b> Una serie sotto il minimo: la volta dopo quella serie punta al minimo, o a una ripetizione in più se il peso è appena salito di un salto grosso. Due sedute di fila allo stesso peso con 2 o più ripetizioni sotto il minimo: −10% e si riparte (se il −10% sarebbe un salto troppo grosso, resti al peso e aggiungi una ripetizione alla volta). Nelle prime 3 sedute dopo un aumento stare 1-2 ripetizioni sotto è normale e non conta.</li>
     <li><b>Dopo una pausa.</b> Saltare una seduta non conta. Da 21 giorni senza un esercizio ripeti l'ultima seduta; da 35 giorni 10% in meno. «Progredisci comunque» ignora la pausa se ti senti bene.</li>
