@@ -2,13 +2,14 @@
 const CACHE="allenati-sharon-v2";
 const CORE=["index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png",
   "fonts/fraunces.woff2","fonts/fraunces-italic.woff2","fonts/nunito.woff2","fonts/bodoni-moda.woff2","fonts/big-shoulders.woff2","fonts/manrope.woff2","fonts/syne.woff2"];
-self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
+self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:"reload"})))).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 
 // Scarica la pagina e, se è cambiata, la salva e avvisa l'app (che propone "Aggiorna")
 async function refreshPage(req){
-  const r=await fetch(req,{cache:"no-store"});
-  if(!r.ok)return null;
+  // no-cache: chiede al server se è cambiata (ETag); se no arriva un 304 e il corpo viene dalla cache del browser
+  const r=await fetch(req,{cache:"no-cache"});
+  if(!r.ok)return r;
   const c=await caches.open(CACHE);
   const old=await c.match("index.html");
   const body=await r.clone().text();
