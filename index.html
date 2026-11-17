@@ -178,6 +178,12 @@ nav.bar button[aria-current="page"]{color:var(--hot)}
 }
 @media (prefers-reduced-motion:reduce){.cele{animation:fade 1.4s steps(1) forwards}}
 
+#glit{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:60;contain:strict}
+#glit i{position:absolute;top:-18px;display:block;will-change:transform,opacity;background:var(--c)}
+#glit .gs{clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
+#glit .gd{border-radius:50%;box-shadow:0 0 4px var(--c)}
+html[data-skin="fiaba"] #glit .gs,html[data-skin="vetro"]:not([data-sera]) #glit .gs{background:linear-gradient(135deg,#fff8dc,var(--c) 45%,var(--c))}
+@media (prefers-reduced-motion:reduce){#glit{display:none}}
 /* pippa: serie sotto l'obiettivo */
 .cele.fail::before{background:radial-gradient(circle at 50% 45%,rgba(10,18,30,.9),rgba(10,22,40,.7) 75%)}
 .cele.fail .txt{color:#8ecbff;font-size:clamp(96px,30vw,150px);text-shadow:0 0 30px rgba(110,180,255,.35),0 6px 40px rgba(0,0,0,.6)}
@@ -3846,11 +3852,27 @@ function isRecord(g,ex,exId,j,r){if(noEff(ex)||powEx(ex)||fixRep(ex)||!history(e
 // Carico più alto mai usato su un esercizio (famiglia, convertito all'attrezzo dei cavi di oggi)
 function maxKgEver(exId){const ex=exById(exId);let m=0;for(const s of S.sessions){if(!s.sets)continue;for(const fid of famIds(exId)){const cv=isCable(ex)?stnConv(stnOfSet(s,fid),stationOf(ex)):1;for(const x of (s.sets[fid]||[]))m=Math.max(m,(num(x.kg)||0)*cv)}}return m}
 function tickFx(g,exId,j,rec,wow){
+  glitter(g,wow);
   const b=document.querySelector(`#exs .tick[data-ex="${exId}"][data-j="${j}"]`)||document.querySelector(`#exs .xrow[data-open="${exId}"] .ck`);
   if(b&&!RM())popEl(b,"pop");
   if(rec)prStamp(exId,j);
   if(brkNow.has(exId)){brkNow.delete(exId);const el=document.querySelector(`#exs article.ex[data-ex="${exId}"] .prog.fermo`);if(el)breakFermo(el)}
 }
+// Brillantini a ogni serie spuntata: cadono dall'alto, sempre di più man mano che la seduta avanza. Solo transform/opacity (fluido sui telefoni), niente con Riduci movimento
+const GLIT={fiaba:[["#e3a92b","#f5c84c","#c9861a","#f39ab8","#7fa8f0"],["#e3a92b","#f5c84c","#e8779f","#f4a6c0","#c98bd9"],["#e3a92b","#f5c84c","#3fae7f","#7fd3a8","#c9861a"]],
+  vetro:[["#ffffff","#ffd6ec","#bdf3ff","#e2d2ff","#ffe7a8"]],vetroG:[["#7a5cff","#ff5fa8","#22b0dc","#e8a321","#9b6bff"]],eclisse:[["#ffd27a","#fff3d1","#ffb347","#ffffff","#f6c25c"]]};
+function glitter(g,wow){if(RM()||document.hidden)return;
+  const h=document.documentElement,sk=h.dataset.skin||"fiaba",day=sk==="vetro"&&!("sera" in h.dataset),pal=(GLIT[day?"vetroG":sk]||GLIT.fiaba),cols=pal[+h.dataset.var||0]||pal[0];
+  let done=0;try{for(const a of Object.values(draftFor(g).ex))for(const x of a)if(x&&x.done)done++}catch(e){}
+  let box=document.getElementById("glit");if(!box){box=document.createElement("div");box.id="glit";box.setAttribute("aria-hidden","true");document.body.appendChild(box)}
+  const live=box.childElementCount,n=Math.max(0,Math.min(wow?44:34,12+done*2,70-live));if(!n)return;
+  const W=innerWidth,H=innerHeight,fr=document.createDocumentFragment(),light=sk==="fiaba"||day;
+  for(let i=0;i<n;i++){const e=document.createElement("i"),c=cols[i%cols.length],star=i%3!==2,sz=star?7+Math.random()*9:3+Math.random()*4;
+    e.className=star?"gs":"gd";e.style.cssText=`left:${(Math.random()*W).toFixed(0)}px;width:${sz.toFixed(1)}px;height:${sz.toFixed(1)}px;--c:${c}`;fr.appendChild(e);
+    const x=(Math.random()-.5)*80,end=H*(.55+Math.random()*.5),r0=Math.random()*180,rz=r0+(Math.random()<.5?-1:1)*(120+Math.random()*240),d=1500+Math.random()*1300,dl=Math.random()*(wow?650:450);
+    e.animate([{transform:`translate3d(0,0,0) rotate(${r0}deg) scale(.6)`,opacity:0},{opacity:1,offset:.08},{transform:`translate3d(${(x*.6).toFixed(0)}px,${(end*.45).toFixed(0)}px,0) rotate(${(r0+rz)/2}deg) scale(1)`,opacity:light?1:.95,offset:.45},{opacity:.35,offset:.62},{opacity:.9,offset:.75},{transform:`translate3d(${x.toFixed(0)}px,${end.toFixed(0)}px,0) rotate(${rz}deg) scale(.7)`,opacity:0}],
+      {duration:d,delay:dl,easing:"cubic-bezier(.33,.1,.6,1)",fill:"both"}).finished.then(()=>e.remove(),()=>e.remove())}
+  box.appendChild(fr)}
 // "Fermo" sbloccato: l'etichetta si crepa a zig-zag e le due metà cadono, poi lo spazio si richiude
 const brkNow=new Set();
 function breakFermo(el){const shut=()=>{if(!el.isConnected)return;const h=el.offsetHeight,cs=getComputedStyle(el);

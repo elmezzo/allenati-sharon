@@ -1,5 +1,5 @@
 // Alza la versione a ogni rilascio: le icone, il manifest e i caratteri vengono riscaricati
-const CACHE="allenati-sharon-v2";
+const CACHE="allenati-sharon-v3";
 const CORE=["index.html","manifest.webmanifest","icons/icon-192.png","icons/icon-512.png","icons/apple-touch-icon.png","icons/icon-maskable-512.png",
   "fonts/fraunces.woff2","fonts/fraunces-italic.woff2","fonts/nunito.woff2","fonts/bodoni-moda.woff2","fonts/big-shoulders.woff2","fonts/manrope.woff2","fonts/syne.woff2"];
 // Se cambia anche questo file la pagina nuova arriva qui: dopo l'attivazione si avvisano le pagine aperte (banner "Aggiorna")
