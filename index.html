@@ -2796,8 +2796,9 @@ const cardioTail=L=>{let i=L.length;while(i>0&&L[i-1].cardio)i--;return i};
 function withAdd(g,base){const d=S.draft&&S.draft[g],A=d&&Array.isArray(d.add)?d.add:null;if(!A||!A.length)return base;
   const key=famRev+"|"+base.length+"|"+JSON.stringify(A),m=addMemo[g];if(m&&m.k===key)return m.v;
   const nk=n=>String(n||"").toLowerCase().replace(/\s+/g," ").trim(),have=new Set(base.map(e=>nk(e.n))),xs=[];
-  for(const it of A){const src=EX[it.id]&&!EX[it.id].tmp?EX[it.id]:it;if(!src||!src.n||have.has(nk(src.n)))continue;have.add(nk(src.n));const e={...src,id:it.id,ss:"",tmp:1};delete e.gone;xs.push(e);if(!EX[it.id])EX[it.id]={...e,day:g}}
-  const i=cardioTail(base),v=[...base.slice(0,i),...xs,...base.slice(i)];addMemo[g]={k:key,v};return v}
+  for(const it of A){const src=EX[it.id]&&!EX[it.id].tmp?EX[it.id]:it;if(!src||!src.n||have.has(nk(src.n)))continue;have.add(nk(src.n));const e={...src,id:it.id,ss:"",tmp:1};delete e.gone;delete e.before;xs.push([e,it.before]);if(!EX[it.id])EX[it.id]={...e,day:g}}
+  // "Adesso" = prima dell'esercizio che stava facendo (before); altrimenti prima del cardio finale
+  const v=[...base];for(const [e,bf] of xs){let i=bf?v.findIndex(x=>x.id===bf):-1;if(i<0)i=cardioTail(v);v.splice(i,0,e)}addMemo[g]={k:key,v};return v}
 function freeSheet(){const sel=[];
   // Un esercizio per nome (lo storico è in comune per nome); prima quelli della scheda, poi le varianti, così il muscolo è quello giusto
   const seen=new Set(),L=[...ALL_EX.filter(e=>!e.custom&&!String(e.id).includes("~")),...ALL_EX.filter(e=>!e.custom&&String(e.id).includes("~"))].filter(e=>{const k=nmKey(e.n);if(seen.has(k))return false;seen.add(k);return true});
@@ -4863,35 +4864,39 @@ function finish(g,mods,oldKey,miss){
 /* ================= AGGIUNGI ESERCIZIO ================= */
 // Durante la seduta: "Solo questa volta" lo mette nella bozza (sparisce col salvataggio), "Tienilo nella scheda" lo aggiunge al piano del giorno per sempre.
 // Stesso nome = stesso storico, quindi carichi e progressi ripartono da dove erano. Va prima del tapis roulant finale
-let addScope="once";
+let addScope="once",addPos="now";
 function addSheet(g){
   const nm=()=>new Set(PLAN[g].ex.flatMap(e=>[nmKey(e.n),nmKey(effEx(g,e).n)]));
   const grpOf=e=>e.mu?muLbl(e.mu):e.t==="prev"?"Core e prevenzione":"Altro";
   const sub=e=>`${e.s} serie · ${e.lo===e.hi?e.lo:e.lo+"-"+e.hi} ${e.t==="time"?tU(e):"rip"}${e.side?" per lato":""}`;
-  openSheet({html:()=>{const have=nm(),seen=new Set(),d=S.draft[g],mine=(d&&d.add||[]).map(it=>PLAN[g].ex.find(e=>e.id===it.id)).filter(Boolean);
+  // Esercizio a cui tocca adesso: quello aperto se non è finito, altrimenti il primo da fare (il cardio finale non conta: "in fondo" va già prima)
+  const nowEx=()=>{const mods=trainMods(g),L=trainList(g,mods).filter(x=>setsFor(x.ex,mods)>0&&!exDone(g,x.ex,mods)),o=L.find(x=>x.base.id===openEx[g]||x.ex.id===openEx[g])||L[0];return o&&!o.base.cardio?o:null};
+  openSheet({html:()=>{const have=nm(),seen=new Set(),d=S.draft[g],nw=nowEx(),pos=nw?addPos:"end",mine=(d&&d.add||[]).map(it=>PLAN[g].ex.find(e=>e.id===it.id)).filter(Boolean);
     const L=[...ALL_EX.filter(e=>!e.custom&&!String(e.id).includes("~")),...ALL_EX.filter(e=>!e.custom&&String(e.id).includes("~"))].filter(e=>{const k=nmKey(e.n);if(have.has(k)||seen.has(k))return false;seen.add(k);return true});
     const mus=[...new Set(L.map(grpOf))];
-    return `<h2>Aggiungi esercizio</h2><p class="note" style="margin:0">Va in fondo alla seduta, prima del tapis roulant. Carichi e progressi sono quelli di sempre per quell'esercizio.</p>
+    return `<h2>Aggiungi esercizio</h2><p class="note" style="margin:0">Carichi e progressi sono quelli di sempre per quell'esercizio.</p>
     <div class="seg" id="adScope" style="grid-template-columns:1fr 1fr"><button data-v="once" aria-pressed="${addScope==="once"}">Solo questa volta</button><button data-v="always" aria-pressed="${addScope==="always"}">Tienilo nella scheda</button></div>
-    <p class="note adsn" style="margin:0">${addScope==="once"?"Sparisce quando salvi la seduta. La scheda resta com'è.":`Da oggi ${esc(PLAN[g].name)} avrà questo esercizio ogni volta. Lo togli da Settimana › Impostazioni › Piani.`}</p>
+    ${nw?`<div class="seg" id="adPos" style="grid-template-columns:1fr 1fr"><button data-v="now" aria-pressed="${pos==="now"}">Adesso</button><button data-v="end" aria-pressed="${pos==="end"}">In fondo</button></div>`:""}
+    <p class="note adsn" style="margin:0">${pos==="now"?`Lo fai subito, prima di ${esc(nw.ex.n)}.`:"Va dopo gli altri, prima del tapis roulant."} ${addScope==="once"?"Sparisce quando salvi la seduta. La scheda resta com'è.":`Da oggi ${esc(PLAN[g].name)} avrà questo esercizio ogni volta. Lo togli da Settimana › Impostazioni › Piani.`}</p>
     ${mine.length?`<p class="grp">Aggiunti per questa volta</p><div class="opts">${mine.map(e=>{const dn=((d.ex[e.id]||[]).some(x=>x.done));return `<div class="opt adm"><b>${esc(e.n)}</b><span>${dn?"Serie già fatte: resta nella seduta":sub(e)}</span>${dn?"":`<button class="lnk" data-adrm="${esc(e.id)}" aria-label="Togli ${esc(e.n)}">Togli</button>`}</div>`}).join("")}</div>`:""}
     ${mus.map(m=>{const xs=L.filter(e=>grpOf(e)===m);return `<p class="grp">${esc(m)}</p><div class="opts">${xs.map(e=>`<button class="opt" data-adx="${esc(e.id)}"><b>${esc(e.n)}</b><span>${sub(e)}</span></button>`).join("")}</div>`}).join("")}
     <div class="q"><span class="lab">Altro esercizio</span><div class="inl"><input id="adNew" aria-label="Altro esercizio" placeholder="Es. Hip abduction ai cavi" maxlength="60"><button class="btn hot" id="adGo" style="padding:12px 14px">Aggiungi</button></div></div>
     <p class="msg" id="admsg" aria-live="polite"></p>`},
    bind:(w,draw,close)=>{
+    w.querySelectorAll("#adPos button").forEach(b=>b.onclick=()=>{addPos=b.dataset.v;const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
     w.querySelectorAll("#adScope button").forEach(b=>b.onclick=()=>{addScope=b.dataset.v;const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
     w.querySelectorAll("[data-adrm]").forEach(b=>b.onclick=()=>{const d=S.draft[g];if(!d||!d.add)return;const id=b.dataset.adrm;if((d.ex[id]||[]).some(x=>x.done))return;
       d.add=d.add.filter(x=>x.id!==id);if(!d.add.length)delete d.add;delete d.ex[id];if(openEx[g]===id)openEx[g]=null;save();renderTrain();const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
     const put=(src,name)=>{const n=(name||src.n).trim();if(!n)return;if(nm().has(nmKey(n))){const m=w.querySelector("#admsg");m.className="msg err";m.textContent=`${n} è già nella seduta.`;return}
-      let id;
+      let id;const nw=addPos==="now"?nowEx():null,bf=nw?nw.base.id:null;
       if(addScope==="always"){
         // come l'editor dei piani: id nuovo, la libreria di provenienza resta in lib (varianti e foto); lo storico è in comune per nome
         const P=S.plans[g]||BUILTIN[g];if(!P)return;archivePlan(g,"modificato");
         const c=src?{...src}:{...blankEx(),n,lo:10,hi:12,rir:"2"};for(const f of ["day","base","tmp","gone","custom","ss"])delete c[f];
         if(src)c.lib=src.base||src.lib||src.id;id=g+"_"+Math.random().toString(36).slice(2,7);c.id=id;c.n=n;
-        const ex=[...P.ex],i=cardioTail(ex);ex.splice(i,0,c);const B=BUILTIN[g];
+        const ex=[...P.ex];let i=bf?ex.findIndex(x=>x.id===bf):-1;if(i<0)i=cardioTail(ex);ex.splice(i,0,c);const B=BUILTIN[g];
         S.plans[g]={name:P.name,title:P.title||P.name,sub:P.sub||"",...(P.wu?{wu:P.wu}:{}),legs:!!P.legs,custom:!B,ex};rebuild()}
-      else{const d=draftFor(g);id=src?src.id:"x"+Date.now().toString(36);d.add=[...(d.add||[]),src?{id}:{...blankEx(),id,n,lo:10,hi:12,rir:"2"}];if(!src){d.names=d.names||{};d.names[id]=n}}
+      else{const d=draftFor(g);id=src?src.id:"x"+Date.now().toString(36);d.add=[...(d.add||[]),{...(src?{id}:{...blankEx(),id,n,lo:10,hi:12,rir:"2"}),...(bf?{before:bf}:{})}];if(!src){d.names=d.names||{};d.names[id]=n}}
       openEx[g]=id;save();close();renderTrain();requestAnimationFrame(()=>{const c=document.querySelector(`#exs article.ex[data-ex="${id}"]`);if(c){c.scrollIntoView({block:"start",behavior:RM()?"auto":"smooth"});keepFocus(false,id)}});
       const mm=document.getElementById("msg");if(mm){mm.className="msg ok";mm.textContent=addScope==="always"?`${n} aggiunto alla scheda di ${PLAN[g].name}.`:`${n} aggiunto solo per oggi.`}};
     w.querySelectorAll("[data-adx]").forEach(b=>b.onclick=()=>{const e=EX[b.dataset.adx];if(e)put(e)});
