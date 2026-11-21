@@ -2667,6 +2667,19 @@ html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):no
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rest:not(.over) button{color:#fff;border-color:rgba(255,224,150,.7);background:rgba(255,255,255,.08)}
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .rest:not(.over) .ra{stroke:#f3cf74}
 html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):not(#f3):not(#f4):not(#f5):not(#f6):not(#f7) .xrow{border-left:3px solid rgba(var(--gold-rgb),.6)}
+
+/* Macchinari stilizzati accanto agli esercizi */
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach{flex:none;display:inline-grid;place-items:center;color:var(--fg);background:color-mix(in srgb,var(--fg) 6%,transparent);border:1px solid var(--line);border-radius:12px;box-shadow:none;padding:0;margin:0}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:none;opacity:1}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach svg .p{stroke-width:6;opacity:.42}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach svg .f{fill:currentColor;opacity:.16;stroke:none}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach svg .a{fill:var(--acc);stroke:none}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach.sm{width:38px;height:38px;border-radius:10px;padding:2px}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach.big{width:64px;height:64px;padding:3px;align-self:flex-start}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .mach.sh{width:112px;height:112px;padding:6px;border-radius:18px;margin:2px 0 12px}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead:has(>.mach){flex-wrap:nowrap;align-items:flex-start;gap:12px}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead>.mach+h3{flex:1 1 auto;min-width:0;align-self:center}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead:has(>.mach)>.swap{margin-left:0}
 </style>
 <!--APP-HEAD-END-->
 </head>
@@ -2765,6 +2778,35 @@ const ALTS={
 };
 const EQS=[["mac","Macchina o cavo",5],["cavl","Cavo singolo (alzate, extrarotazioni)",2.5],["bar","Bilanciere o Smith",2.5],["db","Manubri",1],["zav","Zavorra (dischi o kettlebell)",2],["altro","Altro",null]];
 const eqOf=e=>e.eq||(e.t==="bw"?"zav":e.step===5?"mac":e.step===2.5?"bar":e.step===2?"db":"altro");
+/* ================= MACCHINARI STILIZZATI ================= */
+// Disegni originali, 64×64, solo linee: tratto = colore del testo, imbottiture velate, pesi nel colore d'accento dello stile attivo
+const MSTK=x=>`<path d="M${x} 58V8M${x+12} 58V8M${x-2} 8h16"/><rect class="a" x="${x+2}" y="33" width="8" height="5.5" rx="1"/><rect class="a" x="${x+2}" y="40.5" width="8" height="5.5" rx="1"/><rect class="a" x="${x+2}" y="48" width="8" height="5.5" rx="1"/>`;
+const MFL='<path d="M4 58h56"/>';
+const MACH={
+ tapis:`${MFL}<path class="f" d="M6 51 44 44.5l1.6 4.5L8 55.5z"/><path d="M6 51 44 44.5l1.6 4.5L8 55.5z"/><path d="M8 55.5V58M43 49v9M45 45l5-27"/><path class="a" d="M45.5 13 59 11v8l-11.5 3z"/><path d="M50 26 34 28.5"/>`,
+ legpress:`${MFL}<path d="M8 58v-4h48v4M14 54 48 18M48 18l5 36"/><path class="p" d="M7 30l8 15h10"/><path d="M18 45v9M30 34l6 6"/><path d="m27 25 13 13" stroke="var(--acc)" stroke-width="5"/><circle cx="44" cy="25" r="5"/><circle class="a" cx="44" cy="25" r="2"/>`,
+ lat:`${MFL}<path d="M38 58V8M38 8H18"/><circle cx="18" cy="11" r="2.4"/><path d="M18 13.5V22M7 25q0-3 3-3h16q3 0 3 3"/><path class="p" d="M12 44h14M12 36h12"/><path d="M19 44v14M24 36l4 8"/>${MSTK(44)}`,
+ chest:`${MFL}<path class="p" d="M37 18v22M24 44h14"/><path d="M31 44v14M44 12H20v12"/><path class="p" d="M16 27h9"/>${MSTK(44)}`,
+ shoulder:`${MFL}<path class="p" d="M37 14v26M24 44h14"/><path d="M31 44v14M44 8H28v6"/><path class="p" d="M21 15h11"/>${MSTK(44)}`,
+ legext:`${MFL}<path class="p" d="M18 40h16M34 40l4-20"/><path d="M26 40v18M38 22l6-2"/><circle cx="18" cy="40" r="2.2"/><path d="M17 42l-2 10"/><circle class="a" cx="14.5" cy="54" r="3.6"/>${MSTK(46)}`,
+ legcurl:`${MFL}<path class="p" d="M10 36h30"/><path d="M14 36v22M36 36v22"/><circle cx="8" cy="36" r="2.2"/><path d="M7.5 34 9 26"/><circle class="a" cx="9.5" cy="23.5" r="3.6"/><path d="M40 33l4-3"/>${MSTK(46)}`,
+ hipm:`${MFL}<path d="M6 56h46"/><path class="p" d="M8 34h13"/><path d="M14 34v22M46 56 34 38"/><path class="p" d="M27 34h11"/><circle class="a" cx="47" cy="40" r="6"/><circle cx="34" cy="38" r="1.6"/>`,
+ bench:`${MFL}<path class="p" d="M6 38h20"/><path d="M10 38v20M22 38v20M26 47h34"/><circle class="a" cx="42" cy="47" r="10"/><circle cx="42" cy="47" r="2"/>`,
+ smith:`${MFL}<path d="M14 58V6M50 58V6M10 6h44M7 30h50"/><rect class="a" x="17" y="22" width="4.5" height="16" rx="1"/><rect class="a" x="42.5" y="22" width="4.5" height="16" rx="1"/><path class="p" d="M26 50h12"/><path d="M32 50v8"/>`,
+ db:`<path d="M20 23h24M18 46h28"/><rect class="a" x="13" y="13" width="7" height="20" rx="2"/><rect class="a" x="44" y="13" width="7" height="20" rx="2"/><rect x="8.5" y="17" width="4.5" height="12" rx="1.5"/><rect x="51" y="17" width="4.5" height="12" rx="1.5"/><rect class="a" x="12" y="38" width="6" height="16" rx="2"/><rect class="a" x="46" y="38" width="6" height="16" rx="2"/>`,
+ mat:`<path class="f" d="M4 50h36l16-12H20z"/><path d="M4 50h36l16-12"/><path d="M21 34h35" stroke="var(--acc)" stroke-width="8"/><path d="M4 50l16-12"/>`,
+ adduct:`${MFL}<rect class="f" x="24" y="10" width="16" height="26" rx="4"/><rect x="24" y="10" width="16" height="26" rx="4"/><path class="p" d="M22 40h20"/><path d="M32 40v18M20 58h24"/><path class="p" d="M23 45 11 34M41 45l12-11"/><circle class="a" cx="9" cy="32" r="3.4"/><circle class="a" cx="55" cy="32" r="3.4"/>`,
+ row:`${MFL}<path class="p" d="M8 42h26"/><path d="M12 42v16M30 42v16"/><path class="p" d="M41 34l4 14"/><circle cx="48" cy="52" r="2.2"/><path d="M46 51 25 37"/><path class="a" d="M21 33l6 1-2 6z"/>${MSTK(50)}`,
+ fly:`${MFL}<rect class="f" x="25" y="16" width="14" height="20" rx="4"/><rect x="25" y="16" width="14" height="20" rx="4"/><path class="p" d="M23 40h18"/><path d="M32 40v18M20 58h24M27 12 12 17v17M37 12l15 5v17M27 12h10"/><path class="p" d="M12 20v12M52 20v12"/><circle class="a" cx="12" cy="36" r="2.6"/><circle class="a" cx="52" cy="36" r="2.6"/>`,
+ cable:`${MFL}<path d="M26 58V6h16"/><circle cx="42" cy="9" r="2.4"/><path d="M42 11.5V38M42 38l-6 9M42 38l6 9"/><circle class="a" cx="35" cy="48.5" r="2.8"/><circle class="a" cx="49" cy="48.5" r="2.8"/>${MSTK(8)}`,
+ preach:`${MFL}<path class="p" d="M14 24l18 12M30 48h12"/><path d="M36 48v10M26 33l10 15"/><circle cx="12" cy="23" r="2.2"/><path class="a" d="M5 15l8-3 1 4-8 3z"/>`,
+ band:`<ellipse cx="32" cy="32" rx="24" ry="12" fill="none" stroke="var(--acc)" stroke-width="4.5"/><ellipse cx="32" cy="32" rx="16.5" ry="6.5"/>`
+};
+// Dal nome dell'esercizio (anche varianti ed esercizi aggiunti a mano); se il nome non dice niente, dall'attrezzo
+const MACH_RX=[[/tapis|camminat/,"tapis"],[/leg press|hack/,"legpress"],[/lat machine|lat pull|trazioni assist/,"lat"],[/chest press|hammer/,"chest"],[/leg curl/,"legcurl"],[/leg extension/,"legext"],[/hip thrust alla macchina|glute machine/,"hipm"],[/smith/,"smith"],[/hip thrust|bilanciere|ponte glutei con bil/,"bench"],[/elastic/,"band"],[/adduzione da sdraiata|dead bug|bird dog|plank|tappetino|crunch|ponte glutei$/,"mat"],[/adductor|abductor/,"adduct"],[/butterfly|pectoral|peck deck/,"fly"],[/shoulder press|lento alla macchina/,"shoulder"],[/pulley|rematore alla macchina|row/,"row"],[/curl alla macchina|panca scott/,"preach"],[/cavo|cavi|corda|pushdown|face pull/,"cable"],[/manubri|manubrio|martello|goblet|kickback/,"db"]];
+function machOf(ex){const n=(ex&&ex.n||"").toLowerCase();for(const[r,k]of MACH_RX)if(r.test(n))return k;
+  return({mac:"chest",cavl:"cable",bar:"bench",db:"db",zav:"db"})[eqOf(ex)]||(ex&&ex.mat?"mat":"")}
+const machSVG=(ex,cls)=>{const k=machOf(ex);return k?`<span class="mach ${cls||""}" aria-hidden="true"><svg viewBox="0 0 64 64">${MACH[k]}</svg></span>`:""};
 const TYPES=[["comp","Multiarticolare"],["iso","Isolamento"],["bw","Corpo libero + zavorra"],["prev","Prevenzione (reps fisse)"],["perf","Salti / pliometria"],["nordic","Eccentrico assistito"],["time","Tenuta in secondi"]];
 let PLAN={},GYM_ORDER=[],ALL_EX=[],EX={};
 function altsOf(e){const k=e.lib||e.id;let out=[...(ALTS[k]||[]).map(([key,n,o])=>({k:key,n,o})),...((S.customAlts||{})[k]||[]).map(a=>({k:a.k,n:a.n,o:{},custom:true}))];
@@ -4039,7 +4081,7 @@ const howOf=ex=>HOW[(ex.n||"").toLowerCase().trim()]||null;
 const errOf=ex=>(typeof ERRS!=="undefined"&&ERRS[(ex.n||"").toLowerCase().trim()])||null;
 const IMGEX={};
 function imgSheet(ex){const how=howOf(ex),k=(ex.n||"").toLowerCase().trim();const mu=muscOf(ex)||(ex.mu||muOf(ex.id)?muLbl(ex.mu||muOf(ex.id)):"");
-  openSheet({html:()=>`<h2>${esc(ex.n)}</h2>${mu?`<p class="note"><b>Muscolo:</b> ${esc(mu)}</p>`:""}${PWHY[k]?`<p class="note">${esc(PWHY[k])}</p>`:""}${how?`<div class="how"><p><b>Posizione</b>${esc(how[0])}</p><p><b>Movimento</b>${esc(how[1])}</p></div>`:""}${errOf(ex)?`<div class="errs"><b>Errori da evitare</b><ul>${errOf(ex).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}${ex.note?`<p class="note">${esc(ex.note)}</p>`:""}`,bind:()=>{}})}
+  openSheet({html:()=>`<h2>${esc(ex.n)}</h2>${machSVG(ex,"sh")}${mu?`<p class="note"><b>Muscolo:</b> ${esc(mu)}</p>`:""}${PWHY[k]?`<p class="note">${esc(PWHY[k])}</p>`:""}${how?`<div class="how"><p><b>Posizione</b>${esc(how[0])}</p><p><b>Movimento</b>${esc(how[1])}</p></div>`:""}${errOf(ex)?`<div class="errs"><b>Errori da evitare</b><ul>${errOf(ex).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}${ex.note?`<p class="note">${esc(ex.note)}</p>`:""}`,bind:()=>{}})}
 const EN_LBL={low:"Stanca",ok:"Normale",high:"In forma"};
 let sheetN=0;
 // Entrata dal basso con curva tipo iOS, uscita più rapida; la maniglia si trascina giù per chiudere
@@ -4287,13 +4329,13 @@ function renderTrain(only){
     if(n===0){nextH.push(`<div class="xrow off"><span class="ck o">–</span><span class="xb"><span class="nm">${esc(ex.n)}</span><em>salta oggi</em></span></div>`);return}
     if(dc>=n){
       const ef=(dr.eff||{})[ex.id],skip=(dr.effSkip||{})[ex.id],eAt=(dr.effAt||{})[ex.id];
-      html=`<button class="xrow done" data-open="${ex.id}"><span class="ck">✓</span><span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${dc}/${n}${ef&&!noEff(ex)?" · "+EFFL[ef]:""}</em></span></button>`;doneH.push(html);
+      html=`<button class="xrow done" data-open="${ex.id}"><span class="ck">✓</span>${machSVG(ex,"sm")}<span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${dc}/${n}${ef&&!noEff(ex)?" · "+EFFL[ef]:""}</em></span></button>`;doneH.push(html);
       // Dopo il voto la domanda resta (con la scelta segnata) finché non spunti un'altra serie: un tocco sbagliato si corregge subito
       if((!ef||(eAt&&!(dr.last>eAt)))&&!skip&&!noEff(ex)&&!mods.has("deload")&&dr.lastDone===ex.id)askH.push(`<div class="ask"><div class="t"><span>${esc(ex.n)}: ${xsOf(mods,ex.id)?(ef?"ultima serie della scheda":"com'era l'ultima serie della scheda?"):ef?"ultima serie":"com'era l'ultima serie?"}</span><button data-effskip="${ex.id}" aria-label="${ef?"Chiudi":"Salta la domanda"}">✕</button></div>${effSeg(ex.id,ef)}${xsCan(g,ex,mods)?`<button class="lnk xadd" data-xadd="${ex.id}">+ Una serie in più</button>`:""}</div>`);
       return;
     }
     const tg=tgFor(ex,mods,g),rng=(ex.lo===ex.hi?ex.lo:ex.lo+"-"+ex.hi)+(ex.t==="time"?" "+tU(ex):"");
-    nextH.push(`<button class="xrow" data-open="${ex.id}"><span class="ck o">${L.filter((x,k)=>k<=i&&setsFor(x.ex,mods)>0).length}</span><span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${n}×${rng}${tg.kg>0&&!noEff(ex)?" · "+fk(tg.kg)+" kg":""}</em></span></button>`);
+    nextH.push(`<button class="xrow" data-open="${ex.id}"><span class="ck o">${L.filter((x,k)=>k<=i&&setsFor(x.ex,mods)>0).length}</span>${machSVG(ex,"sm")}<span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${n}×${rng}${tg.kg>0&&!noEff(ex)?" · "+fk(tg.kg)+" kg":""}</em></span></button>`);
   });
   if(curH.length&&askH.length){curH[0]=curH[0].replace("<!--ASK-->",askH.join(""));askH.length=0}
   const curReg=curH.join(""),CR="<!--CURREG-->";
@@ -4554,7 +4596,7 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
   // Scheda che si colora: a ogni serie un velo su tutta la scheda si intensifica piano; a esercizio finito passa l'oro in diagonale
   const fN=Math.min(n,rows.filter(r=>r.done).length),fr=n?fN/n:0,isGold=goldHold&&goldHold.ex===ex.id,fa=fillAnim(ex.id,fr),fPrev=fa.from;
   return `<article class="ex cur ${ssP.length?"ss":""} ${isGold?"gold":""} ${fr>0||isGold?"tint":""}" data-ex="${ex.id}" style="--f:${fr.toFixed(3)};--f0:${fPrev.toFixed(3)};--fc:${fillCol(fr)};--fc0:${fillCol(fPrev)};--fd:-${fa.el}ms">${fa.on&&!isGold?'<i class="fl fq" aria-hidden="true"></i>':""}<i class="fl fp ${fa.on?"grow":""}" aria-hidden="true"></i>${isGold?'<i class="fl fg" aria-hidden="true"></i>':""}
-    <div class="exhead"><h3>${esc(ex.n)}${(howOf(ex)||errOf(ex)||ex.note)?(IMGEX[ex.id]=ex,`<button class="qm" data-img="${ex.id}" aria-label="Come si fa: ${esc(ex.n)}">?</button>`):""}</h3><button class="swap" data-base="${base.id}" aria-label="Sostituisci ${esc(ex.n)}">⇄ Cambia</button></div>
+    <div class="exhead">${machSVG(ex,"big")}<h3>${esc(ex.n)}${(howOf(ex)||errOf(ex)||ex.note)?(IMGEX[ex.id]=ex,`<button class="qm" data-img="${ex.id}" aria-label="Come si fa: ${esc(ex.n)}">?</button>`):""}</h3><button class="swap" data-base="${base.id}" aria-label="Sostituisci ${esc(ex.n)}">⇄ Cambia</button></div>
     <div class="tgt"><b${cu&&!nn?` data-cu="${lk}|${tg.kg}|${esc(" kg × "+r0)}|${ex.id}"`:""}>${dcw(nn&&nn.kg!=null&&hasKg?`${fk(nn.kg)} kg × ${rT}`:big)}</b>${tg.badge?`<small class="${tg.kind}">${esc(tg.badge)}</small>`:""}</div>
     ${nn?`<p class="prog down"><span>${esc(nn.txt)}</span></p>`:`<p class="prog ${tg.kind}"><span>${esc(tg.msg)}</span></p>`}
     ${pgH}
