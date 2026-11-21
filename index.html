@@ -310,6 +310,9 @@ html[data-skin="vetro"] .sheet{background:rgba(16,13,44,.92);-webkit-backdrop-fi
 .opt b{font-size:max(17px,1rem)}
 .opt span{font-size:max(12px,0.7059rem);color:var(--muted)}
 .opt[aria-pressed="true"]{border-color:var(--hot);box-shadow:0 0 0 1px var(--hot) inset}
+.opt.adm{position:relative;padding-right:84px}
+.opt.adm .lnk{position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+.btn.addx{width:100%;margin-top:4px}
 .inl{display:flex;gap:8px}
 .inl input{flex:1;min-width:0;background:var(--field);border:1px solid var(--line);border-radius:10px;padding:12px;font-weight:600}
 /* piani */
@@ -2680,6 +2683,8 @@ html[data-skin="fiaba"]:not(#m1):not(#m2):not(#m3):not(#m4):not(#f1):not(#f2):no
 :root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead:has(>.mach){flex-wrap:nowrap;align-items:flex-start;gap:12px}
 :root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead>.mach+h3{flex:1 1 auto;min-width:0;align-self:center}
 :root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .exhead:has(>.mach)>.swap{margin-left:0}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .opt:has(>.mach){display:grid;grid-template-columns:38px 1fr;column-gap:12px;row-gap:2px;align-items:center;text-align:left}
+:root:not(#q1):not(#q2):not(#q3):not(#q4):not(#q5):not(#q6):not(#q7):not(#q8) .opt>.mach{grid-row:span 2}
 </style>
 <!--APP-HEAD-END-->
 </head>
@@ -2826,7 +2831,18 @@ function rebuild(){famRev++;
   // Seduta libera: esercizi scelti al volo, fuori dal piano, solo per oggi. Stessi id della scheda, quindi carichi e progressi restano quelli
   if(S.free&&(S.free.d===iso(today())||(S.draft&&S.draft.LIB))){const ex=S.free.ex.filter(id=>EX[id]).map(id=>({...EX[id],ss:""}));
     if(ex.length){PLAN.LIB={name:"Libera",title:"Seduta libera",sub:"Fuori dal piano",custom:true,ex};GYM_ORDER.push("LIB")}}
+  // Esercizi aggiunti "solo questa volta": stanno nella bozza della seduta (S.draft[g].add) e si leggono ogni volta da lì, così spariscono da soli
+  // quando la seduta si salva, si svuota o scade. baseEx = la scheda vera (editor, archivio e "tienilo nella scheda" usano solo quella)
+  for(const k of GYM_ORDER){if(k==="LIB")continue;const B=PLAN[k],P={...B};Object.defineProperty(P,"ex",{enumerable:true,get(){return withAdd(k,B.ex)}});Object.defineProperty(P,"baseEx",{value:B.ex});PLAN[k]=P}
 }
+const addMemo={};
+const cardioTail=L=>{let i=L.length;while(i>0&&L[i-1].cardio)i--;return i};
+function withAdd(g,base){const d=S.draft&&S.draft[g],A=d&&Array.isArray(d.add)?d.add:null;if(!A||!A.length)return base;
+  const key=famRev+"|"+base.length+"|"+JSON.stringify(A),m=addMemo[g];if(m&&m.k===key)return m.v;
+  const nk=n=>String(n||"").toLowerCase().replace(/\s+/g," ").trim(),have=new Set(base.map(e=>nk(e.n))),xs=[];
+  for(const it of A){const src=EX[it.id]&&!EX[it.id].tmp?EX[it.id]:it;if(!src||!src.n||have.has(nk(src.n)))continue;have.add(nk(src.n));const e={...src,id:it.id,ss:"",tmp:1};delete e.gone;delete e.before;xs.push([e,it.before]);if(!EX[it.id])EX[it.id]={...e,day:g}}
+  // "Adesso" = prima dell'esercizio che stava facendo (before); altrimenti prima del cardio finale
+  const v=[...base];for(const [e,bf] of xs){let i=bf?v.findIndex(x=>x.id===bf):-1;if(i<0)i=cardioTail(v);v.splice(i,0,e)}addMemo[g]={k:key,v};return v}
 function freeSheet(){const sel=[];
   // Un esercizio per nome (lo storico è in comune per nome); prima quelli della scheda, poi le varianti, così il muscolo è quello giusto
   const seen=new Set(),L=[...ALL_EX.filter(e=>!e.custom&&!String(e.id).includes("~")),...ALL_EX.filter(e=>!e.custom&&String(e.id).includes("~"))].filter(e=>{const k=nmKey(e.n);if(seen.has(k))return false;seen.add(k);return true});
@@ -2869,7 +2885,7 @@ function normS(){const obj=v=>v&&typeof v==="object"&&!Array.isArray(v),arr=v=>A
   // Ogni campo col suo tipo: un backup modificato a mano o rotto non deve bloccare le schermate
   const wk=obj(S.week)?S.week:{};S.week={};for(let i=0;i<7;i++){const w=obj(wk[i])?wk[i]:DEFAULT_WEEK[i];S.week[i]={padel:"none",gym:typeof w.gym==="string"?w.gym:"none"}}
   S.overrides=obj(S.overrides)?S.overrides:{};for(const k in S.overrides)if(!obj(S.overrides[k]))delete S.overrides[k];else if("padel" in S.overrides[k])S.overrides[k].padel="none";S.energy=obj(S.energy)?S.energy:{};S.normal=obj(S.normal)?S.normal:{};S.pauseGo=obj(S.pauseGo)?S.pauseGo:{};
-  for(const key of ["draft","oldDraft"]){S[key]=obj(S[key])?S[key]:{};for(const g in S[key]){const d=S[key][g];if(!obj(d)||!obj(d.ex)){delete S[key][g];continue}for(const id in d.ex)if(!Array.isArray(d.ex[id]))delete d.ex[id];else{let xn=0;d.ex[id]=d.ex[id].map(x=>obj(x)?x:{}).filter(x=>{if(x.xs==null)return true;if(x.xs!==1&&x.xs!==true){delete x.xs;return true}x.xs=1;return !!x.done||++xn<=XS_MAX})}if(d.ramp!=null){if(!obj(d.ramp))delete d.ramp;else for(const id in d.ramp)if(!Array.isArray(d.ramp[id]))delete d.ramp[id];else d.ramp[id]=d.ramp[id].map(x=>obj(x)?x:{})}if(typeof d.date!=="string")d.date=iso(today());for(const f of ["start","last","idle"])if(d[f]!=null&&!(typeof d[f]==="number"&&isFinite(d[f])))delete d[f];if(d.mods!=null&&!Array.isArray(d.mods))delete d.mods;if(d.xs!=null){if(!obj(d.xs))delete d.xs;else for(const id in d.xs){const v=Math.floor(+d.xs[id]);if(v>0)d.xs[id]=Math.min(XS_MAX,v);else delete d.xs[id]}}}}
+  for(const key of ["draft","oldDraft"]){S[key]=obj(S[key])?S[key]:{};for(const g in S[key]){const d=S[key][g];if(!obj(d)||!obj(d.ex)){delete S[key][g];continue}if(d.add!=null){d.add=arr(d.add).filter(x=>obj(x)&&typeof x.id==="string"&&x.id);if(!d.add.length)delete d.add}for(const id in d.ex)if(!Array.isArray(d.ex[id]))delete d.ex[id];else{let xn=0;d.ex[id]=d.ex[id].map(x=>obj(x)?x:{}).filter(x=>{if(x.xs==null)return true;if(x.xs!==1&&x.xs!==true){delete x.xs;return true}x.xs=1;return !!x.done||++xn<=XS_MAX})}if(d.ramp!=null){if(!obj(d.ramp))delete d.ramp;else for(const id in d.ramp)if(!Array.isArray(d.ramp[id]))delete d.ramp[id];else d.ramp[id]=d.ramp[id].map(x=>obj(x)?x:{})}if(typeof d.date!=="string")d.date=iso(today());for(const f of ["start","last","idle"])if(d[f]!=null&&!(typeof d[f]==="number"&&isFinite(d[f])))delete d[f];if(d.mods!=null&&!Array.isArray(d.mods))delete d.mods;if(d.xs!=null){if(!obj(d.xs))delete d.xs;else for(const id in d.xs){const v=Math.floor(+d.xs[id]);if(v>0)d.xs[id]=Math.min(XS_MAX,v);else delete d.xs[id]}}}}
   S.plans=obj(S.plans)?S.plans:{};for(const k in S.plans)if(!obj(S.plans[k])||!Array.isArray(S.plans[k].ex))delete S.plans[k];else S.plans[k].ex=S.plans[k].ex.filter(e=>obj(e)&&e.id&&typeof e.n==="string");
   S.swaps=obj(S.swaps)?S.swaps:{};for(const k in S.swaps)if(!obj(S.swaps[k]))delete S.swaps[k];S.customAlts=obj(S.customAlts)?S.customAlts:{};for(const k in S.customAlts)S.customAlts[k]=arr(S.customAlts[k]).filter(a=>obj(a)&&a.k&&typeof a.n==="string");if(S.skin!=null&&!["fiaba","vetro","eclisse"].includes(S.skin))S.skin="fiaba";S.pain=obj(S.pain)?S.pain:{};
   for(const key of ["archive","body","phases","cycles"])S[key]=arr(S[key]).filter(obj);
@@ -2914,7 +2930,7 @@ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}ca
 function parkDraft(k){const d=S.draft[k];if(!d)return 0;delete S.draft[k];if((tCtx&&tCtx.g===k)||(S.timer&&S.timer.ctx&&S.timer.ctx.g===k))stopTimer();if(!hasDone(d))return 0;
   const names={};for(const id in d.ex)names[id]=exName(id);let key=k+"@"+d.date;while(S.oldDraft[key])key+="+";S.oldDraft[key]={...d,g:k,names,planName:PLAN[k]?PLAN[k].name:k};return Object.values(d.ex).reduce((a,r)=>a+r.filter(x=>x&&x.done).length,0)}
 const parkMsg=n=>n?` La seduta in corso (${n} serie) è in Oggi: salvala con la sua data o scartala.`:"";
-function archivePlan(key,why){if(!PLAN[key])return;S.archive.unshift({id:"v"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),key,at:new Date().toISOString(),why,plan:JSON.parse(JSON.stringify(PLAN[key]))});S.archive=S.archive.slice(0,60)}
+function archivePlan(key,why){if(!PLAN[key])return;S.archive.unshift({id:"v"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),key,at:new Date().toISOString(),why,plan:JSON.parse(JSON.stringify({...PLAN[key],ex:PLAN[key].baseEx||PLAN[key].ex}))});S.archive=S.archive.slice(0,60)}
 // Prima di cancellare, importare o scartare: copia dei dati attuali e "Annulla" per 10 secondi nel messaggio della schermata
 // Se la copia non si scrive (memoria piena) non si offre "Annulla": rimetterebbe una copia vecchia
 let snapOk=true;const snap=()=>{snapOk=setKey(KEY+".bak",JSON.stringify(S))};
@@ -4335,7 +4351,7 @@ function renderTrain(only){
       return;
     }
     const tg=tgFor(ex,mods,g),rng=(ex.lo===ex.hi?ex.lo:ex.lo+"-"+ex.hi)+(ex.t==="time"?" "+tU(ex):"");
-    nextH.push(`<button class="xrow" data-open="${ex.id}"><span class="ck o">${L.filter((x,k)=>k<=i&&setsFor(x.ex,mods)>0).length}</span>${machSVG(ex,"sm")}<span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${n}×${rng}${tg.kg>0&&!noEff(ex)?" · "+fk(tg.kg)+" kg":""}</em></span></button>`);
+    nextH.push(`<button class="xrow" data-open="${ex.id}"><span class="ck o">${L.filter((x,k)=>k<=i&&setsFor(x.ex,mods)>0).length}</span>${machSVG(ex,"sm")}<span class="xb"><span class="nmw"><span class="nm">${esc(ex.n)}</span></span><em>${n}×${rng}${tg.kg>0&&!noEff(ex)?" · "+fk(tg.kg)+" kg":""}${base.tmp?" · solo oggi":""}</em></span></button>`);
   });
   if(curH.length&&askH.length){curH[0]=curH[0].replace("<!--ASK-->",askH.join(""));askH.length=0}
   const curReg=curH.join(""),CR="<!--CURREG-->";
@@ -4353,6 +4369,7 @@ function renderTrain(only){
   ${savedH}
   ${!first&&dn?`<section class="card alldone"><p>Tutte le serie fatte.</p><button class="btn hot" id="finish">Termina e salva</button></section>`:""}
   <div id="exs" class="exs">${hideNew?"":html}</div>
+  ${hideNew||g==="LIB"?"":`<button class="btn ghost addx" id="addEx">+ Aggiungi esercizio</button>`}
   ${hideNew?"":`${!first&&dn?"":`<button class="btn hot" id="finish">Termina e salva</button>`}<button class="lnk clr" id="clear">Svuota la seduta</button>`}
   <p class="msg" id="msg" aria-live="polite"></p>`;
   const key=g+"|"+P.title+"|"+bodyT,ex0=document.getElementById("exs"),curs=only&&view==="train"&&curReg&&key===rtKey&&ex0&&ex0===rtExs?[...ex0.querySelectorAll(":scope>article.ex.cur")]:[],patch=curs.length>0;
@@ -4413,9 +4430,10 @@ function renderTrain(only){
   const fb=document.getElementById("finish");if(fb)fb.onclick=()=>{const miss=mP;
     if(miss>0&&!arm2(fb,`Mancano ${miss} serie · tocca ancora`,"Termina e salva")){const mm=document.getElementById("msg");if(mm&&fb.dataset.arm==="1"){mm.className="msg";mm.textContent=`Mancano ${miss} serie: tocca ancora Termina e salva per salvare lo stesso.`}return}
     finish(g,mods,null,miss)};
+  const ax=document.getElementById("addEx");if(ax)ax.onclick=()=>addSheet(g);
   const rd=document.getElementById("redoSv");if(rd)rd.onclick=()=>{if(!arm2(rd,"Tocca di nuovo: riapri la seduta","Riapri la seduta per correggerla o finirla"))return;
     const ex={};for(const id in svd.sets)ex[id]=svd.sets[id].map(x=>({kg:x.kg,reps:x.reps,done:true,...(x.myo?{myo:x.myo.slice()}:{}),...(x.pr?{pr:1}:{}),...(x.xs?{xs:1}:{})}));
-    S.sessions=S.sessions.filter(x=>x.id!==svd.id);S.draft[g]={date:iso(today()),start:Date.parse(svd.date),last:Date.parse(svd.date)+(svd.dur||0)*6e4,ex,eff:{...(svd.eff||{})},names:{...(svd.names||{})},...(svd.pre?{pre:{...svd.pre}}:{})};save();renderTrain()};
+    S.sessions=S.sessions.filter(x=>x.id!==svd.id);S.draft[g]={date:iso(today()),start:Date.parse(svd.date),last:Date.parse(svd.date)+(svd.dur||0)*6e4,ex,eff:{...(svd.eff||{})},names:{...(svd.names||{})},...(svd.pre?{pre:{...svd.pre}}:{}),...(Array.isArray(svd.add)?{add:svd.add.slice()}:{})};save();renderTrain()};
   const sv=document.getElementById("seeSv");if(sv)sv.onclick=()=>sheetFrom(sv.closest(".card"),()=>summarySheet(svd));
   oldDraftBind();
   // Il riflesso del bottone passa una volta sola: dopo ogni spunta la scheda si ridisegna e non deve ripartire
@@ -4577,6 +4595,7 @@ function exCard(g,ex,mods,dr,base,withRest){base=base||ex;
   if(rir&&/\d/.test(rir))spec.push(`<span${rir!==ex.rir?' class="ad"':""}>${esc(rir)}&nbsp;in&nbsp;canna</span>`);
   // Myo-rep: l'ultima serie va a cedimento tecnico, le altre restano con le ripetizioni in canna
   if(myoA)spec.push(`<span class="ad">ultima&nbsp;a&nbsp;cedimento</span>`);
+  if(base&&base.tmp)spec.push(`<span class="ad">solo&nbsp;oggi</span>`);
   if(!ex.cardio)spec.push(`<span>${ex.rest?(ex.rest>=120?fk(ex.rest/60)+"&nbsp;min":ex.rest+"&nbsp;s"):"Subito il prossimo"}</span>`);
   if(padAfter(mods)&&ex.strap)chips.push(`<span class="chip adapt">Fasce da polso: risparmi la presa per il padel</span>`);
   if(tg.top&&tg.top>ex.hi&&!mods.has("deload")&&tg.reps.every(r=>r>=ex.lo)&&!["time","nordic","perf"].includes(ex.t)){const mx=eqMax(ex),nX0=noExtOf(ex);chips.push(`<span class="chip hot">${nX0?"Fino a "+tg.top+" ripetizioni prima di salire":"Range esteso fino a "+tg.top}: ${mx&&(tg.kg||0)>=mx?`${fk(mx)} kg è il massimo del pacco`:`il prossimo gradino è ${pct(Math.round(stepOf(ex)/Math.max(1,tg.kg||lastKg(ex)||1)*100))}`}</span>`)}
@@ -4871,7 +4890,7 @@ function finish(g,mods,oldKey,miss){
   const bk=miss>0&&!oldKey?JSON.parse(JSON.stringify({d,free:g==="LIB"?S.free:null,ds:S.sessions.filter(x=>x.demo),db:(S.body||[]).filter(x=>x.demo)})):null;
   clearDemo();
   try{localStorage.removeItem(KEY+".imp")}catch(e){}
-  S.sessions.push({id:"s"+Date.now(),day:g,planName:d.planName||(PLAN[g]?PLAN[g].name:"Seduta libera"),date:when.toISOString(),sets,names,eff,mods:[...mods],...(mods.norm&&mods.norm.length?{norm:[...mods.norm]}:{}),deload:mods.has("deload"),dur,prv:1,...(hasXs?{xs:1}:{}),...(stn?{stn}:{}),...(d.pre&&Object.values(d.pre).some(v=>v>0)?{pre:{...d.pre}}:{})});
+  S.sessions.push({id:"s"+Date.now(),day:g,planName:d.planName||(PLAN[g]?PLAN[g].name:"Seduta libera"),date:when.toISOString(),sets,names,eff,mods:[...mods],...(mods.norm&&mods.norm.length?{norm:[...mods.norm]}:{}),deload:mods.has("deload"),dur,prv:1,...(Array.isArray(d.add)&&d.add.length?{add:d.add.slice()}:{}),...(hasXs?{xs:1}:{}),...(stn?{stn}:{}),...(d.pre&&Object.values(d.pre).some(v=>v>0)?{pre:{...d.pre}}:{})});
   if(oldKey)delete S.oldDraft[oldKey];else{delete S.draft[g];openEx[g]=null;if(g==="LIB"){delete S.free;rebuild();gymSel=null}stopTimer()}save();sheetFrom(document.getElementById("finish"),()=>{renderTrain();
   const mm=document.getElementById("msg");mm.className="msg ok";mm.textContent=`Seduta salvata: ${n} serie. I carichi della prossima volta sono già pronti.`;
   if(!storageOk){mm.className="msg err";mm.textContent=STOR_MSG}
@@ -4885,6 +4904,49 @@ function finish(g,mods,oldKey,miss){
   summarySheet(ss)});
 }
 
+
+/* ================= AGGIUNGI ESERCIZIO ================= */
+// Durante la seduta: "Solo questa volta" lo mette nella bozza (sparisce col salvataggio), "Tienilo nella scheda" lo aggiunge al piano del giorno per sempre.
+// Stesso nome = stesso storico, quindi carichi e progressi ripartono da dove erano. Va prima del tapis roulant finale
+let addScope="once",addPos="now";
+function addSheet(g){
+  const nm=()=>new Set(PLAN[g].ex.flatMap(e=>[nmKey(e.n),nmKey(effEx(g,e).n)]));
+  const grpOf=e=>e.mu?muLbl(e.mu):e.t==="prev"?"Core e prevenzione":"Altro";
+  const sub=e=>`${e.s} serie · ${e.lo===e.hi?e.lo:e.lo+"-"+e.hi} ${e.t==="time"?tU(e):"rip"}${e.side?" per lato":""}`;
+  // Esercizio a cui tocca adesso: quello aperto se non è finito, altrimenti il primo da fare (il cardio finale non conta: "in fondo" va già prima)
+  const nowEx=()=>{const mods=trainMods(g),L=trainList(g,mods).filter(x=>setsFor(x.ex,mods)>0&&!exDone(g,x.ex,mods)),o=L.find(x=>x.base.id===openEx[g]||x.ex.id===openEx[g])||L[0];return o&&!o.base.cardio?o:null};
+  openSheet({html:()=>{const have=nm(),seen=new Set(),d=S.draft[g],nw=nowEx(),pos=nw?addPos:"end",mine=(d&&d.add||[]).map(it=>PLAN[g].ex.find(e=>e.id===it.id)).filter(Boolean);
+    const L=[...ALL_EX.filter(e=>!e.custom&&!String(e.id).includes("~")),...ALL_EX.filter(e=>!e.custom&&String(e.id).includes("~"))].filter(e=>{const k=nmKey(e.n);if(have.has(k)||seen.has(k))return false;seen.add(k);return true});
+    const mus=[...new Set(L.map(grpOf))];
+    return `<h2>Aggiungi esercizio</h2><p class="note" style="margin:0">Carichi e progressi sono quelli di sempre per quell'esercizio.</p>
+    <div class="seg" id="adScope" style="grid-template-columns:1fr 1fr"><button data-v="once" aria-pressed="${addScope==="once"}">Solo questa volta</button><button data-v="always" aria-pressed="${addScope==="always"}">Tienilo nella scheda</button></div>
+    ${nw?`<div class="seg" id="adPos" style="grid-template-columns:1fr 1fr"><button data-v="now" aria-pressed="${pos==="now"}">Adesso</button><button data-v="end" aria-pressed="${pos==="end"}">In fondo</button></div>`:""}
+    <p class="note adsn" style="margin:0">${pos==="now"?`Lo fai subito, prima di ${esc(nw.ex.n)}.`:"Va dopo gli altri, prima del tapis roulant."} ${addScope==="once"?"Sparisce quando salvi la seduta. La scheda resta com'è.":`Da oggi ${esc(PLAN[g].name)} avrà questo esercizio ogni volta. Lo togli da Settimana › Impostazioni › Piani.`}</p>
+    ${mine.length?`<p class="grp">Aggiunti per questa volta</p><div class="opts">${mine.map(e=>{const dn=((d.ex[e.id]||[]).some(x=>x.done));return `<div class="opt adm"><b>${esc(e.n)}</b><span>${dn?"Serie già fatte: resta nella seduta":sub(e)}</span>${dn?"":`<button class="lnk" data-adrm="${esc(e.id)}" aria-label="Togli ${esc(e.n)}">Togli</button>`}</div>`}).join("")}</div>`:""}
+    ${mus.map(m=>{const xs=L.filter(e=>grpOf(e)===m);return `<p class="grp">${esc(m)}</p><div class="opts">${xs.map(e=>`<button class="opt" data-adx="${esc(e.id)}">${machSVG(e,"sm")}<b>${esc(e.n)}</b><span>${sub(e)}</span></button>`).join("")}</div>`}).join("")}
+    <div class="q"><span class="lab">Altro esercizio</span><div class="inl"><input id="adNew" aria-label="Altro esercizio" placeholder="Es. Hip abduction ai cavi" maxlength="60"><button class="btn hot" id="adGo" style="padding:12px 14px">Aggiungi</button></div></div>
+    <p class="msg" id="admsg" aria-live="polite"></p>`},
+   bind:(w,draw,close)=>{
+    w.querySelectorAll("#adPos button").forEach(b=>b.onclick=()=>{addPos=b.dataset.v;const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
+    w.querySelectorAll("#adScope button").forEach(b=>b.onclick=()=>{addScope=b.dataset.v;const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
+    w.querySelectorAll("[data-adrm]").forEach(b=>b.onclick=()=>{const d=S.draft[g];if(!d||!d.add)return;const id=b.dataset.adrm;if((d.ex[id]||[]).some(x=>x.done))return;
+      d.add=d.add.filter(x=>x.id!==id);if(!d.add.length)delete d.add;delete d.ex[id];if(openEx[g]===id)openEx[g]=null;save();renderTrain();const y=w.querySelector(".sheet").scrollTop;draw();w.querySelector(".sheet").scrollTop=y});
+    const put=(src,name)=>{const n=(name||src.n).trim();if(!n)return;if(nm().has(nmKey(n))){const m=w.querySelector("#admsg");m.className="msg err";m.textContent=`${n} è già nella seduta.`;return}
+      let id;const nw=addPos==="now"?nowEx():null,bf=nw?nw.base.id:null;
+      if(addScope==="always"){
+        // come l'editor dei piani: id nuovo, la libreria di provenienza resta in lib (varianti e foto); lo storico è in comune per nome
+        const P=S.plans[g]||BUILTIN[g];if(!P)return;archivePlan(g,"modificato");
+        const c=src?{...src}:{...blankEx(),n,lo:10,hi:12,rir:"2"};for(const f of ["day","base","tmp","gone","custom","ss"])delete c[f];
+        if(src)c.lib=src.base||src.lib||src.id;id=g+"_"+Math.random().toString(36).slice(2,7);c.id=id;c.n=n;
+        const ex=[...P.ex];let i=bf?ex.findIndex(x=>x.id===bf):-1;if(i<0)i=cardioTail(ex);ex.splice(i,0,c);const B=BUILTIN[g];
+        S.plans[g]={name:P.name,title:P.title||P.name,sub:P.sub||"",...(P.wu?{wu:P.wu}:{}),legs:!!P.legs,custom:!B,ex};rebuild()}
+      else{const d=draftFor(g);id=src?src.id:"x"+Date.now().toString(36);d.add=[...(d.add||[]),{...(src?{id}:{...blankEx(),id,n,lo:10,hi:12,rir:"2"}),...(bf?{before:bf}:{})}];if(!src){d.names=d.names||{};d.names[id]=n}}
+      openEx[g]=id;save();close();renderTrain();requestAnimationFrame(()=>{const c=document.querySelector(`#exs article.ex[data-ex="${id}"]`);if(c){c.scrollIntoView({block:"start",behavior:RM()?"auto":"smooth"});keepFocus(false,id)}});
+      const mm=document.getElementById("msg");if(mm){mm.className="msg ok";mm.textContent=addScope==="always"?`${n} aggiunto alla scheda di ${PLAN[g].name}.`:`${n} aggiunto solo per oggi.`}};
+    w.querySelectorAll("[data-adx]").forEach(b=>b.onclick=()=>{const e=EX[b.dataset.adx];if(e)put(e)});
+    w.querySelector("#adGo").onclick=()=>put(null,w.querySelector("#adNew").value);
+    w.querySelector("#adNew").onkeydown=e=>{if(e.key==="Enter")put(null,e.target.value)}}});
+}
 
 /* ================= SOSTITUZIONI ================= */
 let swapScope="today";
@@ -5875,11 +5937,11 @@ function renderSettings(){
   document.querySelectorAll("#segSera [data-sera]").forEach(b=>b.onclick=e=>{if((S.sera||"auto")===b.dataset.sera)return;skinVT(e,()=>{S.sera=b.dataset.sera;save();applySkin();renderSettings()})});
   document.querySelectorAll(".vars [data-var]").forEach(b=>b.onclick=e=>{S.vars=S.vars||{};if((S.vars[S.skin||"fiaba"]||0)===+b.dataset.var)return;skinVT(e,()=>{S.vars[S.skin||"fiaba"]=+b.dataset.var;save();applySkin();renderSettings()})});
   document.getElementById("newPlan").onclick=()=>{editPlan={key:null,name:"",sub:"",legs:false,ex:[blankEx()]};go("edit")};
-  document.querySelectorAll("[data-ed]").forEach(b=>b.onclick=()=>{const k=b.dataset.ed,P=PLAN[k];editPlan=JSON.parse(JSON.stringify({key:k,name:P.name,sub:P.sub||"",legs:!!P.legs,ex:P.ex}));go("edit")});
+  document.querySelectorAll("[data-ed]").forEach(b=>b.onclick=()=>{const k=b.dataset.ed,P=PLAN[k];editPlan=JSON.parse(JSON.stringify({key:k,name:P.name,sub:P.sub||"",legs:!!P.legs,ex:P.baseEx||P.ex}));go("edit")});
   document.querySelectorAll("[data-vw]").forEach(b=>b.onclick=()=>{const l=document.getElementById("ax-"+b.dataset.vw);l.hidden=!l.hidden;b.textContent=l.hidden?"Vedi":"Chiudi"});
   document.querySelectorAll("[data-rs]").forEach(b=>b.onclick=()=>{const v=S.archive.find(x=>x.id===b.dataset.rs);if(!v)return;snap();const n=parkDraft(v.key);S.archive=S.archive.filter(x=>x!==v);if(PLAN[v.key])archivePlan(v.key,"modificato");S.plans[v.key]=JSON.parse(JSON.stringify(v.plan));fixDupIds();fixDupIds.n=0;rebuild();save();renderSettings();undoable(`Ripristinato "${v.plan.name}".${parkMsg(n)}`,"wmsg")});
   document.querySelectorAll("[data-rmv]").forEach(b=>b.onclick=()=>{if(b.dataset.arm!=="1"){b.dataset.arm="1";b.textContent="Sicura?";return}S.archive=S.archive.filter(x=>x.id!==b.dataset.rmv);save();renderSettings()});
-  document.querySelectorAll("[data-dup]").forEach(b=>b.onclick=()=>{const P=PLAN[b.dataset.dup];editPlan=JSON.parse(JSON.stringify({key:null,name:P.name+" (copia)",sub:P.sub||"",legs:!!P.legs,ex:P.ex.map(e=>({...e,lib:e.lib||e.id,id:null}))}));go("edit")});
+  document.querySelectorAll("[data-dup]").forEach(b=>b.onclick=()=>{const P=PLAN[b.dataset.dup];editPlan=JSON.parse(JSON.stringify({key:null,name:P.name+" (copia)",sub:P.sub||"",legs:!!P.legs,ex:(P.baseEx||P.ex).map(e=>({...e,lib:e.lib||e.id,id:null}))}));go("edit")});
   document.querySelectorAll("[data-delp]").forEach(b=>b.onclick=()=>{const k=b.dataset.delp;if(!arm2(b,S.draft[k]&&hasDone(S.draft[k])?"Sicura? Ha una seduta in corso":"Sicura?","Elimina"))return;snap();const n=parkDraft(k);archivePlan(k,"eliminato");delete S.plans[k];for(const d in S.week)if(S.week[d].gym===k)S.week[d]={...S.week[d],gym:"none"};for(const d in S.overrides)if(S.overrides[d].gym===k)delete S.overrides[d].gym;rebuild();save();renderSettings();undoable(`Piano eliminato.${parkMsg(n)}`,"wmsg")});
   const bm=document.getElementById("bmsg");
   document.getElementById("exp").onclick=async e=>{const eb=e.currentTarget,x=await shareBackup();if(x==="ok"){bkOk(eb);bm.className="msg ok";bm.textContent="Backup salvato."}else if(x==="no"){bm.className="msg";bm.textContent="Backup non salvato."}else{bm.className="msg err";bm.textContent="Salvataggio non riuscito su questo browser."}};
